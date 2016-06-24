@@ -24,6 +24,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		//TODO: Select game (.sqlite -> .dragonfly)
+		//TODO: Read directory (library) to load a list of the available games
 
 		TR.write("What is your name hero?" + SPACER + PROMPT);
 		player = new Player(TR.read());
