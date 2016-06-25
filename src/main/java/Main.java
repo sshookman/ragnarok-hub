@@ -4,6 +4,9 @@ import model.Page;
 import model.Player;
 import das.PageDataService;
 import rendering.TerminalRenderer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.IOException;
 
 public class Main {
 
@@ -21,12 +24,23 @@ public class Main {
 	 * selects the game they wish to play and the account they will be
 	 * using.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
-		//TODO: Select game (.sqlite -> .dragonfly)
-		//TODO: Read directory (library) to load a list of the available games
+		List<String> stories = new ArrayList<String>();
+		Files.walk(Paths.get("library")).forEach(filePath -> {
+    		if (Files.isRegularFile(filePath)) {
+        		stories.add(filePath.toString());
+    		}
+		});
 
-		TR.write("What is your name hero?" + SPACER + PROMPT);
+		TR.write("Select a Story: ");
+		for (int i = 0; i < stories.size(); i++) {
+			TR.write("\n\t" + i + ". " + stories.get(i));
+		}
+		TR.write(SPACER + PROMPT);
+		String gameSelection = TR.read();
+
+		TR.write("Enter your name hero..." + SPACER + PROMPT);
 		player = new Player(TR.read());
 
 		gameLoop(-1);
