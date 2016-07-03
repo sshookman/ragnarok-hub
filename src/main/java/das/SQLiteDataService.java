@@ -15,7 +15,8 @@ public class SQLiteDataService {
 
     	try {
       		// create a database connection
-      		connection = DriverManager.getConnection("jdbc:sqlite:sample.db");
+			// Load to Memory - Connection connection = DriverManager.getConnection("jdbc:sqlite::memory:");
+      		connection = DriverManager.getConnection("jdbc:sqlite:library/Throwing_Shadows.sqlite");
       		Statement statement = connection.createStatement();
       		statement.setQueryTimeout(30);  // set timeout to 30 sec.
 
