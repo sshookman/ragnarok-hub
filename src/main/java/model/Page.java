@@ -13,35 +13,47 @@ import java.util.HashMap;
  */
 public class Page {
 
+	private Integer id;
 	private Integer chapterId;
-	private String message;
-	private boolean prompt;
-	private Map<String, Integer> pageBindings;
+	private String title;
+	private String body;
 
-	public Page(Integer chapterId, String message, boolean prompt) {
+	public Page(Integer id, Integer chapterId, String title, String body) {
+		this.id = id;
 		this.chapterId = chapterId;
-		this.message = message;
-		this.prompt = prompt;
-		this.pageBindings = new HashMap<String, Integer>();
+		this.title = title;
+		this.body = body;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getChapterId() {
 		return chapterId;
 	}
+
+	public void setChapterId(Integer chapterId) {
+		this.chapterId = chapterId;
+	}
 	
-	public String getMessage() {
-		return message;
+	public String getTitle() {
+		return title;
 	}
 
-	public boolean isPrompt() {
-		return prompt;
+	public void setTitle() {
+		this.title = title;
 	}
 
-	public Integer getPageBinding(String search) {
-		return pageBindings.get(search);
+	public String getBody() {
+		return body;
 	}
 
-	public void addPageBinding(String key, Integer pageId) {
-		pageBindings.put(key, pageId);
+	public void setBody() {
+		this.body = body;
 	}
 }
