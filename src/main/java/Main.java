@@ -7,6 +7,7 @@ import rendering.TerminalRenderer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.IOException;
+import das.SQLiteDataService;
 
 public class Main {
 
@@ -16,6 +17,8 @@ public class Main {
 	private static final PageDataService PAGE_DAS = new PageDataService();
 
 	private static Player player;
+
+	private static SQLiteDataService dataService;
 
 	/**
 	 * This is the main entrypoint for the application.
@@ -35,10 +38,12 @@ public class Main {
 
 		TR.write("Select a Story: ");
 		for (int i = 0; i < stories.size(); i++) {
-			TR.write("\n\t" + i + ". " + stories.get(i));
+			TR.write("\n\t" + (i+1) + ". " + stories.get(i));
 		}
 		TR.write(SPACER + PROMPT);
-		String gameSelection = TR.read();
+		String storyId = TR.read();
+
+		dataService = new SQLiteDataService(stories.get(Integer.valueOf(storyId) - 1));
 
 		TR.write("Enter your name hero..." + SPACER + PROMPT);
 		player = new Player(TR.read());

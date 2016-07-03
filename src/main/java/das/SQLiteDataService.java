@@ -5,45 +5,26 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
+import java.util.ArrayList;
 
 public class SQLiteDataService {
 
-	public void load(String db) throws ClassNotFoundException {
-    	// load the sqlite-JDBC driver using the current class loader
-   		Class.forName("org.sqlite.JDBC");
-    	Connection connection = null;
+	Connection connection;
 
-    	try {
-      		// create a database connection
-			// Load to Memory - Connection connection = DriverManager.getConnection("jdbc:sqlite::memory:");
-      		connection = DriverManager.getConnection("jdbc:sqlite:library/Throwing_Shadows.sqlite");
-      		Statement statement = connection.createStatement();
-      		statement.setQueryTimeout(30);  // set timeout to 30 sec.
+	public SQLiteDataService(String db) {
+		Connection c = null;
+		try {
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:" + db);
+		} catch ( Exception e ) {
+			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+			System.exit(0);
+		}
+		System.out.println("Opened database successfully");
+	}
 
-      		statement.executeUpdate("drop table if exists person");
-      		statement.executeUpdate("create table person (id integer, name string)");
-      		statement.executeUpdate("insert into person values(1, 'leo')");
-      		statement.executeUpdate("insert into person values(2, 'yui')");
-      		ResultSet rs = statement.executeQuery("select * from person");
-      		while(rs.next()) {
-        		// read the result set
-        		System.out.println("name = " + rs.getString("name"));
-        		System.out.println("id = " + rs.getInt("id"));
-      		}
-    	} catch(SQLException e) {
-      		// if the error message is "out of memory", 
-      		// it probably means no database file is found
-      		System.err.println(e.getMessage());
-    	} finally {
-      
-			try {
-        		if(connection != null) {
-          			connection.close();
-				}
-      		} catch(SQLException e) {
-        		// connection close failed.
-        		System.err.println(e);
-      		}
-    	}
-  	}
+	public List<Object> read() {
+		return new ArrayList<Object>();
+	}
 }
