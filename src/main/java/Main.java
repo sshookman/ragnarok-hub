@@ -9,6 +9,12 @@ import java.nio.file.Paths;
 import java.io.IOException;
 import das.SQLiteDataService;
 
+/**
+ * Dragonfly Reader main loop.
+ *
+ * The Dragonfly Reader allows for stories to be loaded from the library
+ * and played through the terminal.
+ */
 public class Main {
 
 	private static final String PROMPT = "> ";
