@@ -1,8 +1,6 @@
 **Project Read**
 
 
-Build
-	./Build.sh
+Build: ./Build.sh
 
-Run
-	./Dragonfly.sh
+Run: ./Dragonfly.sh
