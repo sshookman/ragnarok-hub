@@ -9,13 +9,13 @@ package model;
 public class Chapter {
 
 	private Integer id;
-	private Integer number;
+	private Integer prevChapterId;
 	private String title;
 	private String message;
 
-	public Chapter(Integer id, Integer number, String title, String message) {
+	public Chapter(Integer id, Integer prevChapterId, String title, String message) {
 		this.id = id;
-		this.number = number;
+		this.prevChapterId = prevChapterId;
 		this.title = title;
 		this.message = message;
 	}	
@@ -28,12 +28,12 @@ public class Chapter {
 		this.id = id;
 	}
 	
-	public Integer getNumber() {
-		return number;
+	public Integer getPrevChapterId() {
+		return prevChapterId;
 	}
 
-	public void setNumber(Integer number) {
-		this.number = number;
+	public void setPrevChapterId(Integer prevChapterId) {
+		this.prevChapterId = prevChapterId;
 	}
 
 	public String getTitle() {

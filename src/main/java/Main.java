@@ -60,6 +60,7 @@ public class Main {
 
 		try {
 			TR.render("Select a Story: ");
+
 			List<String> stories = LIB.getStories();
 			for (int i = 0; i < stories.size(); i++) {
 				TR.render("\n\t" + (i+1) + ". " + stories.get(i));
