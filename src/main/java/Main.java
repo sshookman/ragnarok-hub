@@ -33,6 +33,7 @@ public class Main {
 		
 		selectPlayer();
 		selectStory();
+		play();
 	}
 
 	private static void selectPlayer() {
@@ -80,6 +81,6 @@ public class Main {
 	 * 
 	 * @param pageIndex The Integer index value specifying which page to load
 	 */
-	private static void gameLoop(Integer pageIndex) {
+	private static void play() {
 	}
 }
