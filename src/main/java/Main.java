@@ -5,6 +5,7 @@ import model.Player;
 import rendering.TerminalRenderer;
 import das.SQLiteDataService;
 import library.LibraryManager;
+import player.PlayerManager;
 
 /**
  * Dragonfly Reader main loop.
@@ -16,6 +17,7 @@ public class Main {
 
 	private static final TerminalRenderer TR = new TerminalRenderer();
 	private static final LibraryManager LIB = new LibraryManager();
+	private static final PlayerManager PLY = new PlayerManager();
 
 	private static Player player;
 	private static SQLiteDataService dataService;
@@ -35,8 +37,22 @@ public class Main {
 
 	private static void selectPlayer() {
 		
-		TR.render("Select a Player: ");
-		TR.setPlayer(TR.prompt());
+		try {
+			TR.render("Select a Player: ");
+
+			List<String> players = PLY.getPlayers();
+			for (int i = 0; i < players.size(); i++) {
+				TR.render("\n\t" + (i+1) + ". " + players.get(i));
+			}
+
+			String playerId = TR.prompt();
+			String playerTitle = players.get(Integer.valueOf(playerId)-1);
+
+			TR.setPlayer(playerTitle);
+		} catch (Exception exception) {
+			TR.render("!!! Invalid Selection !!!\n");
+			selectPlayer();
+		}
 	}
 
 	private static void selectStory() {
@@ -44,7 +60,7 @@ public class Main {
 		try {
 			TR.render("Select a Story: ");
 			List<String> stories = LIB.getStories();
-			for (int i = 0; i < LIB.getStories().size(); i++) {
+			for (int i = 0; i < stories.size(); i++) {
 				TR.render("\n\t" + (i+1) + ". " + stories.get(i));
 			}
 

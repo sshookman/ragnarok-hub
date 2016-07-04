@@ -11,14 +11,14 @@ import java.io.IOException;
 
 public class LibraryManager {
 
-	private static final String LIBRARY = "library";
+	private static final String FOLDER = "library";
 	private Map<String, String> stories;
 
 	public LibraryManager() {
 
 		stories = new HashMap<String, String>();
 		try {
-		Files.walk(Paths.get(LIBRARY)).forEach(filePath -> {
+		Files.walk(Paths.get(FOLDER)).forEach(filePath -> {
     		if (Files.isRegularFile(filePath)) {
         		stories.put(getStoryTitle(filePath.toString()), filePath.toString());
     		}
@@ -41,7 +41,7 @@ public class LibraryManager {
 	private String getStoryTitle(final String storyPath) {
 		String storyTitle = storyPath;
 		storyTitle = storyTitle.replace(".sqlite", "");
-		storyTitle = storyTitle.replace("library/", "");
+		storyTitle = storyTitle.replace(FOLDER + "/", "");
 		storyTitle = storyTitle.replaceAll("_", " ");
 
 		return storyTitle;
