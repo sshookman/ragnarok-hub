@@ -1,29 +1,49 @@
 package library;
 
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
 import java.util.List;
 import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.IOException;
 
 public class LibraryManager {
 
 	private static final String LIBRARY = "library";
-	private List<String> stories;
+	private Map<String, String> stories;
 
 	public LibraryManager() {
 
-		stories = new ArrayList<String>();
+		stories = new HashMap<String, String>();
+		try {
 		Files.walk(Paths.get(LIBRARY)).forEach(filePath -> {
     		if (Files.isRegularFile(filePath)) {
-        		stories.add(filePath.toString());
+        		stories.put(getStoryTitle(filePath.toString()), filePath.toString());
     		}
 		});
+		} catch (IOException exception) {
+			System.out.println("Failed to load library: " + exception.getMessage());
+		}
 	}
 
-	public String getStory(Integer index) {
-		return stories.get(index);
+	public List<String> getStories() {
+		List<String> storyTitles = new ArrayList<String>();
+		storyTitles.addAll(stories.keySet());
+		return storyTitles;
 	}
 
-	public String getStoryTitle(Integer index) {
-		//TODO: Regex to grab title
-		return stories.get(index);	
+	public String getStoryPath(String key) {
+		return stories.get(key);
+	}
+
+	private String getStoryTitle(final String storyPath) {
+		String storyTitle = storyPath;
+		storyTitle = storyTitle.replace(".sqlite", "");
+		storyTitle = storyTitle.replace("library/", "");
+		storyTitle = storyTitle.replaceAll("_", " ");
+
+		return storyTitle;
 	}
 }
