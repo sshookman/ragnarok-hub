@@ -18,6 +18,10 @@ public class TerminalRenderer {
 		System.out.print(message);
 	}
 
+	public void invalidSelection() {
+		System.out.print("!!! INVALID SELECTION !!!\n");
+	}
+
 	public String prompt() {
 		System.out.print(SPACER + player + PROMPT);
 		return SCANNER.next();	

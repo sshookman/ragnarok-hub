@@ -4,8 +4,7 @@ import model.Page;
 import model.Player;
 import rendering.TerminalRenderer;
 import das.SQLiteDataService;
-import library.LibraryManager;
-import player.PlayerManager;
+import file.FileManager;
 
 /**
  * Dragonfly Reader main loop.
@@ -16,10 +15,6 @@ import player.PlayerManager;
 public class Main {
 
 	private static final TerminalRenderer TR = new TerminalRenderer();
-	private static final LibraryManager LIB = new LibraryManager();
-	private static final PlayerManager PLY = new PlayerManager();
-
-	private static Player player;
 	private static SQLiteDataService dataService;
 
 	/**
@@ -31,50 +26,37 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		
-		selectPlayer();
-		selectStory();
+		String[] player = select("players");
+		String[] story = select("library");
 		play();
 	}
 
-	private static void selectPlayer() {
-		
+	private static String[] select(final String folder) {
 		try {
-			TR.render("Select a Player: ");
+	
+			FileManager fileManager = new FileManager(folder);
+			
+			TR.render("Select: ");
 
-			List<String> players = PLY.getPlayers();
-			for (int i = 0; i < players.size(); i++) {
-				TR.render("\n\t" + (i+1) + ". " + players.get(i));
+			List<String> files = fileManager.getFiles();
+			for (int i = 0; i < files.size(); i++) {
+				TR.render("\n\t" + (i+1) + ". " + files.get(i));
 			}
 
-			String playerId = TR.prompt();
-			String playerTitle = players.get(Integer.valueOf(playerId)-1);
+			String fileId = TR.prompt();
+			String fileTitle = files.get(Integer.valueOf(fileId)-1);
+			String filePath = fileManager.getFilePath(fileTitle);
+			
+			String[] selection = new String[2];
+			selection[0] = fileTitle;
+			selection[1] = filePath;
 
-			TR.setPlayer(playerTitle);
+			return selection;
+
 		} catch (Exception exception) {
-			TR.render("!!! Invalid Selection !!!\n");
-			selectPlayer();
+			TR.invalidSelection();
+			return select(folder);
 		}
-	}
-
-	private static void selectStory() {
-
-		try {
-			TR.render("Select a Story: ");
-
-			List<String> stories = LIB.getStories();
-			for (int i = 0; i < stories.size(); i++) {
-				TR.render("\n\t" + (i+1) + ". " + stories.get(i));
-			}
-
-			String storyId = TR.prompt();
-			String storyTitle = stories.get(Integer.valueOf(storyId)-1);
-
-			dataService = new SQLiteDataService(LIB.getStoryPath(storyTitle));
-		} catch (Exception exception) {
-			TR.render("!!! Invalid Selection !!!\n");
-			selectStory();
-		}
-
 	}
 
 	/**
