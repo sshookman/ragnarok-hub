@@ -1,9 +1,7 @@
 Project Read
 ===
 
-Build: ./Build.sh
-
-Run: ./DragonflyEngine.sh
+![Build](https://travis-ci.org/sshookman/ProjectRead.svg?branch=master)
 
 -------------------
 
