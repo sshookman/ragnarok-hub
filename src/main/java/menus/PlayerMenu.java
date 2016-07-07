@@ -19,7 +19,7 @@ public class PlayerMenu {
 	public String select(int page) {
 
 		try {
-	
+
 			FileManager fileManager = new FileManager(FOLDER);
 			
 			tr.render("Select Player: ");
@@ -32,6 +32,8 @@ public class PlayerMenu {
 				}	
 			}
 
+			tr.render("\n\nPage " + (page+1) + " of " + ((files.size() / 5)+1));
+
 			String selection = tr.prompt();
 
 			if (NUMERIC.matcher(selection).matches()) {
@@ -42,6 +44,10 @@ public class PlayerMenu {
 				switch (selection) {
 					case "C": 
 					case "c": return create(tr);
+					case "N":
+					case "n": return (page+1 >= ((files.size() / 5)+1)) ? select(page) : select(page+1);
+					case "P":
+					case "p": return (page-1 < 0) ? select(page) : select(page-1);
 					default: return select(page);
 				}					
 			}
