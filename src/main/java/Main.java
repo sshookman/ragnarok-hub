@@ -33,9 +33,9 @@ public class Main {
 	public static void main(String[] args) {
 		init();
 		
-		String player = playerMenu.select(0);
+		String player = playerMenu.select();
 		TR.setPlayer(player);
-		//String[] player = select("players");
+
 		String[] story = select("library");
 		play();
 	}

@@ -16,6 +16,10 @@ public class PlayerMenu {
 		this.tr = tr;
 	}
 
+	public String select() {
+		return select(0);
+	}
+
 	public String select(int page) {
 
 		try {
@@ -32,8 +36,8 @@ public class PlayerMenu {
 				}	
 			}
 
-			tr.render("\n\nPage " + (page+1) + " of " + ((files.size() / 5)+1));
-
+			tr.render("\n\n\t<< P | N >>");
+			tr.render("\n\tPage " + (page+1) + " of " + ((files.size() / 5)+1));
 			String selection = tr.prompt();
 
 			if (NUMERIC.matcher(selection).matches()) {
@@ -43,12 +47,16 @@ public class PlayerMenu {
 			} else {
 				switch (selection) {
 					case "C": 
-					case "c": return create(tr);
+					case "c": 	return create(tr);
+
 					case "N":
-					case "n": return (page+1 >= ((files.size() / 5)+1)) ? select(page) : select(page+1);
+					case "n": 	return (page+1 >= ((files.size() / 5)+1)) ? select(page) : select(page+1);
+
 					case "P":
-					case "p": return (page-1 < 0) ? select(page) : select(page-1);
-					default: return select(page);
+					case "p": 	return (page-1 < 0) ? select(page) : select(page-1);
+
+					default: 	tr.invalidSelection();
+								return select(page);
 				}					
 			}
 
