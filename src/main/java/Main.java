@@ -8,6 +8,7 @@ import das.SQLiteDataService;
 import file.FileManager;
 import menus.PlayerMenu;
 import menus.StoryMenu;
+import das.ChapterDataService;
 
 /**
  * Dragonfly Reader main loop.
@@ -19,7 +20,7 @@ public class Main {
 
 	private static final TerminalRenderer TR = new TerminalRenderer();
 
-	private static Connection storyConnection;
+	private static Connection story;
 	private static PlayerMenu playerMenu;
 	private static StoryMenu storyMenu;
 
@@ -44,8 +45,8 @@ public class Main {
 		TR.setPlayer(player);
 
 		//Select Story
-		String story = storyMenu.select();
-		storyConnection = SQLiteDataService.getConnection(story);
+		String storyPath = storyMenu.select();
+		story = SQLiteDataService.getConnection(storyPath);
 
 		//Start Game
 		play();
@@ -57,5 +58,8 @@ public class Main {
 	 * @param pageIndex The Integer index value specifying which page to load
 	 */
 	private static void play() {
+		ChapterDataService chapterService = new ChapterDataService(story);
+		String chapter = chapterService.readChapter(null);
+		TR.render(chapter);
 	}
 }
