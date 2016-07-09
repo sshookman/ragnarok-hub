@@ -6,6 +6,7 @@ import rendering.TerminalRenderer;
 import das.SQLiteDataService;
 import file.FileManager;
 import menus.PlayerMenu;
+import menus.StoryMenu;
 
 /**
  * Dragonfly Reader main loop.
@@ -18,9 +19,11 @@ public class Main {
 	private static final TerminalRenderer TR = new TerminalRenderer();
 	private static SQLiteDataService dataService;
 	private static PlayerMenu playerMenu;
+	private static StoryMenu storyMenu;
 
 	private static void init() {
 		playerMenu = new PlayerMenu(TR);
+		storyMenu = new StoryMenu(TR);
 	}
 
 	/**
@@ -33,10 +36,15 @@ public class Main {
 	public static void main(String[] args) {
 		init();
 		
+		//Select Player
 		String player = playerMenu.select();
 		TR.setPlayer(player);
 
-		String[] story = select("library");
+		//Select Story
+		String story = storyMenu.select();
+		dataService = new SQLiteDataService(story);
+
+		//Start Game
 		play();
 	}
 

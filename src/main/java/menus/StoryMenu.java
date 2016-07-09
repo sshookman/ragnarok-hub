@@ -5,15 +5,14 @@ import rendering.TerminalRenderer;
 import file.FileManager;
 import java.util.regex.Pattern;
 
-public class PlayerMenu {
-//TODO: SEAN - Create Abstract and/or Interface for menus
+public class StoryMenu {
 
-	private static final String FOLDER = "players";
+	private static final String FOLDER = "library";
 	private static final Pattern NUMERIC = Pattern.compile("\\d+");
 
 	private TerminalRenderer tr;
 
-	public PlayerMenu(TerminalRenderer tr) {
+	public StoryMenu(TerminalRenderer tr) {
 		this.tr = tr;
 	}
 
@@ -27,8 +26,7 @@ public class PlayerMenu {
 
 			FileManager fileManager = new FileManager(FOLDER);
 			
-			tr.render("Select Player: ");
-			tr.render("\n\tC: Create New Player");
+			tr.render("Select Story: ");
 
 			List<String> files = fileManager.getFiles();
 			for (int index = (page*5); index < (page*5) + 5; index++) {
@@ -44,12 +42,10 @@ public class PlayerMenu {
 			if (NUMERIC.matcher(selection).matches()) {
 				Integer selectedFile = Integer.valueOf(selection);
 				String fileTitle = files.get(Integer.valueOf(selectedFile)-1);
-				return fileTitle;
+				String filePath = fileManager.getFilePath(fileTitle);
+				return filePath;
 			} else {
 				switch (selection) {
-					case "C": 
-					case "c": 	return create(tr);
-
 					case "N":
 					case "n": 	return (page+1 >= ((files.size() / 5)+1)) ? select(page) : select(page+1);
 
@@ -64,21 +60,6 @@ public class PlayerMenu {
 		} catch (Exception exception) {
 			tr.invalidSelection();
 			return select(page);
-		}
-	}
-
-	public static String create(TerminalRenderer tr) {
-
-		try {
-
-			tr.render("Create New Player: ");
-
-			String player = tr.prompt();
-			return player;
-
-		} catch (Exception exception) {
-			tr.invalidSelection();
-			return create(tr);
 		}
 	}
 }
