@@ -1,68 +1,65 @@
-Project Read
-===
-
 ![Build](https://travis-ci.org/sshookman/ProjectRead.svg?branch=master)
 
--------------------
+Project Read
+===
 
 Menu Screens
 ---
 
-**Select Player**
+**Player Selection Menu**
+```
+Select Player:
+	C. Create New Player
+	
+	1. Sarah
+	2. Sean
+	3. Lincoln
+	4. Bob
+	5. Joe
+	
+	<<   | N >>
+	Page 1 of 5
 
-Select a Player:
+> _
+```
 
-	C: Create New
+**Main Menu**
+```
+(Project Read)
 
-	6. Sean
-	7. Sarah
-	8. Joe
-	9. Ted
-	10. Bob
+	P. Play
+	O. Options
+	E. Exit
+	
+(Player) > _
+```
 
-	<< P |1|[2]|3| N >>
+**Story Selection Menu**
+```
+Select Story:
 
- \> *1*
+	1. Survive This
+	2. Aliens from Outer Space
+	3. Weapons of Moderate Destruction
+	4. The Ice Vault
+	5. I Guess We Just Left it in the Fridge Too Long
+	
+	<<   | N >>
+	Page 1 of 5
 
--------------------
+(Player) > _
+```
 
-**Create Player**
+**Options Menu**
+```
+Options:
 
-Create a Player:
-
-Name > *Amadeus*
-
-
--------------------
-
-**Select a Story**
-
-Select a Story:
-
-	6. Dragonfly Experiments
-	7. Throwing Shadows
-	8. Dark Matters
-	9. Private Investocat
-	10. Code Gurus
-
-	<< P |1|[2]|3| N >>
-
-Sean > *N*
-
--------------------
-
-**Enter the Game**
-
-Dragonf|y Experiments
-       |
-      1|Play
-      2|Options
-      3|Help
-       |
-      X|Exit
-      L|Logout
-       |
-
-Sean > *1*
-
--------------------
+	P. Print Speed	[>SLOW, MEDIUM, FAST]
+	T. Text Color	[WHITE, >RED, GREEN, BLUE, BLACK]
+	B. BG Color	[WHITE, RED, GREEN, BLUE, >BLACK]
+	
+	S. Save and Exit
+	C. Cancel
+	
+(Player) > _
+```
