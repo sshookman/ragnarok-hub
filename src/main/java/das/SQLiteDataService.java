@@ -10,21 +10,15 @@ import java.util.ArrayList;
 
 public class SQLiteDataService {
 
-	Connection connection;
-
-	public SQLiteDataService(String db) {
-		Connection c = null;
+	public static Connection getConnection(String db) {
+		Connection connection = null;
 		try {
 			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:" + db);
+			connection = DriverManager.getConnection("jdbc:sqlite:" + db);
 		} catch ( Exception e ) {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			System.exit(0);
 		}
-		System.out.println("Opened database successfully");
-	}
-
-	public List<Object> read() {
-		return new ArrayList<Object>();
+		return connection;
 	}
 }
