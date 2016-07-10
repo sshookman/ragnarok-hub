@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.sql.Connection;
 import model.Page;
 import model.Player;
+import model.Chapter;
 import rendering.TerminalRenderer;
 import das.SQLiteDataService;
 import file.FileManager;
@@ -59,7 +60,7 @@ public class Main {
 	 */
 	private static void play() {
 		ChapterDataService chapterService = new ChapterDataService(story);
-		String chapter = chapterService.readChapter(null);
-		TR.render(chapter);
+		List<Chapter> chapters = chapterService.readChapters(null);
+		TR.render(chapters.get(0).getBody());
 	}
 }

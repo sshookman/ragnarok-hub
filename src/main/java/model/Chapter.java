@@ -11,13 +11,13 @@ public class Chapter {
 	private Integer id;
 	private Integer prevChapterId;
 	private String title;
-	private String message;
+	private String body;
 
-	public Chapter(Integer id, Integer prevChapterId, String title, String message) {
+	public Chapter(Integer id, Integer prevChapterId, String title, String body) {
 		this.id = id;
 		this.prevChapterId = prevChapterId;
 		this.title = title;
-		this.message = message;
+		this.body = body;
 	}	
 
 	public Integer getId() {
@@ -44,11 +44,11 @@ public class Chapter {
 		this.title = title;
 	}
 
-	public String getMessage() {
-		return message;
+	public String getBody() {
+		return body;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setBody(String body) {
+		this.body = body;
 	}
 }
