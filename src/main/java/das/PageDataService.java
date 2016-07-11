@@ -20,10 +20,10 @@ public class PageDataService {
 		List<Page> pages = new ArrayList<Page>();
 		try {
 			Statement stmt = story.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM page WHERE chapterId IS " + chapterId);
+			ResultSet rs = stmt.executeQuery("SELECT * FROM page WHERE chapter_id IS " + chapterId);
 			while (rs.next()) {
 				Integer id = rs.getInt("id");
-				chapterId = rs.getInt("chapterId");
+				chapterId = rs.getInt("chapter_id");
 				String title = rs.getString("title");
 				String body = rs.getString("body");
 				Page page = new Page(id, chapterId, title, body);

@@ -10,6 +10,7 @@ import file.FileManager;
 import menus.PlayerMenu;
 import menus.StoryMenu;
 import das.ChapterDataService;
+import das.PageDataService;
 
 /**
  * Dragonfly Reader main loop.
@@ -54,13 +55,19 @@ public class Main {
 	}
 
 	/**
-	 * This is the main loop for the game.
-	 * 
-	 * @param pageIndex The Integer index value specifying which page to load
+	 * This should not live in the main class
 	 */
 	private static void play() {
 		ChapterDataService chapterService = new ChapterDataService(story);
+		PageDataService pageService = new PageDataService(story);
+
 		List<Chapter> chapters = chapterService.readChapters(null);
-		TR.render(chapters.get(0).getBody());
+		TR.render(chapters.get(0).getBody() + "\n\n");
+
+		List<Page> pages = pageService.readPages(1);
+		for (Page page : pages) {
+			TR.render(page.getTitle() + "\n\n");
+			TR.render(page.getBody() + "\n\n");
+		}	
 	}
 }
