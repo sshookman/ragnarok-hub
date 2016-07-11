@@ -41,6 +41,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		init();
+		TR.clear();
 		
 		//Select Player
 		String player = playerMenu.select();
@@ -62,12 +63,16 @@ public class Main {
 		PageDataService pageService = new PageDataService(story);
 
 		List<Chapter> chapters = chapterService.readChapters(null);
-		TR.render(chapters.get(0).getBody() + "\n\n");
+		TR.render(chapters.get(0).getBody());
+		TR.prompt();
+		TR.clear();
 
 		List<Page> pages = pageService.readPages(1);
 		for (Page page : pages) {
-			TR.render(page.getTitle() + "\n\n");
-			TR.render(page.getBody() + "\n\n");
+			TR.render(page.getTitle());
+			TR.render(page.getBody());
+			TR.prompt();
+			TR.clear();
 		}	
 	}
 }

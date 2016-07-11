@@ -18,6 +18,12 @@ public class TerminalRenderer {
 		System.out.print(message);
 	}
 
+	public void clear() {
+		//Figure out windows console later... screw windows...
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+	}
+
 	public void invalidSelection() {
 		System.out.print("!!! INVALID SELECTION !!!\n");
 	}

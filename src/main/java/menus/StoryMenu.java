@@ -38,6 +38,7 @@ public class StoryMenu {
 			tr.render("\n\n\t<< P | N >>");
 			tr.render("\n\tPage " + (page+1) + " of " + ((files.size() / 5)+1));
 			String selection = tr.prompt();
+			tr.clear();
 
 			if (NUMERIC.matcher(selection).matches()) {
 				Integer selectedFile = Integer.valueOf(selection);
