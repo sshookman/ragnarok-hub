@@ -8,32 +8,29 @@ public class TerminalRenderer {
 	private static final String PROMPT = "> ";
 	private static final String SPACER = "\n\n";
 	private static final Scanner SCANNER = new Scanner(System.in);
-	private String player = "";
+	private static String player = "";
 
-	public TerminalRenderer() {
-		SCANNER.useDelimiter("\n");
-	}
-
-	public void render(String message) {
+	public static void render(String message) {
 		System.out.print(message);
 	}
 
-	public void clear() {
+	public static void clear() {
 		//Figure out windows console later... screw windows...
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
 	}
 
-	public void invalidSelection() {
+	public static void invalidSelection() {
 		System.out.print("!!! INVALID SELECTION !!!\n");
 	}
 
-	public String prompt() {
+	public static String prompt() {
+		SCANNER.useDelimiter("\n");
 		System.out.print(SPACER + player + PROMPT);
 		return SCANNER.next();	
 	}
 
-	public void setPlayer(String player) {
-		this.player = player;
+	public static void setPlayer(String newPlayer) {
+		player = newPlayer;
 	}
 }
