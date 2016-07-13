@@ -7,8 +7,18 @@ public class TerminalRenderer {
 	
 	private static final String PROMPT = "> ";
 	private static final String SPACER = "\n\n";
+	private static final Integer TYPE_SPEED = 50;
 	private static final Scanner SCANNER = new Scanner(System.in);
 	private static String player = "";
+
+	public static void renderTyped(String message) {
+		for (int i = 0; i < message.length(); i++){
+			sleep();
+		    char character = message.charAt(i);        
+			System.out.print(character);
+		}
+		
+	}
 
 	public static void render(String message) {
 		System.out.print(message);
@@ -32,5 +42,13 @@ public class TerminalRenderer {
 
 	public static void setPlayer(String newPlayer) {
 		player = newPlayer;
+	}
+
+	private static void sleep() {
+		try {
+			Thread.sleep(TYPE_SPEED);
+		} catch (Exception exception) {
+			return;
+		}
 	}
 }

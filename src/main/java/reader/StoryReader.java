@@ -16,14 +16,14 @@ public class StoryReader {
 		PageDataService pageService = new PageDataService(story);
 
 		List<Chapter> chapters = chapterService.readChapters(null);
-		TerminalRenderer.render(chapters.get(0).getBody());
+		TerminalRenderer.renderTyped(chapters.get(0).getBody());
 		TerminalRenderer.prompt();
 		TerminalRenderer.clear();
 
 		List<Page> pages = pageService.readPages(1);
 		for (Page page : pages) {
-			TerminalRenderer.render(page.getTitle());
-			TerminalRenderer.render(page.getBody());
+			TerminalRenderer.render(page.getTitle() + "\n\n");
+			TerminalRenderer.renderTyped(page.getBody());
 			TerminalRenderer.prompt();
 			TerminalRenderer.clear();
 		}	

@@ -67,6 +67,7 @@ public class PlayerMenu {
 
 			render("Create New Player: ");
 			String player = prompt();
+			clear();
 			return player;
 		} catch (Exception exception) {
 
