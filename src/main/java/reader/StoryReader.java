@@ -8,10 +8,10 @@ import rendering.TerminalRenderer;
 import das.ChapterDataService;
 import das.PageDataService;
 
+
 public class StoryReader {
 
 	public void play(Connection story) {
-
 		ChapterDataService chapterService = new ChapterDataService(story);
 		PageDataService pageService = new PageDataService(story);
 
