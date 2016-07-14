@@ -21,6 +21,11 @@ public abstract class AbstractMenu {
 		render("Select: ");
 	}
 
+	protected String additionalSelections(final String selection, final Integer page) {
+		invalidSelection();
+		return select(page);
+	}
+
 	public String select() {
 		return select(0);
 	}
@@ -52,13 +57,13 @@ public abstract class AbstractMenu {
 			} else {
 				switch (selection) {
 					case "N":
-					case "n": 	return (page+1 >= ((files.size() / pageSize)+1)) ? select(page) : select(page+1);
-
+					case "n": 
+						return (page+1 >= ((files.size() / pageSize)+1)) ? select(page) : select(page+1);
 					case "P":
-					case "p": 	return (page-1 < 0) ? select(page) : select(page-1);
-
-					default: 	invalidSelection();
-								return select(page);
+					case "p":
+						return (page-1 < 0) ? select(page) : select(page-1);
+					default: 	
+						return additionalSelections(selection, page);
 				}					
 			}
 
