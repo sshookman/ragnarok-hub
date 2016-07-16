@@ -3,6 +3,7 @@ package rendering;
 import java.io.*;
 import java.util.Scanner;
 
+//Obsolete
 public class TerminalRenderer {
 	
 	private static final String PROMPT = "> ";

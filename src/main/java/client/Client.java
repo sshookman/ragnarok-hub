@@ -41,10 +41,12 @@ public class Client implements Runnable {
 		}
     }
 
-	public void login() {
+	public void login() throws IOException {
 
-		writer.println("Login > ");
-
+		writer.write("Login > ");
+		writer.flush();
+		String input = reader.readLine();
+		writer.println("Welcome " + input);
 	}
 }
 
