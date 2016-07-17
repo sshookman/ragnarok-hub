@@ -7,7 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import client.Client;
+import client.TelnetClient;
 
 public class TelnetServer {
 	private final Logger logger = Logger.getLogger(TelnetServer.class.getName());
@@ -27,8 +27,8 @@ public class TelnetServer {
 			logger.info("Server listening on port : " + port);
 
             while (true) {
-                Socket s = server.accept();
-                executor.execute(new Client(s));
+                Socket socket = server.accept();
+                executor.execute(new TelnetClient(socket));
             }
 
         } catch (IOException e) {
