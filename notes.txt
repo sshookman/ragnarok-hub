@@ -3,44 +3,40 @@ Architecture:
 Dragonfly Reader:
 
 /server
---TelnetServer
+--TelnetServer				| Server Handling Telnet Connections
 
 /client
---TelnetClient
+--TelnetClient				| Connected Client
 
 /service
---LoginService
---MenuService
---HelpService
---StoryService
+--AuthenticationService		| Handles login authentication
+--MainLobbyService			| Main lobby for the Dragonfly Mud-Hub
+--HelpService				| Help screens
+--StoryService				| Executes the Story Game loop
 
-/reader
---StoryReader
-
-/interface
---Interface
---SocketInterface
+/rendering
+--TelnetRenderer			| Handles input and output on the socket
 
 Dragonfly Data Service:
 
 /controller
---RESTController
---ChapterRESTController
---PageRESTController
---EntityRESTController
---ComponentRESTController
+--RESTController			| Abstract REST API
+--ChapterRESTController		| Chapter API (contains a map of pages)
+--PageRESTController		| Page API (contains a map of entities)
+--EntityRESTController		| Entity API (objects within the game)
+--ComponentRESTController	| Component API (attached to entities to provide functionality)
 
 /service
---SQLiteDataService
---ChapterDataService
---PageDataService
---EntityDataService
---ComponentDataService
+--SQLiteDataService			| Abstract Data Service for SQLite
+--ChapterDataService		| Chapter DAS
+--PageDataService			| Page DAS
+--EntityDataService			| Entity DAS
+--ComponentDataService		| Component DAS
 
 /model
---Chapter
---Page
---Entity
---Component
---CDoorway
---CPickup
+--Chapter					| Chapter DO
+--Page						| Page DO
+--Entity					| Entity DO
+--Component					| Component Interface DO
+--CDoorway					| Component Doorway DO
+--CPickup					| Compenent Pickup DO
