@@ -1,4 +1,4 @@
-package model;
+package golem.mud.hub.model;
 
 public class Player {
 

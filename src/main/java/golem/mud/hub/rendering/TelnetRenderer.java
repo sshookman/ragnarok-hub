@@ -1,4 +1,4 @@
-package rendering;
+package golem.mud.hub.rendering;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 public class TelnetRenderer {
 	private final Logger logger = Logger.getLogger(TelnetRenderer.class.getName());
 
+	private int writeSpeed = 50;
 	private final BufferedReader reader;
 	private final PrintWriter writer;
 
@@ -26,5 +27,13 @@ public class TelnetRenderer {
 
 	public String read() throws IOException {
 		return reader.readLine();
+	}
+
+	private void sleep() {
+		try {
+			Thread.sleep(writeSpeed);
+		} catch (Exception exception) {
+			return;
+		}
 	}
 }

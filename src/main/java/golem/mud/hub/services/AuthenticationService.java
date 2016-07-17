@@ -1,8 +1,8 @@
-package services;
+package golem.mud.hub.services;
 
 import java.io.IOException;
 
-import rendering.TelnetRenderer;
+import golem.mud.hub.rendering.TelnetRenderer;
 
 public class AuthenticationService implements ServiceInterface {
 

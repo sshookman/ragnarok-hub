@@ -1,11 +1,5 @@
-package model;
+package golem.mud.hub.model;
 
-/**
- * This object represents a chapter in the book.
- *
- * The chapter consists of a title and a message that are displayed
- * when the chapter begins.
- */
 public class Chapter {
 
 	private Integer id;

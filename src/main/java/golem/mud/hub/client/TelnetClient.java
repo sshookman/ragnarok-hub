@@ -1,13 +1,13 @@
-package client;
+package golem.mud.hub.client;
 
 import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import rendering.TelnetRenderer;
-import services.MainLobbyService;
-import services.AuthenticationService;
+import golem.mud.hub.rendering.TelnetRenderer;
+import golem.mud.hub.services.MainLobbyService;
+import golem.mud.hub.services.AuthenticationService;
 
 public class TelnetClient implements Runnable {
 	private final Logger logger = Logger.getLogger(TelnetClient.class.getName());

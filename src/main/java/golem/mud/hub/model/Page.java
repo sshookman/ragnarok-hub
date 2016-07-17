@@ -1,16 +1,8 @@
-package model;
+package golem.mud.hub.model;
 
 import java.util.Map;
 import java.util.HashMap;
 
-/**
- * This object represents a single page in the book.
- *
- * It consists of a message and an optional user input prompt. It also
- * contains a map of all of the pages that can be accessed from this page.
- * A regex is used as the key to evaluate user input against the available
- * pages in the map.
- */
 public class Page {
 
 	private Integer id;
