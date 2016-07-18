@@ -7,10 +7,13 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import golem.mud.hub.model.DataObject;
 
 public abstract class SQLiteDataService<DO extends DataObject> {
+	private final Logger logger = Logger.getLogger(SQLiteDataService.class.getName());
 
 	private DO dataObjectClass;
 	private Connection story;
@@ -34,8 +37,7 @@ public abstract class SQLiteDataService<DO extends DataObject> {
 			results.close();
 			statement.close();
 		} catch (SQLException exception) {
-			System.err.println(exception.getClass().getName() + ": " + exception.getMessage() );
-			System.exit(0);
+			logger.warning("Failed to read from table " + dataObjectClass.getTable());
 		}
 		return dataObjects;
 	}
