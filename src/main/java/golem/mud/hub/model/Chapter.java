@@ -1,6 +1,6 @@
 package golem.mud.hub.model;
 
-public class Chapter {
+public class Chapter implements DataObject {
 
 	private Integer id;
 	private Integer prevChapterId;

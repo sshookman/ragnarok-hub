@@ -6,8 +6,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import golem.mud.hub.rendering.TelnetRenderer;
-import golem.mud.hub.services.MainLobbyService;
-import golem.mud.hub.services.AuthenticationService;
+import golem.mud.hub.service.MainLobbyService;
+import golem.mud.hub.service.AuthenticationService;
 
 public class TelnetClient implements Runnable {
 	private final Logger logger = Logger.getLogger(TelnetClient.class.getName());

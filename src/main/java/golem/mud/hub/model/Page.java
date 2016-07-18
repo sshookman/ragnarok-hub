@@ -3,7 +3,7 @@ package golem.mud.hub.model;
 import java.util.Map;
 import java.util.HashMap;
 
-public class Page {
+public class Page implements DataObject {
 
 	private Integer id;
 	private Integer chapterId;

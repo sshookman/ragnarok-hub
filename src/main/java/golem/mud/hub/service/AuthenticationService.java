@@ -1,4 +1,4 @@
-package golem.mud.hub.services;
+package golem.mud.hub.service;
 
 import java.io.IOException;
 
