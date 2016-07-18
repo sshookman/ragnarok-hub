@@ -1,23 +1,21 @@
 package golem.mud.hub.model;
 
-public class Chapter implements DataObject {
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class Chapter extends DataObject {
 
 	private Integer id;
 	private Integer prevChapterId;
 	private String title;
 	private String body;
 
-	public Chapter(Integer id, Integer prevChapterId, String title, String body) {
-		this.id = id;
-		this.prevChapterId = prevChapterId;
-		this.title = title;
-		this.body = body;
-	}	
-
+	@Override
 	public Integer getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -44,5 +42,20 @@ public class Chapter implements DataObject {
 
 	public void setBody(String body) {
 		this.body = body;
+	}
+
+	@Override
+	public String getTable() {
+		return "chapter";
+	}
+
+	@Override
+	public Chapter instance(ResultSet result) throws SQLException {
+		Chapter instance = new Chapter();
+		instance.setId(result.getInt("id"));
+		instance.setPrevChapterId(result.getInt("prev_chapter_id"));
+		instance.setTitle(result.getString("title"));
+		instance.setBody(result.getString("body"));
+		return instance;
 	}
 }

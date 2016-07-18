@@ -1,7 +1,13 @@
 package golem.mud.hub.model;
 
-public interface DataObject {
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-	public Integer getId();
-	public void setId(Integer id);
+public abstract class DataObject {
+
+	public abstract Integer getId();
+	public abstract void setId(Integer id);
+
+	public abstract String getTable();
+	public abstract DataObject instance(ResultSet result) throws SQLException;
 }

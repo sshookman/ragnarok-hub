@@ -1,18 +1,19 @@
 package golem.mud.hub.model;
 
-public class Player implements DataObject {
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class Player extends DataObject {
 
 	private Integer id;
 	private String name;
 
-	public Player(String name) {
-		this.name = name;
-	}
-
+	@Override
 	public Integer getId() {
 		return this.id;
 	}
 
+	@Override
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -24,4 +25,17 @@ public class Player implements DataObject {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	@Override
+	public String getTable() {
+		return "player";
+	}
+
+	@Override
+	public Player instance(ResultSet result) throws SQLException {
+		Player instance = new Player();
+		instance.setId(result.getInt("id"));
+		instance.setName(result.getString("name"));
+		return instance;
+	}	
 }

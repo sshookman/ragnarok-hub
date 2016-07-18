@@ -2,25 +2,22 @@ package golem.mud.hub.model;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-public class Page implements DataObject {
+public class Page extends DataObject {
 
 	private Integer id;
 	private Integer chapterId;
 	private String title;
 	private String body;
 
-	public Page(Integer id, Integer chapterId, String title, String body) {
-		this.id = id;
-		this.chapterId = chapterId;
-		this.title = title;
-		this.body = body;
-	}
-
+	@Override
 	public Integer getId() {
 		return id;
 	}
 	
+	@Override
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -37,7 +34,7 @@ public class Page implements DataObject {
 		return title;
 	}
 
-	public void setTitle() {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 
@@ -45,7 +42,22 @@ public class Page implements DataObject {
 		return body;
 	}
 
-	public void setBody() {
+	public void setBody(String title) {
 		this.body = body;
+	}
+
+	@Override
+	public String getTable() {
+		return "page";
+	}
+
+	@Override
+	public Page instance(ResultSet result) throws SQLException {
+		Page instance = new Page();
+		instance.setId(result.getInt("id"));
+		instance.setChapterId(result.getInt("chapter_id"));
+		instance.setTitle(result.getString("title"));
+		instance.setBody(result.getString("body"));
+		return instance;
 	}
 }
