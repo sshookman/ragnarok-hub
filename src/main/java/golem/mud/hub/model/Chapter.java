@@ -3,7 +3,7 @@ package golem.mud.hub.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Chapter extends DataObject {
+public class Chapter extends AbstractDataObject {
 
 	private Integer id;
 	private Integer prevChapterId;

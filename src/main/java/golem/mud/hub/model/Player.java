@@ -3,7 +3,7 @@ package golem.mud.hub.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Player extends DataObject {
+public class Player extends AbstractDataObject {
 
 	private Integer id;
 	private String name;

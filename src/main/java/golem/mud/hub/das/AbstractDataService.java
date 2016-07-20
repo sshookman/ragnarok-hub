@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import golem.mud.hub.model.DataObject;
+import golem.mud.hub.model.AbstractDataObject;
 
-public abstract class AbstractDataService<D extends DataObject> {
+public abstract class AbstractDataService<D extends AbstractDataObject> {
 	private final Logger logger = Logger.getLogger(AbstractDataService.class.getName());
 
 	private D dataObjectClass;
@@ -41,15 +41,15 @@ public abstract class AbstractDataService<D extends DataObject> {
 		return dataObjects;
 	}
 	
-	public DataObject read(final Integer id) {
+	public AbstractDataObject read(final Integer id) {
 		return null;
 	}
 
-	public Integer create(DataObject dataObject) {
+	public Integer create(AbstractDataObject dataObject) {
 		return 0;
 	}
 
-	public Integer update(final Integer id, final DataObject dataObject) {
+	public Integer update(final Integer id, final AbstractDataObject dataObject) {
 		return 0;
 	}
 
