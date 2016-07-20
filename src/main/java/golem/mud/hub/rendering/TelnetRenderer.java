@@ -40,7 +40,7 @@ public class TelnetRenderer {
 		try {
 			Thread.sleep(speed);
 		} catch (Exception exception) {
-			logger.error("Failed to sleep thread");
+			logger.severe("Failed to sleep thread");
 			return;
 		}
 	}

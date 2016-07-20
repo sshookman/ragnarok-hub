@@ -30,7 +30,7 @@ public abstract class AbstractDataService<D extends DataObject> {
 			ResultSet results = statement.executeQuery("SELECT * FROM " + dataObjectClass.getTable());
 			while (results.next()) {
 				@SuppressWarnings("unchecked")
-				DO dataObject = (DO) dataObjectClass.instance(results);
+				D dataObject = (D) dataObjectClass.instance(results);
 				dataObjects.add(dataObject);
 			}
 			results.close();
