@@ -8,29 +8,33 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import java.sql.ResultSet;
 
-public class TestPlayer {
+public class ChapterPageTest {
 
-	private static final Player playerClass = new Player();
+	private static final ChapterPage pageClass = new ChapterPage();
 	private static ResultSet resultSet;
 
 	@BeforeClass
 	public static void setup() throws Exception {
 		resultSet = mock(ResultSet.class);
 		when(resultSet.getInt("id")).thenReturn(1);
-		when(resultSet.getString("name")).thenReturn("NAME");
+		when(resultSet.getInt("chapter_id")).thenReturn(5);
+		when(resultSet.getString("title")).thenReturn("TITLE");
+		when(resultSet.getString("body")).thenReturn("BODY");
 	}
 
 	@Test
 	public void testGetTable() throws Exception {
-		assertEquals("player", playerClass.getTable());
+		assertEquals("page", pageClass.getTable());
 	}
 
 	@Test
 	public void testInstance() throws Exception {
-		Player instance = playerClass.instance(resultSet);
+		ChapterPage instance = pageClass.instance(resultSet);
 
 		assertNotNull(instance);
-		assertEquals(Integer.valueOf(1), instance.getId());
-		assertEquals("NAME", instance.getName());
+		assertEquals(Integer.valueOf(1), instance.getRowId());
+		assertEquals(Integer.valueOf(5), instance.getChapterRowId());
+		assertEquals("TITLE", instance.getTitle());
+		assertEquals("BODY", instance.getBody());
 	}
 }

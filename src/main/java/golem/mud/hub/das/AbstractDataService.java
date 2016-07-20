@@ -41,7 +41,7 @@ public abstract class AbstractDataService<D extends AbstractDataObject> {
 		return dataObjects;
 	}
 	
-	public AbstractDataObject read(final Integer id) {
+	public AbstractDataObject read(final Integer rowId) {
 		return null;
 	}
 
@@ -49,11 +49,11 @@ public abstract class AbstractDataService<D extends AbstractDataObject> {
 		return 0;
 	}
 
-	public Integer update(final Integer id, final AbstractDataObject dataObject) {
+	public Integer update(final Integer rowId, final AbstractDataObject dataObject) {
 		return 0;
 	}
 
-	public Boolean delete(final Integer id) {
+	public Boolean delete(final Integer rowId) {
 		return false;
 	}
 }

@@ -8,7 +8,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import java.sql.ResultSet;
 
-public class TestChapter {
+public class ChapterTest {
 
 	private static final Chapter chapterClass = new Chapter();
 	private static ResultSet resultSet;
@@ -32,8 +32,8 @@ public class TestChapter {
 		Chapter instance = chapterClass.instance(resultSet);
 
 		assertNotNull(instance);
-		assertEquals(Integer.valueOf(1), instance.getId());
-		assertEquals(Integer.valueOf(5), instance.getPrevChapterId());
+		assertEquals(Integer.valueOf(1), instance.getRowId());
+		assertEquals(Integer.valueOf(5), instance.getPrevChapterRowId());
 		assertEquals("TITLE", instance.getTitle());
 		assertEquals("BODY", instance.getBody());
 	}

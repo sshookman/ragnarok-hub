@@ -5,8 +5,8 @@ import java.sql.SQLException;
 
 public abstract class AbstractDataObject {
 
-	public abstract Integer getId();
-	public abstract void setId(Integer id);
+	public abstract Integer getRowId();
+	public abstract void setRowId(Integer rowId);
 
 	public abstract String getTable();
 	public abstract AbstractDataObject instance(ResultSet result) throws SQLException;

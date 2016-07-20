@@ -5,17 +5,17 @@ import java.sql.SQLException;
 
 public class Player extends AbstractDataObject {
 
-	private Integer id;
+	private Integer rowId;
 	private String name;
 
 	@Override
-	public Integer getId() {
-		return this.id;
+	public Integer getRowId() {
+		return rowId;
 	}
 
 	@Override
-	public void setId(Integer id) {
-		this.id = id;
+	public void setRowId(Integer rowId) {
+		this.rowId = rowId;
 	}
 
 	public String getName() {
@@ -34,7 +34,7 @@ public class Player extends AbstractDataObject {
 	@Override
 	public Player instance(ResultSet result) throws SQLException {
 		Player instance = new Player();
-		instance.setId(result.getInt("id"));
+		instance.setRowId(result.getInt("id"));
 		instance.setName(result.getString("name"));
 		return instance;
 	}	

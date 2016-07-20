@@ -5,27 +5,27 @@ import java.sql.SQLException;
 
 public class Chapter extends AbstractDataObject {
 
-	private Integer id;
-	private Integer prevChapterId;
+	private Integer rowId;
+	private Integer prevChapterRowId;
 	private String title;
 	private String body;
 
 	@Override
-	public Integer getId() {
-		return id;
+	public Integer getRowId() {
+		return rowId;
 	}
 
 	@Override
-	public void setId(Integer id) {
-		this.id = id;
+	public void setRowId(Integer rowId) {
+		this.rowId = rowId;
 	}
 	
-	public Integer getPrevChapterId() {
-		return prevChapterId;
+	public Integer getPrevChapterRowId() {
+		return prevChapterRowId;
 	}
 
-	public void setPrevChapterId(Integer prevChapterId) {
-		this.prevChapterId = prevChapterId;
+	public void setPrevChapterRowId(Integer prevChapterRowId) {
+		this.prevChapterRowId = prevChapterRowId;
 	}
 
 	public String getTitle() {
@@ -52,8 +52,8 @@ public class Chapter extends AbstractDataObject {
 	@Override
 	public Chapter instance(ResultSet result) throws SQLException {
 		Chapter instance = new Chapter();
-		instance.setId(result.getInt("id"));
-		instance.setPrevChapterId(result.getInt("prev_chapter_id"));
+		instance.setRowId(result.getInt("id"));
+		instance.setPrevChapterRowId(result.getInt("prev_chapter_id"));
 		instance.setTitle(result.getString("title"));
 		instance.setBody(result.getString("body"));
 		return instance;

@@ -3,29 +3,29 @@ package golem.mud.hub.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Page extends AbstractDataObject {
+public class ChapterPage extends AbstractDataObject {
 
-	private Integer id;
-	private Integer chapterId;
+	private Integer rowId;
+	private Integer chapterRowId;
 	private String title;
 	private String body;
 
 	@Override
-	public Integer getId() {
-		return id;
+	public Integer getRowId() {
+		return rowId;
 	}
 	
 	@Override
-	public void setId(Integer id) {
-		this.id = id;
+	public void setRowId(Integer rowId) {
+		this.rowId = rowId;
 	}
 
-	public Integer getChapterId() {
-		return chapterId;
+	public Integer getChapterRowId() {
+		return chapterRowId;
 	}
 
-	public void setChapterId(Integer chapterId) {
-		this.chapterId = chapterId;
+	public void setChapterRowId(Integer chapterRowId) {
+		this.chapterRowId = chapterRowId;
 	}
 	
 	public String getTitle() {
@@ -50,10 +50,10 @@ public class Page extends AbstractDataObject {
 	}
 
 	@Override
-	public Page instance(ResultSet result) throws SQLException {
-		Page instance = new Page();
-		instance.setId(result.getInt("id"));
-		instance.setChapterId(result.getInt("chapter_id"));
+	public ChapterPage instance(ResultSet result) throws SQLException {
+		ChapterPage instance = new ChapterPage();
+		instance.setRowId(result.getInt("id"));
+		instance.setChapterRowId(result.getInt("chapter_id"));
 		instance.setTitle(result.getString("title"));
 		instance.setBody(result.getString("body"));
 		return instance;
