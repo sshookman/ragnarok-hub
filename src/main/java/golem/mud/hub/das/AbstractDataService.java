@@ -7,25 +7,24 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import golem.mud.hub.model.DataObject;
 
-public abstract class SQLiteDataService<DO extends DataObject> {
-	private final Logger logger = Logger.getLogger(SQLiteDataService.class.getName());
+public abstract class AbstractDataService<D extends DataObject> {
+	private final Logger logger = Logger.getLogger(AbstractDataService.class.getName());
 
-	private DO dataObjectClass;
+	private D dataObjectClass;
 	private Connection story;
 
-	public SQLiteDataService(final DO dataObject, final Connection story) {
+	public AbstractDataService(final D dataObject, final Connection story) {
 		this.dataObjectClass = dataObject;
 		this.story = story;
 	}	
 	
-	public List<DO> read(Map<String, Object> search) {
+	public List<D> read(Map<String, Object> search) {
 
-		List<DO> dataObjects = new ArrayList<DO>();
+		List<D> dataObjects = new ArrayList<D>();
 		try {
 			Statement statement = story.createStatement();
 			ResultSet results = statement.executeQuery("SELECT * FROM " + dataObjectClass.getTable());

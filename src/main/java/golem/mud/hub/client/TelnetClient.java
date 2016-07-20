@@ -2,7 +2,6 @@ package golem.mud.hub.client;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import golem.mud.hub.rendering.TelnetRenderer;

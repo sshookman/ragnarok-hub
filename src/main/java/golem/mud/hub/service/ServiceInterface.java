@@ -4,5 +4,5 @@ import java.io.IOException;
 
 public interface ServiceInterface {
 
-	public void start() throws IOException;
+	void start() throws IOException;
 }

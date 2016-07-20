@@ -1,7 +1,5 @@
 package golem.mud.hub.model;
 
-import java.util.Map;
-import java.util.HashMap;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
