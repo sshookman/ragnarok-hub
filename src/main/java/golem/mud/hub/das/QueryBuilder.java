@@ -2,16 +2,12 @@ package golem.mud.hub.das;
 
 import java.util.Map;
 import java.util.HashMap;
-//import java.util.logging.Logger;
+
+import static golem.mud.hub.das.QueryConstants.*;
 
 public class QueryBuilder {
-	//private final Logger logger = Logger.getLogger(QueryBuilder.class.getName());
 	
-	private static final String WHERE = "WHERE ";
-	private static final String AND = " AND ";
-
 	public static class SelectQuery {
-		private static final String TEMPLATE = "SELECT * FROM {TABLE} {WHERE}";
 
 		private String table;
 		private Map<String, String> conditions = new HashMap<String, String>();
@@ -26,24 +22,26 @@ public class QueryBuilder {
 		}
 
 		public String build() {
-			String query = TEMPLATE;
+			String query = SELECT_TEMPLATE;
 			query = query.replace("{TABLE}", table);
 			query = query.replace("{WHERE}", buildWhere());
 			return query;
 		}
 
 		private String buildWhere() {
-			StringBuilder whereBuilder = new StringBuilder(WHERE);
+			StringBuilder whereBuilder = new StringBuilder();
 
 			boolean isFirst = true;
 			for (Map.Entry<String, String> entry : conditions.entrySet()) {
-				if (!isFirst) {
+				if (isFirst) {
+					isFirst = false;
+					whereBuilder.append(WHERE);
+				} else {
 					whereBuilder.append(AND);
 				}
 				whereBuilder.append(entry.getKey());
 				whereBuilder.append(" = ");
 				whereBuilder.append(entry.getValue());
-				isFirst = false;
 			}
 		
 			return whereBuilder.toString();

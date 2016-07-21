@@ -8,12 +8,18 @@ public class QueryBuilderTest {
 
 	@Test
 	public void testSelectStatement() throws Exception {
-		String select = new QueryBuilder
+		String selectWhere = new QueryBuilder
 			.SelectQuery("my_table")
 			.addCondition("foo", "bar")
 			.addCondition("top", "paz")
 			.build();
 
-		assertEquals("SELECT * FROM my_table WHERE top = paz AND foo = bar", select);
+		assertEquals("SELECT * FROM my_table WHERE top = paz AND foo = bar", selectWhere);
+
+		String select = new QueryBuilder
+			.SelectQuery("my_table")
+			.build();
+
+		assertEquals("SELECT * FROM my_table", select);
 	}	
 }
