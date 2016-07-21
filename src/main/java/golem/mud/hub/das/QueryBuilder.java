@@ -6,36 +6,46 @@ import java.util.HashMap;
 
 public class QueryBuilder {
 	//private final Logger logger = Logger.getLogger(QueryBuilder.class.getName());
+	
+	private static final String WHERE = "WHERE ";
+	private static final String AND = " AND ";
 
-	private String table;
-	private Map<String, String> conditions = new HashMap<String, String>();
+	public class SelectQuery {
+		private static final String TEMPLATE = "SELECT * FROM {TABLE} {WHERE}";
 
-	private QueryBuilder(final String table) {
-		this.table = table;
-	}
-
-	private void addCondition(final String field, final String value) {
-		this.conditions.put(field, value);	
-	}
-
-	private String build() {
-		return table; 
-	}
-
-	private class SelectQuery {
-		private QueryBuilder queryBuilder;
+		private String table;
+		private Map<String, String> conditions = new HashMap<String, String>();
 
 		public SelectQuery(String table) {
-			this.queryBuilder = new QueryBuilder(table);
+			this.table = table;
 		}
 
 		public SelectQuery addCondition(final String field, final String value) {
-			queryBuilder.addCondition(field, value);
+			conditions.put(field, value);
 			return this;
 		}
 
 		public String build() {
-			return queryBuilder.build();
+			String query = TEMPLATE;
+			query = query.replace("{WHERE}", buildWhere());
+			return query;
+		}
+
+		private String buildWhere() {
+			StringBuilder whereBuilder = new StringBuilder(WHERE);
+
+			boolean isFirst = true;
+			for (Map.Entry<String, String> entry : conditions.entrySet()) {
+				if (!isFirst) {
+					whereBuilder.append(AND);
+				}
+				whereBuilder.append(entry.getKey());
+				whereBuilder.append(" = ");
+				whereBuilder.append(entry.getValue());
+				isFirst = false;
+			}
+		
+			return whereBuilder.toString();
 		}
 	}
 
