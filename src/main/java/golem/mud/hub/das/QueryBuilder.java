@@ -10,7 +10,7 @@ public class QueryBuilder {
 	private static final String WHERE = "WHERE ";
 	private static final String AND = " AND ";
 
-	public class SelectQuery {
+	public static class SelectQuery {
 		private static final String TEMPLATE = "SELECT * FROM {TABLE} {WHERE}";
 
 		private String table;
@@ -27,6 +27,7 @@ public class QueryBuilder {
 
 		public String build() {
 			String query = TEMPLATE;
+			query = query.replace("{TABLE}", table);
 			query = query.replace("{WHERE}", buildWhere());
 			return query;
 		}

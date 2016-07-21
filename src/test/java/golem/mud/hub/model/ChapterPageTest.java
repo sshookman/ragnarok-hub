@@ -2,11 +2,11 @@ package golem.mud.hub.model;
 
 import org.junit.Test;
 import org.junit.BeforeClass;
+import java.sql.ResultSet;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import java.sql.ResultSet;
 
 public class ChapterPageTest {
 
