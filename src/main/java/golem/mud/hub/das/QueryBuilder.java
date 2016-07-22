@@ -20,7 +20,7 @@ public class QueryBuilder {
 			}
 			whereBuilder
 				.append(entry.getKey())
-				.append(" = ")
+				.append("=")
 				.append(entry.getValue());
 		}
 	
@@ -38,6 +38,11 @@ public class QueryBuilder {
 
 		public SelectQuery whereEquals(final String field, final String value) {
 			conditions.put(field, value);
+			return this;
+		}
+
+		public SelectQuery whereEquals(final Map<String, String> fieldValues) {
+			conditions.putAll(fieldValues);
 			return this;
 		}
 
@@ -107,7 +112,7 @@ public class QueryBuilder {
 			String set = setBuilder.toString().trim();
 			set = set.replaceAll(" ", ",");
 
-			String query = SELECT_TEMPLATE;
+			String query = UPDATE_TEMPLATE;
 			query = query.replace("{TABLE}", table);
 			query = query.replace("{SET}", set);
 			query = query.replace("{WHERE}", buildWhere(conditions));
