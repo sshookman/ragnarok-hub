@@ -69,6 +69,13 @@ public class QueryBuilder {
 			valuesBuilder.append(" ").append(value);
 			return this;
 		}
+		
+		public InsertQuery value(final Map<String, String> values) {
+			for (Map.Entry<String, String> entry : values.entrySet()) {
+				value(entry.getKey(), entry.getValue());
+			}
+			return this;
+		}
 
 		public String build() {
 			String fields = fieldsBuilder.toString().trim();
@@ -105,6 +112,13 @@ public class QueryBuilder {
 				.append(field)
 				.append("=")
 				.append(value);
+			return this;
+		}
+
+		public UpdateQuery set(final Map<String, String> values) {
+			for (Map.Entry<String, String> entry : values.entrySet()) {
+				set(entry.getKey(), entry.getValue());
+			}
 			return this;
 		}
 

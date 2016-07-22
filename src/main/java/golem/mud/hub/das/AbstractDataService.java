@@ -21,13 +21,12 @@ public abstract class AbstractDataService<D extends AbstractDataObject> {
 		this.dataObjectClass = dataObject;
 		this.story = story;
 	}	
-	
-	public List<D> read(Map<String, Object> search) {
 
+	private List<D> execute(final String query) {
 		List<D> dataObjects = new ArrayList<D>();
 		try {
 			Statement statement = story.createStatement();
-			ResultSet results = statement.executeQuery("SELECT * FROM " + dataObjectClass.getTable());
+			ResultSet results = statement.executeQuery(query);
 			while (results.next()) {
 				@SuppressWarnings("unchecked")
 				D dataObject = (D) dataObjectClass.instance(results);
@@ -36,21 +35,50 @@ public abstract class AbstractDataService<D extends AbstractDataObject> {
 			results.close();
 			statement.close();
 		} catch (SQLException exception) {
-			logger.warning("Failed to read from table " + dataObjectClass.getTable());
+			logger.severe("Failed to execute query: " + query);
 		}
 		return dataObjects;
 	}
 	
+	public List<D> read(Map<String, String> search) {
+		String query = new QueryBuilder
+			.SelectQuery(dataObjectClass.getTable())
+			.whereEquals(search)
+			.build();
+		return execute(query);
+	}
+	
 	public AbstractDataObject read(final Integer rowId) {
-		return null;
+		String idString = (rowId == null) ? "NULL" : rowId.toString();
+		String query = new QueryBuilder
+			.SelectQuery(dataObjectClass.getTable())
+			.whereEquals("id", idString)
+			.build();
+
+		List<D> results = execute(query);
+		return results == null || results.isEmpty() ? null : results.get(0);
 	}
 
 	public Integer create(AbstractDataObject dataObject) {
-		return 0;
+		String query = new QueryBuilder
+			.InsertQuery(dataObjectClass.getTable())
+			.value(dataObject.toMap())
+			.build();
+
+		List<D> results = execute(query);
+		return results == null || results.isEmpty() ? null : results.get(0).getRowId();
 	}
 
 	public Integer update(final Integer rowId, final AbstractDataObject dataObject) {
-		return 0;
+		String idString = (rowId == null) ? "NULL" : rowId.toString();
+		String query = new QueryBuilder
+			.UpdateQuery(dataObjectClass.getTable())
+			.set(dataObject.toMap())
+			.whereEquals("id", idString)
+			.build();
+
+		List<D> results = execute(query);
+		return results == null || results.isEmpty() ? null : results.get(0).getRowId();
 	}
 
 	public Boolean delete(final Integer rowId) {

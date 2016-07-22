@@ -2,6 +2,8 @@ package golem.mud.hub.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
+import java.util.HashMap;
 
 public class Player extends AbstractDataObject {
 
@@ -38,4 +40,12 @@ public class Player extends AbstractDataObject {
 		instance.setName(result.getString("name"));
 		return instance;
 	}	
+
+	@Override
+	public Map<String, String> toMap() {
+		Map<String, String> dataMap = new HashMap<String, String>();
+		dataMap.put("id", getRowId().toString());
+		dataMap.put("name", getName());
+		return dataMap;
+	}
 }

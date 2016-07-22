@@ -2,11 +2,12 @@ package golem.mud.hub.model;
 
 import org.junit.Test;
 import org.junit.BeforeClass;
+import java.sql.ResultSet;
+import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import java.sql.ResultSet;
 
 public class PlayerTest {
 
@@ -32,5 +33,15 @@ public class PlayerTest {
 		assertNotNull(instance);
 		assertEquals(Integer.valueOf(1), instance.getRowId());
 		assertEquals("NAME", instance.getName());
+	}
+
+	@Test
+	public void testToMap() throws Exception {
+		Player player = playerClass.instance(resultSet);
+		Map<String, String> playerMap = player.toMap();
+
+		assertNotNull(playerMap);
+		assertEquals("1", playerMap.get("id"));
+		assertEquals("NAME", playerMap.get("name"));
 	}
 }

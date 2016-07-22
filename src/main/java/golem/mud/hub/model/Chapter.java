@@ -2,6 +2,8 @@ package golem.mud.hub.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
+import java.util.HashMap;
 
 public class Chapter extends AbstractDataObject {
 
@@ -57,5 +59,15 @@ public class Chapter extends AbstractDataObject {
 		instance.setTitle(result.getString("title"));
 		instance.setBody(result.getString("body"));
 		return instance;
+	}
+
+	@Override
+	public Map<String, String> toMap() {
+		Map<String, String> dataMap = new HashMap<String, String>();
+		dataMap.put("id", getRowId().toString());
+		dataMap.put("prev_chapter_id", getPrevChapterRowId().toString());
+		dataMap.put("title", getTitle());
+		dataMap.put("body", getBody());
+		return dataMap;
 	}
 }
