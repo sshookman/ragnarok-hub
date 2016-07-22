@@ -10,8 +10,8 @@ public class QueryBuilderTest {
 	public void testSelectStatement() throws Exception {
 		String selectWhere = new QueryBuilder
 			.SelectQuery("my_table")
-			.addCondition("foo", "bar")
-			.addCondition("top", "paz")
+			.whereEquals("foo", "bar")
+			.whereEquals("top", "paz")
 			.build();
 
 		assertEquals("SELECT * FROM my_table WHERE top = paz AND foo = bar;", selectWhere);
@@ -27,10 +27,10 @@ public class QueryBuilderTest {
 	public void testInsertStatement() throws Exception {
 		String insert = new QueryBuilder
 			.InsertQuery("my_table")
-			.addFieldValue("foo", "bar")
-			.addFieldValue("top", "paz")
+			.value("top", "paz")
+			.value("foo", "bar")
 			.build();
 
-		assertEquals("INSERT INTO my_table (top, foo) VALUES (paz, bar);", insert);
+		assertEquals("INSERT INTO my_table (top,foo) VALUES (paz,bar);", insert);
 	}
 }

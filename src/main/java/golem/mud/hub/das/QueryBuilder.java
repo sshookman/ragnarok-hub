@@ -36,7 +36,7 @@ public class QueryBuilder {
 			this.table = table;
 		}
 
-		public SelectQuery addCondition(final String field, final String value) {
+		public SelectQuery whereEquals(final String field, final String value) {
 			conditions.put(field, value);
 			return this;
 		}
@@ -52,56 +52,88 @@ public class QueryBuilder {
 	public static class InsertQuery {
 
 		private String table;
-		private Map<String, String> fieldValues = new HashMap<String, String>();
-		private StringBuilder fieldsBuilder;
-		private StringBuilder valuesBuilder;
+		private StringBuilder fieldsBuilder = new StringBuilder();
+		private StringBuilder valuesBuilder = new StringBuilder();
 
 		public InsertQuery(String table) {
 			this.table = table;
 		}
 
-		public InsertQuery addFieldValue(final String field, final String value) {
-			fieldValues.put(field, value);
+		public InsertQuery value(final String field, final String value) {
+			fieldsBuilder.append(" ").append(field);
+			valuesBuilder.append(" ").append(value);
 			return this;
 		}
 
 		public String build() {
-			buildFieldValues();
+			String fields = fieldsBuilder.toString().trim();
+			String values = valuesBuilder.toString().trim();
+			fields = fields.replaceAll(" ", ",");
+			values = values.replaceAll(" ", ",");
+
 			String query = INSERT_TEMPLATE;
 			query = query.replace("{TABLE}", table);
-			query = query.replace("{FIELDS}", fieldsBuilder.toString());
-			query = query.replace("{VALUES}", valuesBuilder.toString());
+			query = query.replace("{FIELDS}", fields);
+			query = query.replace("{VALUES}", values);
 			return query;
-		}
-
-		private void buildFieldValues() {
-			fieldsBuilder = new StringBuilder();
-			valuesBuilder = new StringBuilder();
-
-			boolean isFirst = true;
-			for (Map.Entry<String, String> entry : fieldValues.entrySet()) {
-				if (!isFirst) {
-					fieldsBuilder.append(", ");
-					valuesBuilder.append(", ");
-				} else {
-					isFirst = false;
-				}
-				fieldsBuilder.append(entry.getKey());
-				valuesBuilder.append(entry.getValue());
-			}
-		
 		}
 	}
 
-	//SELECT * FROM {TABLE} {WHERE};
-		//WHERE
-		//AND
-		//{FIELD} IS {VALUE}
+	public static class UpdateQuery {
 
-	//INSERT INTO {TABLE} ({FIELDS}) VALUES ({VALUES});
+		private String table;
+		private Map<String, String> conditions = new HashMap<String, String>();
+		private StringBuilder setBuilder = new StringBuilder();
 
-	//UPDATE {TABLE} SET {SET} {WHERE};
+		public UpdateQuery(String table) {
+			this.table = table;
+		}
 
-	//DELETE FROM {TABLE} {WHERE};
-	
+		public UpdateQuery whereEquals(final String field, final String value) {
+			conditions.put(field, value);
+			return this;
+		}
+
+		public UpdateQuery set(final String field, final String value) {
+			setBuilder
+				.append(" ")
+				.append(field)
+				.append("=")
+				.append(value);
+			return this;
+		}
+
+		public String build() {
+			String set = setBuilder.toString().trim();
+			set = set.replaceAll(" ", ",");
+
+			String query = SELECT_TEMPLATE;
+			query = query.replace("{TABLE}", table);
+			query = query.replace("{SET}", set);
+			query = query.replace("{WHERE}", buildWhere(conditions));
+			return query;
+		}
+	}
+
+	public static class DeleteQuery {
+
+		private String table;
+		private Map<String, String> conditions = new HashMap<String, String>();
+
+		public DeleteQuery(String table) {
+			this.table = table;
+		}
+
+		public DeleteQuery whereEquals(final String field, final String value) {
+			conditions.put(field, value);
+			return this;
+		}
+
+		public String build() {
+			String query = DELETE_TEMPLATE;
+			query = query.replace("{TABLE}", table);
+			query = query.replace("{WHERE}", buildWhere(conditions));
+			return query;
+		}
+	}
 }
