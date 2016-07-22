@@ -82,6 +82,13 @@ public abstract class AbstractDataService<D extends AbstractDataObject> {
 	}
 
 	public Boolean delete(final Integer rowId) {
-		return false;
+		String idString = (rowId == null) ? "NULL" : rowId.toString();
+		String query = new QueryBuilder
+			.DeleteQuery(dataObjectClass.getTable())
+			.whereEquals("id", idString)
+			.build();
+
+		List<D> results = execute(query);
+		return results == null || results.isEmpty();
 	}
 }
