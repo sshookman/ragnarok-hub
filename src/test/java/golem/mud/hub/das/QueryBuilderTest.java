@@ -14,12 +14,23 @@ public class QueryBuilderTest {
 			.addCondition("top", "paz")
 			.build();
 
-		assertEquals("SELECT * FROM my_table WHERE top = paz AND foo = bar", selectWhere);
+		assertEquals("SELECT * FROM my_table WHERE top = paz AND foo = bar;", selectWhere);
 
 		String select = new QueryBuilder
 			.SelectQuery("my_table")
 			.build();
 
-		assertEquals("SELECT * FROM my_table", select);
+		assertEquals("SELECT * FROM my_table;", select);
 	}	
+
+	@Test
+	public void testInsertStatement() throws Exception {
+		String insert = new QueryBuilder
+			.InsertQuery("my_table")
+			.addFieldValue("foo", "bar")
+			.addFieldValue("top", "paz")
+			.build();
+
+		assertEquals("INSERT INTO my_table (top, foo) VALUES (paz, bar);", insert);
+	}
 }

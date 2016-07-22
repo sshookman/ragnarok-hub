@@ -47,8 +47,50 @@ public class QueryBuilder {
 			query = query.replace("{WHERE}", buildWhere(conditions));
 			return query;
 		}
+	}
 
+	public static class InsertQuery {
+
+		private String table;
+		private Map<String, String> fieldValues = new HashMap<String, String>();
+		private StringBuilder fieldsBuilder;
+		private StringBuilder valuesBuilder;
+
+		public InsertQuery(String table) {
+			this.table = table;
+		}
+
+		public InsertQuery addFieldValue(final String field, final String value) {
+			fieldValues.put(field, value);
+			return this;
+		}
+
+		public String build() {
+			buildFieldValues();
+			String query = INSERT_TEMPLATE;
+			query = query.replace("{TABLE}", table);
+			query = query.replace("{FIELDS}", fieldsBuilder.toString());
+			query = query.replace("{VALUES}", valuesBuilder.toString());
+			return query;
+		}
+
+		private void buildFieldValues() {
+			fieldsBuilder = new StringBuilder();
+			valuesBuilder = new StringBuilder();
+
+			boolean isFirst = true;
+			for (Map.Entry<String, String> entry : fieldValues.entrySet()) {
+				if (!isFirst) {
+					fieldsBuilder.append(", ");
+					valuesBuilder.append(", ");
+				} else {
+					isFirst = false;
+				}
+				fieldsBuilder.append(entry.getKey());
+				valuesBuilder.append(entry.getValue());
+			}
 		
+		}
 	}
 
 	//SELECT * FROM {TABLE} {WHERE};
