@@ -10,6 +10,7 @@ Project Structure:
 ---
 
 **Source Code**
+```
 src/main/java/golem/	-- Main Package
 --client/				-- Telnet Client Related Classes
 --das/					-- Data Access Service Classes
@@ -17,7 +18,9 @@ src/main/java/golem/	-- Main Package
 --rendering/			-- Telnet Input and Output Handling
 --server/				-- Telnet Server Related Classes
 src/test/java/golem/	-- Main Testing Package
-
+```
 **Database**
+```
 library/				-- Database MUD Files
 init/					-- Database Initialization Scripts
+```
