@@ -38,13 +38,15 @@ Server Structure
     │   └── Crathus_Throwing_Shadows.sglm
     └── saul
         └── Mathus_Throwing_Shadows.sglm
-```
 
 GOLEM.gmh is the database file for the Hub itself.
 The *library* directory contains all of the Golem MUD games.
 The *player* directory contains folders for each player with their saved games.
+```
 
 **Database Extensions**
+```
 .gmh = Golem MUD Hub
 .glm = Golem MUD
 .sglm= Golem MUD Saved Game
+```
