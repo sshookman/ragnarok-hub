@@ -1,0 +1,1 @@
+cd .. && mvn cobertura:cobertura
