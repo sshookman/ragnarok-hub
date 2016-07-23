@@ -5,9 +5,11 @@ RUN apt-get -y update
 RUN apt-get -y install default-jdk
 RUN apt-get -y install maven
 
-ADD GOLEM.gmh /golem/
-ADD scripts/Run.sh /golem/
+ADD server/GOLEM.gmh /golem/
+ADD server/Run.sh /golem/
 ADD target/Golem-0.1.0.jar /golem/
 
+EXPOSE 1127
+
 WORKDIR /golem
-CMD ["./Run.sh"]
+CMD ["/bin/bash", "./Run.sh"]
