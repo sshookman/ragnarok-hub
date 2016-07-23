@@ -19,9 +19,32 @@ src/main/java/golem/	-- Main Package
 --server/				-- Telnet Server Related Classes
 src/test/java/golem/	-- Main Testing Package
 ```
-**Database**
+
+---
+
+Server Structure
+---
+
+**Directories**
 ```
-library/				-- Golem (glm) Database Files
-init/					-- Database Initialization Scripts
-GOLEM.gmh				-- Golem MUD Hub (gmh) Database File
+├── GOLEM.gmh
+├── library
+│   ├── Throwing_Shadows.glm
+│   └── Throwing_Light.glm
+└── player
+    ├── sean
+    │   └── Wrathus_Throwing_Shadows.sglm
+    ├── paul
+    │   └── Crathus_Throwing_Shadows.sglm
+    └── saul
+        └── Mathus_Throwing_Shadows.sglm
 ```
+
+GOLEM.gmh is the database file for the Hub itself.
+The *library* directory contains all of the Golem MUD games.
+The *player* directory contains folders for each player with their saved games.
+
+**Database Extensions**
+.gmh = Golem MUD Hub
+.glm = Golem MUD
+.sglm= Golem MUD Saved Game
