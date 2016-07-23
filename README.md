@@ -21,6 +21,7 @@ src/test/java/golem/	-- Main Testing Package
 ```
 **Database**
 ```
-library/				-- Database MUD Files
+library/				-- Golem (glm) Database Files
 init/					-- Database Initialization Scripts
+GOLEM.gmh				-- Golem MUD Hub (gmh) Database File
 ```
