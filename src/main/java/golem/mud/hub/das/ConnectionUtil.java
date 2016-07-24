@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.logging.Logger;
 
-public class ConnectionFactory {
+public class ConnectionUtil {
 	private static final Logger LOGGER = Logger.getLogger(AbstractDataService.class.getName());
 
-	public static Connection getConnection(final String dbFile) throws Exception {
+	public static Connection establishConnection(final String dbFile) throws Exception {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			return DriverManager.getConnection("jdbc:sqlite:" + dbFile);
@@ -15,5 +15,15 @@ public class ConnectionFactory {
 			LOGGER.severe("Failed to Connect to Database: " + exception.getMessage());
 			throw exception;
 		}
+	}
+
+	public static Connection initGolemMudHub(final Connection connection) {
+
+		return connection;
+	}
+
+	public static Connection initGolem(final Connection connection) {
+
+		return connection;
 	}
 }
