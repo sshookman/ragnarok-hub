@@ -10,7 +10,7 @@ public class ConnectionFactoryTest {
 
 	@Test
 	public void testGetConnection() throws Exception {
-		Connection game = ConnectionFactory.getConnection("library/Throwing_Shadows.sqlite");
+		Connection game = ConnectionFactory.getConnection("server/GOLEM.gmh");
 		assertNotNull(game);
 		
 		try {

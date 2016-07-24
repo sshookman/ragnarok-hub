@@ -9,16 +9,17 @@ import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class PlayerTest {
+public class PlayerDOTest {
 
-	private static final Player playerClass = new Player();
+	private static final PlayerDO playerClass = new PlayerDO();
 	private static ResultSet resultSet;
 
 	@BeforeClass
 	public static void setup() throws Exception {
 		resultSet = mock(ResultSet.class);
 		when(resultSet.getInt("id")).thenReturn(1);
-		when(resultSet.getString("name")).thenReturn("NAME");
+		when(resultSet.getString("username")).thenReturn("NAME");
+		when(resultSet.getString("password")).thenReturn("PASS");
 	}
 
 	@Test
@@ -28,20 +29,22 @@ public class PlayerTest {
 
 	@Test
 	public void testInstance() throws Exception {
-		Player instance = playerClass.instance(resultSet);
+		PlayerDO instance = playerClass.instance(resultSet);
 
 		assertNotNull(instance);
 		assertEquals(Integer.valueOf(1), instance.getRowId());
-		assertEquals("NAME", instance.getName());
+		assertEquals("NAME", instance.getUsername());
+		assertEquals("PASS", instance.getPassword());
 	}
 
 	@Test
 	public void testToMap() throws Exception {
-		Player player = playerClass.instance(resultSet);
+		PlayerDO player = playerClass.instance(resultSet);
 		Map<String, String> playerMap = player.toMap();
 
 		assertNotNull(playerMap);
 		assertEquals("1", playerMap.get("id"));
-		assertEquals("NAME", playerMap.get("name"));
+		assertEquals("NAME", playerMap.get("username"));
+		assertEquals("PASS", playerMap.get("password"));
 	}
 }
