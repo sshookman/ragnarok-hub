@@ -8,6 +8,7 @@ import java.util.List;
 import java.sql.Connection;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertFalse;
 
 import golem.mud.hub.util.ConnectionUtil;
 import golem.mud.hub.model.PlayerDO;
@@ -37,6 +38,7 @@ public class PlayerDataServiceTest {
 	public void testReadSearch() throws Exception {
 		List<PlayerDO> players = playerDataService.read(new HashMap<String, String>());
 		assertNotNull(players);
+		assertFalse(players.isEmpty());
 	}
 
 	public void testRead() throws Exception {

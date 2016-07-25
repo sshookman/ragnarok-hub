@@ -43,7 +43,7 @@ public class PlayerDOTest {
 		Map<String, String> playerMap = player.toMap();
 
 		assertNotNull(playerMap);
-		assertEquals("NAME", playerMap.get("username"));
-		assertEquals("PASS", playerMap.get("password"));
+		assertEquals("\"NAME\"", playerMap.get("username"));
+		assertEquals("\"PASS\"", playerMap.get("password"));
 	}
 }
