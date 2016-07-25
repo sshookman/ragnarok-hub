@@ -51,6 +51,16 @@ public class QueryBuilderTest {
 			.build();
 
 		assertEquals("INSERT INTO my_table (top,foo) VALUES (paz,bar);", insert);
+
+		Map<String, String> mapData = new HashMap<String, String>();
+		mapData.put("top", "paz");
+		mapData.put("foo", "bar");
+		String insertMap = new QueryBuilder
+			.InsertQuery("my_table")
+			.value(mapData)
+			.build();
+
+		assertEquals("INSERT INTO my_table (top,foo) VALUES (paz,bar);", insertMap);
 	}
 
 	@Test
@@ -71,6 +81,16 @@ public class QueryBuilderTest {
 			.build();
 
 		assertEquals("UPDATE my_table SET top=paz;", update);
+
+		Map<String, String> mapData = new HashMap<String, String>();
+		mapData.put("top", "paz");
+		mapData.put("wam", "bam");
+		String updateMap = new QueryBuilder
+			.UpdateQuery("my_table")
+			.set(mapData)
+			.build();
+
+		assertEquals("UPDATE my_table SET wam=bam,top=paz;", updateMap);
 	}
 
 	@Test
