@@ -54,7 +54,6 @@ public class PlayerDO extends AbstractDataObject {
 	@Override
 	public Map<String, String> toMap() {
 		Map<String, String> dataMap = new HashMap<String, String>();
-		dataMap.put("id", getRowId().toString());
 		dataMap.put("username", getUsername());
 		dataMap.put("password", getPassword());
 		return dataMap;

@@ -22,7 +22,18 @@ public abstract class AbstractDataService<D extends AbstractDataObject> {
 		this.story = story;
 	}	
 
-	private List<D> execute(final String query) {
+	private void executeUpdate(final String query) {
+		try {
+			Statement statement = story.createStatement();
+			statement.executeUpdate(query);
+			statement.close();
+		} catch (SQLException exception) {
+			logger.severe("Failed to execute query: " + query);
+		}
+	}
+	
+
+	private List<D> executeQuery(final String query) {
 		List<D> dataObjects = new ArrayList<D>();
 		try {
 			Statement statement = story.createStatement();
@@ -45,7 +56,7 @@ public abstract class AbstractDataService<D extends AbstractDataObject> {
 			.SelectQuery(dataObjectClass.getTable())
 			.whereEquals(search)
 			.build();
-		return execute(query);
+		return executeQuery(query);
 	}
 	
 	public AbstractDataObject read(final Integer rowId) {
@@ -55,18 +66,17 @@ public abstract class AbstractDataService<D extends AbstractDataObject> {
 			.whereEquals("id", idString)
 			.build();
 
-		List<D> results = execute(query);
+		List<D> results = executeQuery(query);
 		return results == null || results.isEmpty() ? null : results.get(0);
 	}
 
-	public Integer create(AbstractDataObject dataObject) {
+	public void create(AbstractDataObject dataObject) {
 		String query = new QueryBuilder
 			.InsertQuery(dataObjectClass.getTable())
 			.value(dataObject.toMap())
 			.build();
 
-		List<D> results = execute(query);
-		return results == null || results.isEmpty() ? null : results.get(0).getRowId();
+		executeUpdate(query);
 	}
 
 	public Integer update(final Integer rowId, final AbstractDataObject dataObject) {
@@ -77,7 +87,7 @@ public abstract class AbstractDataService<D extends AbstractDataObject> {
 			.whereEquals("id", idString)
 			.build();
 
-		List<D> results = execute(query);
+		List<D> results = executeQuery(query);
 		return results == null || results.isEmpty() ? null : results.get(0).getRowId();
 	}
 
@@ -88,7 +98,7 @@ public abstract class AbstractDataService<D extends AbstractDataObject> {
 			.whereEquals("id", idString)
 			.build();
 
-		List<D> results = execute(query);
+		List<D> results = executeQuery(query);
 		return results == null || results.isEmpty();
 	}
 }
