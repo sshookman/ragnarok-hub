@@ -13,17 +13,12 @@ public class ConnectionUtil {
 	private static final Logger LOGGER = Logger.getLogger(ConnectionUtil.class.getName());
 	private static final ResourceLoader RESOURCE_LOADER = new ResourceLoader();
 
-	private static void init(final Connection connection, final String fileName) {
-		try {
-			String query = getFile(fileName);
-			Statement statement = connection.createStatement();
-			statement.executeQuery(query);
-			statement.close();
-		} catch (FileNotFoundException exception) {
-			LOGGER.severe("Failed to load: " + fileName);
-		} catch (SQLException exception) {
-			LOGGER.severe("Failed to init: " + fileName);
-		}
+	private static Connection init(final Connection connection, final String fileName) throws FileNotFoundException, SQLException {
+		String query = getFile(fileName);
+		Statement statement = connection.createStatement();
+		statement.executeUpdate(query);
+		statement.close();
+		return connection;
 	}
 
 	public static Connection establishConnection(final String dbFile) throws Exception {
@@ -36,14 +31,12 @@ public class ConnectionUtil {
 		}
 	}
 
-	public static Connection initGolemMudHub(final Connection connection) {
-		init(connection, "GOLEM-MUD-HUB.sql");
-		return connection;
+	public static Connection initGolemMudHub(final Connection connection) throws FileNotFoundException, SQLException {
+		return init(connection, "GOLEM-MUD-HUB.sql");
 	}
 
-	public static Connection initGolem(final Connection connection) {
-		init(connection, "GOLEM.sql");
-		return connection;
+	public static Connection initGolem(final Connection connection) throws FileNotFoundException, SQLException {
+		return init(connection, "GOLEM.sql");
 	}
 
 	private static String getFile(String fileName) throws FileNotFoundException {

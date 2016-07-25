@@ -20,4 +20,20 @@ public class ConnectionUtilTest {
 			assertNotNull(exception);
 		}
 	}
+
+	@Test
+	public void testInitGolemMudHub() throws Exception {
+		Connection hubTest = ConnectionUtil.establishConnection("test/GolemMudHubTest.gmh");
+
+		hubTest = ConnectionUtil.initGolemMudHub(hubTest);
+		assertNotNull(hubTest);
+	}
+
+	@Test
+	public void testInitGolem() throws Exception {
+		Connection glmTest = ConnectionUtil.establishConnection("test/GolemTest.glm");
+
+		glmTest = ConnectionUtil.initGolem(glmTest);
+		assertNotNull(glmTest);
+	}
 }
