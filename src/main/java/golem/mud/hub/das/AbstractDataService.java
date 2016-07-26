@@ -1,7 +1,6 @@
 package golem.mud.hub.das;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.logging.Logger;
 import golem.mud.hub.model.AbstractDataObject;
 
 public abstract class AbstractDataService<D extends AbstractDataObject> {
-	private final Logger logger = Logger.getLogger(AbstractDataService.class.getName());
+	private final Logger LOGGER = Logger.getLogger(AbstractDataService.class.getName());
 
 	private D dataObjectClass;
 	private Connection story;
@@ -22,13 +21,16 @@ public abstract class AbstractDataService<D extends AbstractDataObject> {
 		this.story = story;
 	}	
 
-	private void executeUpdate(final String query) {
+	private boolean executeUpdate(final String query) {
 		try {
 			Statement statement = story.createStatement();
 			statement.executeUpdate(query);
 			statement.close();
-		} catch (SQLException exception) {
-			logger.severe("Failed to execute query: " + query);
+			return true;
+		} catch (Exception exception) {
+			LOGGER.severe("Failed to execute query: " + query);
+			LOGGER.severe(exception.getMessage());
+			return false;
 		}
 	}
 	
@@ -45,8 +47,9 @@ public abstract class AbstractDataService<D extends AbstractDataObject> {
 			}
 			results.close();
 			statement.close();
-		} catch (SQLException exception) {
-			logger.severe("Failed to execute query: " + query);
+		} catch (Exception exception) {
+			LOGGER.severe("Failed to execute query: " + query);
+			LOGGER.severe(exception.getMessage());
 		}
 		return dataObjects;
 	}
@@ -70,25 +73,32 @@ public abstract class AbstractDataService<D extends AbstractDataObject> {
 		return results == null || results.isEmpty() ? null : results.get(0);
 	}
 
-	public void create(AbstractDataObject dataObject) {
+	public boolean create(AbstractDataObject dataObject) {
+		if (dataObject == null) {
+			return false;
+		}
+
 		String query = new QueryBuilder
 			.InsertQuery(dataObjectClass.getTable())
 			.value(dataObject.toMap())
 			.build();
 
-		executeUpdate(query);
+		return executeUpdate(query);
 	}
 
-	public Integer update(final Integer rowId, final AbstractDataObject dataObject) {
-		String idString = (rowId == null) ? "NULL" : rowId.toString();
+	public boolean update(final Integer rowId, final AbstractDataObject dataObject) {
+		if (rowId == null || dataObject == null) {
+			return false;
+		}
+
+		String idString = rowId.toString();
 		String query = new QueryBuilder
 			.UpdateQuery(dataObjectClass.getTable())
 			.set(dataObject.toMap())
 			.whereEquals("id", idString)
 			.build();
 
-		List<D> results = executeQuery(query);
-		return results == null || results.isEmpty() ? null : results.get(0).getRowId();
+		return executeUpdate(query);
 	}
 
 	public Boolean delete(final Integer rowId) {

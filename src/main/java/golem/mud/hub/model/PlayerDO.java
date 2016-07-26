@@ -54,8 +54,14 @@ public class PlayerDO extends AbstractDataObject {
 	@Override
 	public Map<String, String> toMap() {
 		Map<String, String> dataMap = new HashMap<String, String>();
-		dataMap.put("username", "\""+getUsername()+"\"");
-		dataMap.put("password", "\""+getPassword()+"\"");
+		addNotNull("username", getUsername(), dataMap);
+		addNotNull("password", getPassword(), dataMap);
 		return dataMap;
+	}
+
+	private void addNotNull(final String name, final String value, final Map<String, String> map) {
+		if (value != null && !value.isEmpty()) {
+			map.put(name, "\""+value+"\"");
+		}
 	}
 }

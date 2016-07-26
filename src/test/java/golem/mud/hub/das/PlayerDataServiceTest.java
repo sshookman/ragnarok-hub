@@ -9,6 +9,8 @@ import java.sql.Connection;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 
 import golem.mud.hub.util.ConnectionUtil;
 import golem.mud.hub.model.PlayerDO;
@@ -27,21 +29,43 @@ public class PlayerDataServiceTest {
 	@Test 
 	public void testPlayerDataService() throws Exception {
 		testCreate();
-		testReadSearch();
-		testRead();
-		testUpdate();
-		testRead();
-		testDelete();
-		testReadSearch();
+		int playerRowId = testReadSearch();
+		testUpdate(playerRowId);
 	}
 
-	public void testReadSearch() throws Exception {
+	public Integer testReadSearch() throws Exception {
+		Integer playerRowId;
+		
 		List<PlayerDO> players = playerDataService.read(new HashMap<String, String>());
 		assertNotNull(players);
 		assertFalse(players.isEmpty());
+
+		PlayerDO player = players.get(0);
+		assertNotNull(player);
+		assertEquals("Sean", player.getUsername());
+		assertEquals("plaintext", player.getPassword());
+		
+		playerRowId = player.getRowId();
+
+		List<PlayerDO> playersFiltered = playerDataService.read(player.toMap());
+		assertNotNull(playersFiltered);
+		assertFalse(playersFiltered.isEmpty());
+
+		PlayerDO playerFiltered = playersFiltered.get(0);
+		assertNotNull(playerFiltered);
+		assertEquals("Sean", playerFiltered.getUsername());
+		assertEquals("plaintext", playerFiltered.getPassword());
+
+		Map<String, String> badSearch = new HashMap<String, String>();
+		badSearch.put("BAD", "SEARCH");
+		List<PlayerDO> playersBadFilter= playerDataService.read(badSearch);
+		assertNotNull(playersBadFilter);
+		assertTrue(playersBadFilter.isEmpty());
+
+		return playerRowId;
 	}
 
-	public void testRead() throws Exception {
+	public void testRead(Integer playerRowId) throws Exception {
 
 	}
 
@@ -49,11 +73,32 @@ public class PlayerDataServiceTest {
 		PlayerDO player = new PlayerDO();
 		player.setUsername("Sean");
 		player.setPassword("plaintext");
+		boolean success = playerDataService.create(player);
+		assertTrue(success);
 
-		playerDataService.create(player);
+		PlayerDO badPlayer = new PlayerDO();
+		boolean failure = playerDataService.create(badPlayer);
+		assertFalse(failure);
+
+		boolean superFailure = playerDataService.create(null);
+		assertFalse(superFailure);
 	}
 
-	public void testUpdate() throws Exception {
+	public void testUpdate(Integer playerRowId) throws Exception {
+		PlayerDO player = new PlayerDO();
+		player.setUsername("Link");
+		player.setPassword("pass");
+		boolean success = playerDataService.update(playerRowId, player);
+		assertTrue(success);
+
+		//Integer failure = playerDataService.update(playerRowId, new PlayerDO());
+		//assertEquals(Integer.valueOf(-1), failure);
+
+		//Integer failObject = playerDataService.update(playerRowId, null);
+		//assertEquals(Integer.valueOf(-1), failObject);
+
+		//Integer failId = playerDataService.update(null, player);
+		//assertEquals(Integer.valueOf(-1), failId);
 
 	}
 
