@@ -31,6 +31,7 @@ public class PlayerDataServiceTest {
 		testCreate();
 		int playerRowId = testReadSearch();
 		testUpdate(playerRowId);
+        testRead(playerRowId);
 	}
 
 	public Integer testReadSearch() throws Exception {
@@ -66,7 +67,10 @@ public class PlayerDataServiceTest {
 	}
 
 	public void testRead(Integer playerRowId) throws Exception {
-
+        PlayerDO player = (PlayerDO) playerDataService.read(playerRowId);
+        assertNotNull(player);
+        assertEquals("Link", player.getUsername());
+        assertEquals("pass", player.getPassword());
 	}
 
 	public void testCreate() throws Exception {
