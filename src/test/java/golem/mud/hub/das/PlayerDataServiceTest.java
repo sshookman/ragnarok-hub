@@ -91,15 +91,14 @@ public class PlayerDataServiceTest {
 		boolean success = playerDataService.update(playerRowId, player);
 		assertTrue(success);
 
-		//Integer failure = playerDataService.update(playerRowId, new PlayerDO());
-		//assertEquals(Integer.valueOf(-1), failure);
+		boolean failure = playerDataService.update(playerRowId, new PlayerDO());
+		assertFalse(failure);
 
-		//Integer failObject = playerDataService.update(playerRowId, null);
-		//assertEquals(Integer.valueOf(-1), failObject);
+		boolean failObject = playerDataService.update(playerRowId, null);
+		assertFalse(failObject);
 
-		//Integer failId = playerDataService.update(null, player);
-		//assertEquals(Integer.valueOf(-1), failId);
-
+		boolean failId = playerDataService.update(null, player);
+		assertFalse(failId);
 	}
 
 	public void testDelete() throws Exception {
