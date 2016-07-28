@@ -19,4 +19,10 @@ public abstract class AbstractDO {
 			map.put(name, "\""+value+"\"");
 		}
 	}
+
+    protected void addNotNull(final String name, final Integer value, final Map<String, String> map) {
+		if (value != null) {
+			map.put(name, value.toString());
+		}
+	}
 }
