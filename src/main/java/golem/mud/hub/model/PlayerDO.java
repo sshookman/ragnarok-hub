@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.HashMap;
 
-public class PlayerDO extends AbstractDataObject {
+public class PlayerDO extends AbstractDO {
 
 	private Integer rowId;
 	private String username;
@@ -57,11 +57,5 @@ public class PlayerDO extends AbstractDataObject {
 		addNotNull("username", getUsername(), dataMap);
 		addNotNull("password", getPassword(), dataMap);
 		return dataMap;
-	}
-
-	private void addNotNull(final String name, final String value, final Map<String, String> map) {
-		if (value != null && !value.isEmpty()) {
-			map.put(name, "\""+value+"\"");
-		}
 	}
 }

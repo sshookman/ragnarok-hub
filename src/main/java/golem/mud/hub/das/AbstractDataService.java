@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import golem.mud.hub.model.AbstractDataObject;
+import golem.mud.hub.model.AbstractDO;
 
-public abstract class AbstractDataService<D extends AbstractDataObject> {
+public abstract class AbstractDataService<D extends AbstractDO> {
 	private final Logger LOGGER = Logger.getLogger(AbstractDataService.class.getName());
 
 	private D dataObjectClass;
@@ -62,7 +62,7 @@ public abstract class AbstractDataService<D extends AbstractDataObject> {
 		return executeQuery(query);
 	}
 	
-	public AbstractDataObject read(final Integer rowId) {
+	public AbstractDO read(final Integer rowId) {
         if (rowId == null) {
             return null;
         }
@@ -76,7 +76,7 @@ public abstract class AbstractDataService<D extends AbstractDataObject> {
 		return results.isEmpty() ? null : results.get(0);
 	}
 
-	public boolean create(AbstractDataObject dataObject) {
+	public boolean create(AbstractDO dataObject) {
 		if (dataObject == null) {
 			return false;
 		}
@@ -89,7 +89,7 @@ public abstract class AbstractDataService<D extends AbstractDataObject> {
 		return executeUpdate(query);
 	}
 
-	public boolean update(final Integer rowId, final AbstractDataObject dataObject) {
+	public boolean update(final Integer rowId, final AbstractDO dataObject) {
 		if (rowId == null || dataObject == null) {
 			return false;
 		}
