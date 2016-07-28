@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.sql.Connection;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -32,6 +33,8 @@ public class PlayerDataServiceTest {
 		int playerRowId = testReadSearch();
 		testUpdate(playerRowId);
         testRead(playerRowId);
+        testDelete(playerRowId);
+        testEmpty();
 	}
 
 	public Integer testReadSearch() throws Exception {
@@ -71,6 +74,13 @@ public class PlayerDataServiceTest {
         assertNotNull(player);
         assertEquals("Link", player.getUsername());
         assertEquals("pass", player.getPassword());
+
+        PlayerDO notFound = (PlayerDO) playerDataService.read(123);
+        assertNull(notFound);
+
+        Integer nullId = null;
+        PlayerDO failure = (PlayerDO) playerDataService.read(nullId);
+        assertNull(failure);
 	}
 
 	public void testCreate() throws Exception {
@@ -105,7 +115,17 @@ public class PlayerDataServiceTest {
 		assertFalse(failId);
 	}
 
-	public void testDelete() throws Exception {
+	public void testDelete(Integer playerRowId) throws Exception {
+        boolean success = playerDataService.delete(playerRowId);
+        assertTrue(success);
 
+        boolean failure = playerDataService.delete(null);
+        assertFalse(failure);
 	}
+
+    public void testEmpty() {
+        List<PlayerDO> players = playerDataService.read(new HashMap<String, String>());
+		assertNotNull(players);
+		assertTrue(players.isEmpty());
+    }
 }

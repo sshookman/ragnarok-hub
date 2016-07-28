@@ -63,14 +63,17 @@ public abstract class AbstractDataService<D extends AbstractDataObject> {
 	}
 	
 	public AbstractDataObject read(final Integer rowId) {
-		String idString = (rowId == null) ? "NULL" : rowId.toString();
+        if (rowId == null) {
+            return null;
+        }
+		String idString = rowId.toString();
 		String query = new QueryBuilder
 			.SelectQuery(dataObjectClass.getTable())
 			.whereEquals("id", idString)
 			.build();
 
 		List<D> results = executeQuery(query);
-		return results == null || results.isEmpty() ? null : results.get(0);
+		return results.isEmpty() ? null : results.get(0);
 	}
 
 	public boolean create(AbstractDataObject dataObject) {
@@ -101,14 +104,16 @@ public abstract class AbstractDataService<D extends AbstractDataObject> {
 		return executeUpdate(query);
 	}
 
-	public Boolean delete(final Integer rowId) {
-		String idString = (rowId == null) ? "NULL" : rowId.toString();
+	public boolean delete(final Integer rowId) {
+        if (rowId == null) {
+            return false;
+        }
+		String idString = rowId.toString();
 		String query = new QueryBuilder
 			.DeleteQuery(dataObjectClass.getTable())
 			.whereEquals("id", idString)
 			.build();
 
-		List<D> results = executeQuery(query);
-		return results == null || results.isEmpty();
+		return executeUpdate(query);
 	}
 }
