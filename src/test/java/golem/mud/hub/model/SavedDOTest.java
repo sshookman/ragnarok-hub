@@ -1,4 +1,4 @@
-package saved.mud.hub.model;
+package golem.mud.hub.model;
 
 import org.junit.Test;
 import org.junit.BeforeClass;
