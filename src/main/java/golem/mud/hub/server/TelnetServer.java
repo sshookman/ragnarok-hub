@@ -31,7 +31,7 @@ public class TelnetServer {
                 executor.execute(new TelnetClient(socket));
             }
 
-        } catch (IOException e) {
+        } catch (Exception e) {
 			executor.shutdown();
         }
     }

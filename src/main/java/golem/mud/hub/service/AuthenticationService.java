@@ -1,21 +1,26 @@
 package golem.mud.hub.service;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
-import golem.mud.hub.rendering.TelnetRenderer;
+import golem.mud.hub.model.PlayerDO;
+import golem.mud.hub.das.PlayerDataService;
 
-public class AuthenticationService implements ServiceInterface {
+public class AuthenticationService {
 
-	private final TelnetRenderer renderer;
+    private final PlayerDataService playerDataService;
 
-	public AuthenticationService(final TelnetRenderer renderer) {
-		this.renderer = renderer;
+	public AuthenticationService(final Connection database) {
+        playerDataService = new PlayerDataService(database);
 	}
 
-	public void start() throws IOException {
-		renderer.write("Login as: ");
-		String username = renderer.read();
-		
-		renderer.write("Welcome " + username + "!\n");
+	public boolean exists(final String username) throws IOException {
+        Map<String, String> search = new HashMap<String, String>();
+        search.put("username", username);
+        List<PlayerDO> players = playerDataService.read(search);
+        return players != null && !players.isEmpty();
 	}
 }
