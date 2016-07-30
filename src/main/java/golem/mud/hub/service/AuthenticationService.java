@@ -1,6 +1,5 @@
 package golem.mud.hub.service;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
@@ -17,10 +16,23 @@ public class AuthenticationService {
         playerDataService = new PlayerDataService(database);
 	}
 
-	public boolean exists(final String username) throws IOException {
+    public boolean authenticate(final String username, final String password) {
+        PlayerDO player = getPlayer(username);
+        return password.equals(player.getPassword());
+    }
+
+    public PlayerDO getPlayer(final String username) {
         Map<String, String> search = new HashMap<String, String>();
         search.put("username", username);
         List<PlayerDO> players = playerDataService.read(search);
-        return players != null && !players.isEmpty();
-	}
+        if (players != null && !players.isEmpty()) {
+            return players.get(0);
+        } else {
+            return null;
+        }
+    }
+
+    public boolean createPlayer(final PlayerDO player) {
+        return playerDataService.create(player);
+    }
 }

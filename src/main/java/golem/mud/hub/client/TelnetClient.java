@@ -9,6 +9,7 @@ import golem.mud.hub.rendering.TelnetRenderer;
 import golem.mud.hub.service.MainLobbyService;
 import golem.mud.hub.service.AuthenticationService;
 import golem.mud.hub.util.ConnectionUtil;
+import golem.mud.hub.model.PlayerDO;
 
 public class TelnetClient implements Runnable {
 	private final static Logger LOGGER = Logger.getLogger(TelnetClient.class.getName());
@@ -38,7 +39,21 @@ public class TelnetClient implements Runnable {
             renderer.write("================================\n\n");
             renderer.write("Enter Username: ");
             String username = renderer.read();
-            auth.exists(username);
+            PlayerDO player = auth.getPlayer(username);
+            if (player != null) {
+                renderer.write("Enter Password: ");
+                auth.authenticate(username, renderer.read());
+            } else {
+                renderer.write("User does not exist. Create new user? (y/n): ");
+                renderer.read();
+
+                renderer.write("Create password: ");
+
+                player = new PlayerDO();
+                player.setUsername(username);
+                player.setPassword(renderer.read());
+                auth.createPlayer(player);
+            }
 
 			lobby.start();	
 
