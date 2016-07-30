@@ -12,7 +12,7 @@ import golem.mud.hub.util.ConnectionUtil;
 
 public class TelnetClient implements Runnable {
 	private final static Logger LOGGER = Logger.getLogger(TelnetClient.class.getName());
-    private static final String HUB_DB_PATH = "GOLEM.gmh";
+    private static final String HUB_DB_PATH = "server/GOLEM.gmh";
 
     private final Socket socket;
 	private final TelnetRenderer renderer;
