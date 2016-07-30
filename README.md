@@ -9,14 +9,14 @@ Java Based MUD Engine and Telnet Hub
 Common Commands
 ---
 
-Validate:       mvn pmd:pmd pmd:cpd
-Coverage:       mvn cobertura:cobertura
-Build:          mvn clean package
-Run Local:      nohup java -jar target/Golem-0.1.0.jar &
-Play:           telnet localhost 1127
-Docker Build:   docker build -t seanshookman/golem .
-Docker Run:     docker run --name golem -d -p 1127:1127 seanshookman/golem
-Docker Kill:    docker ps -aq | xargs docker kill | xargs docker rm
+- **Validate:**       mvn pmd:pmd pmd:cpd
+- **Coverage:**       mvn cobertura:cobertura
+- **Build:**          mvn clean package
+- **Run Local:**      nohup java -jar target/Golem-0.1.0.jar &
+- **Play:**           telnet localhost 1127
+- **Docker Build:**   docker build -t seanshookman/golem .
+- **Docker Run:**     docker run --name golem -d -p 1127:1127 seanshookman/golem
+- **Docker Kill:**    docker ps -aq | xargs docker kill | xargs docker rm
 
 ---
 
