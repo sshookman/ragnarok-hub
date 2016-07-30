@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import golem.mud.hub.rendering.TelnetRenderer;
 
-public class MainLobbyService implements ServiceInterface {
+public class MainLobbyService {
 
 	private final TelnetRenderer renderer;
 	
