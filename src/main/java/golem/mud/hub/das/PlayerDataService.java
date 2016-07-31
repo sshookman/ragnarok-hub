@@ -21,7 +21,7 @@ public class PlayerDataService extends AbstractDataService<PlayerDO> {
         player.setUsername(username);
         Map<String, String> search = player.toMap();
         List<PlayerDO> players = read(search);
-        if (players != null && !players.isEmpty()) {
+        if (!players.isEmpty()) {
             return players.get(0);
         } else {
             return null;

@@ -62,6 +62,9 @@ public class PlayerDataServiceTest {
 
         boolean megaFailure = playerDataService.authenticate("ME", "BAD");
         assertFalse(megaFailure);
+
+        boolean wtFailure = playerDataService.authenticate("Hi", null);
+        assertFalse(wtFailure);
     }
 
 	public Integer testReadSearch() throws Exception {
