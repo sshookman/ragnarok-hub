@@ -8,8 +8,8 @@ import java.util.HashMap;
 public class CommandDO extends AbstractDO {
 
 	private Integer rowId;
-	private Integer screenId;
-	private Integer actionId;
+	private String name;
+	private String targets;
 
 	@Override
 	public Integer getRowId() {
@@ -21,20 +21,20 @@ public class CommandDO extends AbstractDO {
 		this.rowId = rowId;
 	}
 
-    public Integer getScreenId() {
-        return this.screenId;
+    public String getName() {
+        return this.name;
     }
 
-    public void setScreenId(Integer screenId) {
-        this.screenId = screenId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Integer getActionId() {
-        return this.actionId;
+    public String getTargets() {
+        return this.targets;
     }
 
-    public void setActionId(Integer actionId) {
-        this.actionId = actionId;
+    public void setTargets(String targets) {
+        this.targets = targets;
     }
 
 	@Override
@@ -46,16 +46,16 @@ public class CommandDO extends AbstractDO {
 	public CommandDO instance(ResultSet result) throws SQLException {
 		CommandDO instance = new CommandDO();
 		instance.setRowId(result.getInt("id"));
-		instance.setScreenId(result.getInt("screen_id"));
-		instance.setActionId(result.getInt("action_id"));
+		instance.setName(result.getString("name"));
+		instance.setTargets(result.getString("targets"));
 		return instance;
 	}	
 
 	@Override
 	public Map<String, String> toMap() {
 		Map<String, String> dataMap = new HashMap<String, String>();
-		addNotNull("screen_id", getScreenId(), dataMap);
-		addNotNull("action_id", getActionId(), dataMap);
+		addNotNull("name", getName(), dataMap);
+		addNotNull("targets", getTargets(), dataMap);
 		return dataMap;
 	}
 }

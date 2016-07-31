@@ -45,8 +45,8 @@ public class CommandDataServiceTest {
 
 		CommandDO command = commands.get(0);
 		assertNotNull(command);
-		assertEquals(Integer.valueOf(2), command.getScreenId());
-		assertEquals(Integer.valueOf(3), command.getActionId());
+		assertEquals("Save", command.getName());
+		assertEquals("sean", command.getTargets());
 		
 		rowId = command.getRowId();
 
@@ -56,8 +56,8 @@ public class CommandDataServiceTest {
 
 		CommandDO commandFiltered = commandsFiltered.get(0);
 		assertNotNull(commandFiltered);
-		assertEquals(Integer.valueOf(2), commandFiltered.getScreenId());
-		assertEquals(Integer.valueOf(3), commandFiltered.getActionId());
+		assertEquals("Save", commandFiltered.getName());
+		assertEquals("sean", commandFiltered.getTargets());
 
 		Map<String, String> badSearch = new HashMap<String, String>();
 		badSearch.put("BAD", "SEARCH");
@@ -71,8 +71,8 @@ public class CommandDataServiceTest {
 	public void testRead(Integer rowId) throws Exception {
         CommandDO command = (CommandDO) commandDataService.read(rowId);
         assertNotNull(command);
-        assertEquals(Integer.valueOf(4), command.getScreenId());
-        assertEquals(Integer.valueOf(6), command.getActionId());
+        assertEquals("Help", command.getName());
+        assertEquals("commands,games", command.getTargets());
 
         CommandDO notFound = (CommandDO) commandDataService.read(123);
         assertNull(notFound);
@@ -84,8 +84,8 @@ public class CommandDataServiceTest {
 
 	public void testCreate() throws Exception {
 		CommandDO command = new CommandDO();
-		command.setScreenId(2);
-		command.setActionId(3);
+		command.setName("Save");
+		command.setTargets("sean");
 		boolean success = commandDataService.create(command);
 		assertTrue(success);
 
@@ -99,8 +99,8 @@ public class CommandDataServiceTest {
 
 	public void testUpdate(Integer rowId) throws Exception {
 		CommandDO command = new CommandDO();
-		command.setScreenId(Integer.valueOf(4));
-		command.setActionId(Integer.valueOf(6));
+		command.setName("Help");
+		command.setTargets("commands,games");
 		boolean success = commandDataService.update(rowId, command);
 		assertTrue(success);
 

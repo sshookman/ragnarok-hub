@@ -18,8 +18,8 @@ public class CommandDOTest {
 	public static void setup() throws Exception {
 		resultSet = mock(ResultSet.class);
 		when(resultSet.getInt("id")).thenReturn(1);
-		when(resultSet.getInt("screen_id")).thenReturn(2);
-		when(resultSet.getInt("action_id")).thenReturn(3);
+		when(resultSet.getString("name")).thenReturn("Help");
+		when(resultSet.getString("targets")).thenReturn("All");
 	}
 
 	@Test
@@ -33,8 +33,8 @@ public class CommandDOTest {
 
 		assertNotNull(instance);
 		assertEquals(Integer.valueOf(1), instance.getRowId());
-		assertEquals(Integer.valueOf(2), instance.getScreenId());
-		assertEquals(Integer.valueOf(3), instance.getActionId());
+		assertEquals("Help", instance.getName());
+		assertEquals("All", instance.getTargets());
 	}
 
 	@Test
@@ -43,7 +43,7 @@ public class CommandDOTest {
 		Map<String, String> playerMap = player.toMap();
 
 		assertNotNull(playerMap);
-		assertEquals("2", playerMap.get("screen_id"));
-		assertEquals("3", playerMap.get("action_id"));
+		assertEquals("\"Help\"", playerMap.get("name"));
+		assertEquals("\"All\"", playerMap.get("targets"));
 	}
 }
