@@ -32,11 +32,15 @@ public class TelnetClient implements Runnable {
 
     @Override
     public void run() {
+        login();
+    }
 
+    private void login() {
         try {
             renderer.write("================================\n");
             renderer.write("Welcome to the Dragonfly Mud-Hub\n");
             renderer.write("================================\n\n");
+
             renderer.write("Enter Username: ");
             String username = renderer.read();
             PlayerDO player = auth.getPlayer(username);
@@ -45,24 +49,29 @@ public class TelnetClient implements Runnable {
                 auth.authenticate(username, renderer.read());
             } else {
                 renderer.write("User does not exist. Create new user? (y/n): ");
-                renderer.read();
+                if (!"y".equalsIgnoreCase(renderer.read())) {
+                    login();
+                    return;
+                }
 
                 renderer.write("Create password: ");
 
                 player = new PlayerDO();
                 player.setUsername(username);
                 player.setPassword(renderer.read());
-                auth.createPlayer(player);
+                if (auth.createPlayer(player)) {
+                    renderer.write("Created Successfully!\n\n");
+                    lobby.start();
+                } else {
+                    renderer.write("Unable to Create Player\n\n");
+                }
             }
-
-			lobby.start();	
-
-			socket.close();
-
+            
         } catch (IOException e) {
-            LOGGER.info("EXIT");
+            LOGGER.severe(e.getMessage());
 		} finally {
 			try {
+                renderer.write("Thanks for Playing!\n");
 				socket.close();
 			} catch (IOException exception) {
 				LOGGER.info("Failed to close socket");
