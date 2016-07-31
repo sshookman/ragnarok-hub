@@ -13,4 +13,4 @@ ADD target/Golem-0.1.0.jar /golem/
 EXPOSE 1127
 
 WORKDIR /golem
-CMD ["/bin/bash", "./Run.sh"]
+CMD ["nohup", "java", "-jar", "Golem-0.1.0.jar"]
