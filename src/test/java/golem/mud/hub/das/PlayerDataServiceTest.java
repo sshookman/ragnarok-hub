@@ -30,12 +30,39 @@ public class PlayerDataServiceTest {
 	@Test 
 	public void testPlayerDataService() throws Exception {
 		testCreate();
+        testAuthenticate();
 		int playerRowId = testReadSearch();
 		testUpdate(playerRowId);
         testRead(playerRowId);
         testDelete(playerRowId);
         testEmpty();
 	}
+
+	public void testCreate() throws Exception {
+		PlayerDO player = new PlayerDO();
+		player.setUsername("Sean");
+		player.setPassword("plaintext");
+		boolean success = playerDataService.create(player);
+		assertTrue(success);
+
+		PlayerDO badPlayer = new PlayerDO();
+		boolean failure = playerDataService.create(badPlayer);
+		assertFalse(failure);
+
+		boolean superFailure = playerDataService.create(null);
+		assertFalse(superFailure);
+	}
+
+    public void testAuthenticate() throws Exception {
+        boolean success = playerDataService.authenticate("Sean", "plaintext");
+        assertTrue(success);
+
+        boolean failure = playerDataService.authenticate("Sean", "plaintexsdf");
+        assertFalse(failure);
+
+        boolean megaFailure = playerDataService.authenticate("ME", "BAD");
+        assertFalse(megaFailure);
+    }
 
 	public Integer testReadSearch() throws Exception {
 		Integer playerRowId;
@@ -69,35 +96,6 @@ public class PlayerDataServiceTest {
 		return playerRowId;
 	}
 
-	public void testRead(Integer playerRowId) throws Exception {
-        PlayerDO player = (PlayerDO) playerDataService.read(playerRowId);
-        assertNotNull(player);
-        assertEquals("Link", player.getUsername());
-        assertEquals("pass", player.getPassword());
-
-        PlayerDO notFound = (PlayerDO) playerDataService.read(123);
-        assertNull(notFound);
-
-        Integer nullId = null;
-        PlayerDO failure = (PlayerDO) playerDataService.read(nullId);
-        assertNull(failure);
-	}
-
-	public void testCreate() throws Exception {
-		PlayerDO player = new PlayerDO();
-		player.setUsername("Sean");
-		player.setPassword("plaintext");
-		boolean success = playerDataService.create(player);
-		assertTrue(success);
-
-		PlayerDO badPlayer = new PlayerDO();
-		boolean failure = playerDataService.create(badPlayer);
-		assertFalse(failure);
-
-		boolean superFailure = playerDataService.create(null);
-		assertFalse(superFailure);
-	}
-
 	public void testUpdate(Integer playerRowId) throws Exception {
 		PlayerDO player = new PlayerDO();
 		player.setUsername("Link");
@@ -113,6 +111,20 @@ public class PlayerDataServiceTest {
 
 		boolean failId = playerDataService.update(null, player);
 		assertFalse(failId);
+	}
+
+	public void testRead(Integer playerRowId) throws Exception {
+        PlayerDO player = (PlayerDO) playerDataService.read(playerRowId);
+        assertNotNull(player);
+        assertEquals("Link", player.getUsername());
+        assertEquals("pass", player.getPassword());
+
+        PlayerDO notFound = (PlayerDO) playerDataService.read(123);
+        assertNull(notFound);
+
+        Integer nullId = null;
+        PlayerDO failure = (PlayerDO) playerDataService.read(nullId);
+        assertNull(failure);
 	}
 
 	public void testDelete(Integer playerRowId) throws Exception {

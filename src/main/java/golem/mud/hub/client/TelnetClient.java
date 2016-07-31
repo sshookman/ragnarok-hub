@@ -6,10 +6,9 @@ import java.net.Socket;
 import java.util.logging.Logger;
 
 import golem.mud.hub.rendering.TelnetRenderer;
-import golem.mud.hub.service.MainLobbyService;
-import golem.mud.hub.service.AuthenticationService;
 import golem.mud.hub.util.ConnectionUtil;
 import golem.mud.hub.model.PlayerDO;
+import golem.mud.hub.das.PlayerDataService;
 
 public class TelnetClient implements Runnable {
 	private final static Logger LOGGER = Logger.getLogger(TelnetClient.class.getName());
@@ -17,8 +16,7 @@ public class TelnetClient implements Runnable {
 
     private final Socket socket;
 	private final TelnetRenderer renderer;
-	private final AuthenticationService auth;
-	private final MainLobbyService lobby;
+	private final PlayerDataService playerDS;
 
     private final Connection hubDatabase;
 
@@ -26,8 +24,7 @@ public class TelnetClient implements Runnable {
         this.socket = socket;
  		this.renderer = new TelnetRenderer(socket);
         this.hubDatabase = ConnectionUtil.establishConnection(HUB_DB_PATH);
-		this.auth = new AuthenticationService(hubDatabase);
-		this.lobby = new MainLobbyService(renderer);
+		this.playerDS = new PlayerDataService(hubDatabase);
     }
 
     @Override
@@ -43,10 +40,10 @@ public class TelnetClient implements Runnable {
 
             renderer.write("Enter Username: ");
             String username = renderer.read();
-            PlayerDO player = auth.getPlayer(username);
+            PlayerDO player = playerDS.getPlayer(username);
             if (player != null) {
                 renderer.write("Enter Password: ");
-                auth.authenticate(username, renderer.read());
+                playerDS.authenticate(username, renderer.read());
             } else {
                 renderer.write("User does not exist. Create new user? (y/n): ");
                 if (!"y".equalsIgnoreCase(renderer.read())) {
@@ -59,9 +56,8 @@ public class TelnetClient implements Runnable {
                 player = new PlayerDO();
                 player.setUsername(username);
                 player.setPassword(renderer.read());
-                if (auth.createPlayer(player)) {
+                if (playerDS.createPlayer(player)) {
                     renderer.write("Created Successfully!\n\n");
-                    lobby.start();
                 } else {
                     renderer.write("Unable to Create Player\n\n");
                 }
