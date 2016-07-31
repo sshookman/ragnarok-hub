@@ -56,7 +56,7 @@ public class TelnetClient implements Runnable {
                 player = new PlayerDO();
                 player.setUsername(username);
                 player.setPassword(renderer.read());
-                if (playerDS.createPlayer(player)) {
+                if (playerDS.create(player)) {
                     renderer.write("Created Successfully!\n\n");
                 } else {
                     renderer.write("Unable to Create Player\n\n");

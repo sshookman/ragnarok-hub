@@ -27,8 +27,4 @@ public class PlayerDataService extends AbstractDataService<PlayerDO> {
             return null;
         }
     }
-
-    public boolean createPlayer(final PlayerDO player) {
-        return create(player);
-    }
 }
