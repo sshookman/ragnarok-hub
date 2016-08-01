@@ -17,7 +17,6 @@ public class TelnetClient implements Runnable {
     private final Socket socket;
 	private final TelnetRenderer renderer;
 	private final PlayerDataService playerDS;
-
     private final Connection hubDatabase;
 
     public TelnetClient(final Socket socket) throws IOException, Exception {
@@ -29,50 +28,70 @@ public class TelnetClient implements Runnable {
 
     @Override
     public void run() {
-        login();
-    }
-
-    private void login() {
         try {
-            renderer.write("================================\n");
-            renderer.write("Welcome to the Dragonfly Mud-Hub\n");
-            renderer.write("================================\n\n");
-
-            renderer.write("Enter Username: ");
-            String username = renderer.read();
-            PlayerDO player = playerDS.getPlayer(username);
-            if (player != null) {
-                renderer.write("Enter Password: ");
-                playerDS.authenticate(username, renderer.read());
-            } else {
-                renderer.write("User does not exist. Create new user? (y/n): ");
-                if (!"y".equalsIgnoreCase(renderer.read())) {
-                    login();
-                    return;
-                }
-
-                renderer.write("Create password: ");
-
-                player = new PlayerDO();
-                player.setUsername(username);
-                player.setPassword(renderer.read());
-                if (playerDS.create(player)) {
-                    renderer.write("Created Successfully!\n\n");
-                } else {
-                    renderer.write("Unable to Create Player\n\n");
-                }
-            }
-            
-        } catch (IOException e) {
-            LOGGER.severe(e.getMessage());
-		} finally {
+            PlayerDO player = login();
+            mainLoop(player);
+        } catch (IOException exception) {
+            LOGGER.severe(exception.getMessage());
+        } finally {
 			try {
                 renderer.write("Thanks for Playing!\n");
 				socket.close();
 			} catch (IOException exception) {
 				LOGGER.info("Failed to close socket");
 			}
-		}
+        }
+    }
+
+    private PlayerDO login() throws IOException {
+        renderer.write("Enter Username: ");
+        String username = renderer.read();
+        PlayerDO player = playerDS.getPlayer(username);
+        if (player != null) {
+            renderer.write("Enter Password: ");
+            playerDS.authenticate(username, renderer.read());
+        } else {
+            renderer.write("User does not exist. Create new user? (y/n): ");
+            if (!"y".equalsIgnoreCase(renderer.read())) {
+                return login();
+            }
+
+            renderer.write("Create password: ");
+
+            player = new PlayerDO();
+            player.setUsername(username);
+            player.setPassword(renderer.read());
+            if (playerDS.create(player)) {
+                renderer.write("Created Successfully!\n\n");
+            } else {
+                renderer.write("Unable to Create Player\n\n");
+                throw new RuntimeException("Failed to Create Player");
+            }
+        }
+
+        return player;
+    }
+
+    private void mainLoop(final PlayerDO player) throws IOException {
+        if (player == null) {
+            return;
+        }
+
+        showWelcome();
+
+        String input = "";
+        while (!"quit".equals(input)) {
+            renderer.write(player.getUsername());
+            renderer.write(" > ");
+            
+            input = renderer.read();
+        }
+    }
+
+    private void showWelcome() {
+        renderer.write("================================\n");
+        renderer.write("Welcome to the Dragonfly Mud-Hub\n");
+        renderer.write("================================\n\n");
     }
 }
 
