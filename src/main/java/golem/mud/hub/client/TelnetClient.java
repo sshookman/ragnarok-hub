@@ -85,6 +85,7 @@ public class TelnetClient implements Runnable {
             renderer.write(" > ");
             
             input = renderer.read();
+            //Send to command handler
         }
     }
 
