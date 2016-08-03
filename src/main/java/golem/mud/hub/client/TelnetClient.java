@@ -14,14 +14,15 @@ public class TelnetClient implements Runnable {
 	private final static Logger LOGGER = Logger.getLogger(TelnetClient.class.getName());
     private static final String HUB_DB_PATH = "server/GOLEM.gmh";
 
-    private final Socket socket;
 	private final TelnetRenderer renderer;
 	private final PlayerDataService playerDS;
     private final Connection hubDatabase;
 
-    public TelnetClient(final Socket socket) throws IOException, Exception {
-        this.socket = socket;
- 		this.renderer = new TelnetRenderer(socket);
+    private final SessionContext sessionContext;
+
+    public TelnetClient(final Socket socket) throws Exception {
+        this.sessionContext = SessionContext.instance(socket);
+ 		this.renderer = sessionContext.getRenderer();
         this.hubDatabase = ConnectionUtil.establishConnection(HUB_DB_PATH);
 		this.playerDS = new PlayerDataService(hubDatabase);
     }
@@ -34,12 +35,8 @@ public class TelnetClient implements Runnable {
         } catch (IOException exception) {
             LOGGER.severe(exception.getMessage());
         } finally {
-			try {
-                renderer.write("Thanks for Playing!\n");
-				socket.close();
-			} catch (IOException exception) {
-				LOGGER.info("Failed to close socket");
-			}
+            renderer.write("Thanks for Playing!\n");
+            sessionContext.closeSession();
         }
     }
 
