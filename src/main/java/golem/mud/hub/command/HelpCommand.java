@@ -14,7 +14,7 @@ public class HelpCommand implements CommandInterface {
     }
 
     public void execute() {
-        renderer.write("Executing command: ");
+        renderer.write("Executing Help Command: ");
         renderer.write(command);
         renderer.write("\n\n");
     }

@@ -9,7 +9,7 @@ import golem.mud.hub.rendering.TelnetRenderer;
 import golem.mud.hub.util.ConnectionUtil;
 import golem.mud.hub.model.PlayerDO;
 import golem.mud.hub.das.PlayerDataService;
-import golem.mud.hub.command.HelpCommand;
+import golem.mud.hub.command.CommandInterpreter;
 
 public class TelnetClient implements Runnable {
 	private final static Logger LOGGER = Logger.getLogger(TelnetClient.class.getName());
@@ -77,14 +77,13 @@ public class TelnetClient implements Runnable {
 
         showWelcome();
 
-        String input = "";
-        while (!"quit".equals(input)) {
+        String command = "";
+        while (!"quit".equals(command)) {
             renderer.write(player.getUsername());
             renderer.write(" > ");
             
-            input = renderer.read();
-            HelpCommand helpCMD = new HelpCommand(sessionContext, input);
-            helpCMD.execute();
+            command = renderer.read();
+            CommandInterpreter.getCommand(sessionContext, command).execute();
         }
     }
 
