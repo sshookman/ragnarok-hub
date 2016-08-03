@@ -9,6 +9,7 @@ import golem.mud.hub.rendering.TelnetRenderer;
 import golem.mud.hub.util.ConnectionUtil;
 import golem.mud.hub.model.PlayerDO;
 import golem.mud.hub.das.PlayerDataService;
+import golem.mud.hub.command.HelpCommand;
 
 public class TelnetClient implements Runnable {
 	private final static Logger LOGGER = Logger.getLogger(TelnetClient.class.getName());
@@ -82,7 +83,8 @@ public class TelnetClient implements Runnable {
             renderer.write(" > ");
             
             input = renderer.read();
-            //Send to command handler
+            HelpCommand helpCMD = new HelpCommand(sessionContext, input);
+            helpCMD.execute();
         }
     }
 
