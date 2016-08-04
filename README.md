@@ -2,7 +2,7 @@ Golem MUD Hub
 ===
 Java Based MUD Engine and Telnet Hub 
 
-![Build](https://travis-ci.org/sshookman/ProjectRead.svg?branch=master)
+![Build](https://travis-ci.org/sshookman/ProjectRead.svg?branch=master) ![License](https://img.shields.io/badge/license-GPL%20v3-brightgreen.svg)
 
 ---
 
