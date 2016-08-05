@@ -89,7 +89,7 @@ public class TelnetClient implements Runnable {
 
     private void showWelcome() {
         renderer.write("================================\n");
-        renderer.write("Welcome to the Dragonfly Mud-Hub\n");
+        renderer.write("Welcome to the Dragonfly Library\n");
         renderer.write("================================\n\n");
     }
 }
