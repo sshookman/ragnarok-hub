@@ -3,7 +3,8 @@ package golem.mud.hub.das;
 import java.util.Map;
 import java.util.List;
 import java.sql.Connection;
-import golem.mud.hub.model.PlayerDO;
+
+import golem.mud.hub.das.model.PlayerDO;
 
 public class PlayerDataService extends AbstractDataService<PlayerDO> {
 

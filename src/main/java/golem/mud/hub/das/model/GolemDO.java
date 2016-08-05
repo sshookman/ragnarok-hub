@@ -1,17 +1,15 @@
-package golem.mud.hub.model;
+package golem.mud.hub.das.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.HashMap;
 
-public class SavedDO extends AbstractDO {
+public class GolemDO extends AbstractDO {
 
 	private Integer rowId;
 	private String name;
 	private String path;
-    private Integer playerId;
-    private Integer golemId;
 
 	@Override
 	public Integer getRowId() {
@@ -39,35 +37,17 @@ public class SavedDO extends AbstractDO {
 		this.path = path;
 	}
 
-	public Integer getPlayerId() {
-		return this.playerId;
-	}
-
-	public void setPlayerId(Integer playerId) {
-		this.playerId = playerId;
-	}
-
-	public Integer getGolemId() {
-		return this.golemId;
-	}
-
-	public void setGolemId(Integer golemId) {
-		this.golemId = golemId;
-	}
-
 	@Override
 	public String getTable() {
-		return "saved";
+		return "golem";
 	}
 
 	@Override
-	public SavedDO instance(ResultSet result) throws SQLException {
-		SavedDO instance = new SavedDO();
+	public GolemDO instance(ResultSet result) throws SQLException {
+		GolemDO instance = new GolemDO();
 		instance.setRowId(result.getInt("id"));
 		instance.setName(result.getString("name"));
 		instance.setPath(result.getString("path"));
-		instance.setPlayerId(result.getInt("player_id"));
-		instance.setGolemId(result.getInt("golem_id"));
 		return instance;
 	}	
 
@@ -76,8 +56,6 @@ public class SavedDO extends AbstractDO {
 		Map<String, String> dataMap = new HashMap<String, String>();
 		addNotNull("name", getName(), dataMap);
 		addNotNull("path", getPath(), dataMap);
-		addNotNull("player_id", getPlayerId(), dataMap);
-		addNotNull("golem_id", getGolemId(), dataMap);
 		return dataMap;
 	}
 }

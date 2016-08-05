@@ -1,4 +1,4 @@
-package golem.mud.hub.model;
+package golem.mud.hub.das.model;
 
 import org.junit.Test;
 import org.junit.BeforeClass;
@@ -9,41 +9,41 @@ import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class PlayerDOTest {
+public class CommandDOTest {
 
-	private static final PlayerDO playerClass = new PlayerDO();
+	private static final CommandDO commandClass = new CommandDO();
 	private static ResultSet resultSet;
 
 	@BeforeClass
 	public static void setup() throws Exception {
 		resultSet = mock(ResultSet.class);
 		when(resultSet.getInt("id")).thenReturn(1);
-		when(resultSet.getString("username")).thenReturn("NAME");
-		when(resultSet.getString("password")).thenReturn("PASS");
+		when(resultSet.getString("name")).thenReturn("Help");
+		when(resultSet.getString("targets")).thenReturn("All");
 	}
 
 	@Test
 	public void testGetTable() throws Exception {
-		assertEquals("player", playerClass.getTable());
+		assertEquals("command", commandClass.getTable());
 	}
 
 	@Test
 	public void testInstance() throws Exception {
-		PlayerDO instance = playerClass.instance(resultSet);
+		CommandDO instance = commandClass.instance(resultSet);
 
 		assertNotNull(instance);
 		assertEquals(Integer.valueOf(1), instance.getRowId());
-		assertEquals("NAME", instance.getUsername());
-		assertEquals("PASS", instance.getPassword());
+		assertEquals("Help", instance.getName());
+		assertEquals("All", instance.getTargets());
 	}
 
 	@Test
 	public void testToMap() throws Exception {
-		PlayerDO player = playerClass.instance(resultSet);
+		CommandDO player = commandClass.instance(resultSet);
 		Map<String, String> playerMap = player.toMap();
 
 		assertNotNull(playerMap);
-		assertEquals("\"NAME\"", playerMap.get("username"));
-		assertEquals("\"PASS\"", playerMap.get("password"));
+		assertEquals("\"Help\"", playerMap.get("name"));
+		assertEquals("\"All\"", playerMap.get("targets"));
 	}
 }

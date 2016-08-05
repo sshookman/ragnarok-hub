@@ -1,4 +1,4 @@
-package golem.mud.hub.server;
+package golem.mud.hub.telnet;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -6,8 +6,6 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Logger;
-
-import golem.mud.hub.client.TelnetClient;
 
 public class TelnetServer {
 	private final Logger logger = Logger.getLogger(TelnetServer.class.getName());

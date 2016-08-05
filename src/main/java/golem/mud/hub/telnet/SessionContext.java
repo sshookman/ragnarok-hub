@@ -1,11 +1,9 @@
-package golem.mud.hub.client;
+package golem.mud.hub.telnet;
 
 import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Logger;
 import java.util.logging.Level;
-
-import golem.mud.hub.rendering.TelnetRenderer;
 
 public class SessionContext {
 	private final static Logger LOGGER = Logger.getLogger(SessionContext.class.getName());

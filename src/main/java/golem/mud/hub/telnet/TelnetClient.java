@@ -1,13 +1,12 @@
-package golem.mud.hub.client;
+package golem.mud.hub.telnet;
 
 import java.sql.Connection;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Logger;
 
-import golem.mud.hub.rendering.TelnetRenderer;
-import golem.mud.hub.util.ConnectionUtil;
-import golem.mud.hub.model.PlayerDO;
+import golem.mud.hub.das.model.PlayerDO;
+import golem.mud.hub.das.ConnectionManager;
 import golem.mud.hub.das.PlayerDataService;
 import golem.mud.hub.command.CommandInterpreter;
 
@@ -24,7 +23,7 @@ public class TelnetClient implements Runnable {
     public TelnetClient(final Socket socket) throws Exception {
         this.sessionContext = SessionContext.instance(socket);
  		this.renderer = sessionContext.getRenderer();
-        this.hubDatabase = ConnectionUtil.establishConnection(HUB_DB_PATH);
+        this.hubDatabase = ConnectionManager.establishConnection(HUB_DB_PATH);
 		this.playerDS = new PlayerDataService(hubDatabase);
     }
 

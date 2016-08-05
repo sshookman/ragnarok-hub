@@ -1,4 +1,4 @@
-package golem.mud.hub.model;
+package golem.mud.hub.das.model;
 
 import org.junit.Test;
 import org.junit.BeforeClass;
@@ -9,38 +9,41 @@ import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ScreenDOTest {
+public class PlayerDOTest {
 
-	private static final ScreenDO screenClass = new ScreenDO();
+	private static final PlayerDO playerClass = new PlayerDO();
 	private static ResultSet resultSet;
 
 	@BeforeClass
 	public static void setup() throws Exception {
 		resultSet = mock(ResultSet.class);
 		when(resultSet.getInt("id")).thenReturn(1);
-		when(resultSet.getString("message")).thenReturn("MESSAGE");
+		when(resultSet.getString("username")).thenReturn("NAME");
+		when(resultSet.getString("password")).thenReturn("PASS");
 	}
 
 	@Test
 	public void testGetTable() throws Exception {
-		assertEquals("screen", screenClass.getTable());
+		assertEquals("player", playerClass.getTable());
 	}
 
 	@Test
 	public void testInstance() throws Exception {
-		ScreenDO instance = screenClass.instance(resultSet);
+		PlayerDO instance = playerClass.instance(resultSet);
 
 		assertNotNull(instance);
 		assertEquals(Integer.valueOf(1), instance.getRowId());
-		assertEquals("MESSAGE", instance.getMessage());
+		assertEquals("NAME", instance.getUsername());
+		assertEquals("PASS", instance.getPassword());
 	}
 
 	@Test
 	public void testToMap() throws Exception {
-		ScreenDO screen = screenClass.instance(resultSet);
-		Map<String, String> screenMap = screen.toMap();
+		PlayerDO player = playerClass.instance(resultSet);
+		Map<String, String> playerMap = player.toMap();
 
-		assertNotNull(screenMap);
-		assertEquals("\"MESSAGE\"", screenMap.get("message"));
+		assertNotNull(playerMap);
+		assertEquals("\"NAME\"", playerMap.get("username"));
+		assertEquals("\"PASS\"", playerMap.get("password"));
 	}
 }

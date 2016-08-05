@@ -12,8 +12,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import golem.mud.hub.util.ConnectionUtil;
-import golem.mud.hub.model.CommandDO;
+import golem.mud.hub.das.ConnectionManager;
+import golem.mud.hub.das.model.CommandDO;
 
 public class CommandDataServiceTest {
 
@@ -21,8 +21,8 @@ public class CommandDataServiceTest {
 
 	@BeforeClass
 	public static void setup() throws Exception {
-		Connection golemMudHub = ConnectionUtil.establishConnection("test/GolemMudHubTest.gmh");
-		golemMudHub = ConnectionUtil.initGolemMudHub(golemMudHub);
+		Connection golemMudHub = ConnectionManager.establishConnection("test/GolemMudHubTest.gmh");
+		golemMudHub = ConnectionManager.initGolemMudHub(golemMudHub);
 		commandDataService = new CommandDataService(golemMudHub);
 	}
 

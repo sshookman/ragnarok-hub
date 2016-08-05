@@ -1,4 +1,4 @@
-package golem.mud.hub.util;
+package golem.mud.hub.das;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,8 +9,10 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-public class ConnectionUtil {
-	private static final Logger LOGGER = Logger.getLogger(ConnectionUtil.class.getName());
+import golem.mud.hub.util.ResourceLoader;
+
+public class ConnectionManager {
+	private static final Logger LOGGER = Logger.getLogger(ConnectionManager.class.getName());
 	private static final ResourceLoader RESOURCE_LOADER = new ResourceLoader();
 
 	private static Connection init(final Connection connection, final String fileName) throws FileNotFoundException, SQLException {

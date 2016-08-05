@@ -1,4 +1,4 @@
-package golem.mud.hub.rendering;
+package golem.mud.hub.telnet;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

@@ -1,7 +1,7 @@
 package golem.mud.hub.command;
 
-import golem.mud.hub.client.SessionContext;
-import golem.mud.hub.rendering.TelnetRenderer;
+import golem.mud.hub.telnet.SessionContext;
+import golem.mud.hub.telnet.TelnetRenderer;
 
 public class StoryCommand implements CommandInterface {
 

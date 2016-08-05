@@ -1,6 +1,6 @@
 package golem.mud.hub.command;
 
-import golem.mud.hub.client.SessionContext;
+import golem.mud.hub.telnet.SessionContext;
 
 public class CommandInterpreter {
 

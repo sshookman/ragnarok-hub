@@ -1,6 +1,6 @@
 package golem.mud.hub;
 
-import golem.mud.hub.server.TelnetServer;
+import golem.mud.hub.telnet.TelnetServer;
 
 public class Golem {
 
