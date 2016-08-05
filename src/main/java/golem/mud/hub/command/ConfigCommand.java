@@ -16,6 +16,17 @@ public class ConfigCommand implements CommandInterface {
     public void execute() {
         renderer.write("Executing Config Command: ");
         renderer.write(command);
-        renderer.write("\n\n");
+        renderer.write("\n");
+ 
+        String[] commandArray = command.split(" ");
+        switch (commandArray[1].toUpperCase()) {
+            case "LS":
+                list();
+                break;
+        }
+    }
+
+    private void list() {
+        renderer.write("Listing all configs\n\n");
     }
 }

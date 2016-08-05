@@ -16,7 +16,7 @@ public class AuthorCommand implements CommandInterface {
     public void execute() {
         renderer.write("Executing Author Command: ");
         renderer.write(command);
-        renderer.write("\n\n");
+        renderer.write("\n");
 
         String[] commandArray = command.split(" ");
         switch (commandArray[1].toUpperCase()) {
