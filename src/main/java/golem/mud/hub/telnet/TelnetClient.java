@@ -9,6 +9,7 @@ import golem.mud.hub.das.model.PlayerDO;
 import golem.mud.hub.das.ConnectionManager;
 import golem.mud.hub.das.PlayerDataService;
 import golem.mud.hub.command.CommandInterpreter;
+import golem.mud.hub.command.CommandInterface;
 
 public class TelnetClient implements Runnable {
 	private final static Logger LOGGER = Logger.getLogger(TelnetClient.class.getName());
@@ -79,13 +80,18 @@ public class TelnetClient implements Runnable {
 
         showWelcome();
 
-        String command = "";
-        while (!"quit".equals(command)) {
+        String commandString = "";
+        while (!"quit".equals(commandString)) {
             renderer.write(player.getUsername());
             renderer.write(" > ");
             
-            command = renderer.read();
-            CommandInterpreter.getCommand(sessionContext, command).execute();
+            commandString = renderer.read();
+            CommandInterface command = CommandInterpreter.getCommand(sessionContext, commandString);
+            if (command != null) {
+                command.execute();
+            } else {
+                renderer.write("\nInvalid Command\n\n");
+            }
         }
     }
 
