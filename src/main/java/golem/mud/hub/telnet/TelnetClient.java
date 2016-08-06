@@ -46,7 +46,10 @@ public class TelnetClient implements Runnable {
         PlayerDO player = playerDS.getPlayer(username);
         if (player != null) {
             renderer.write("Enter Password: ");
-            playerDS.authenticate(username, renderer.read());
+            if (!playerDS.authenticate(username, renderer.read())) {
+                renderer.write("Invalid Password!\n\n");
+                return login();
+            }
         } else {
             renderer.write("User does not exist. Create new user? (y/n): ");
             if (!"y".equalsIgnoreCase(renderer.read())) {
