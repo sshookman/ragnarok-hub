@@ -41,15 +41,15 @@ public class ConfigCommand implements CommandInterface {
     }
 
     private void list() {
-        renderer.write("All Configs:\n\n");
-        renderer.write("text-color  : WHITE");
-        renderer.write("bg-color    : BLACK");
-        renderer.write("write-speed : INSTANT");
-        renderer.write("auto-clear  : NO");
+        renderer.write("\n=====ALL CONFIGS=====\n");
+        renderer.write("text-color  : WHITE\n");
+        renderer.write("bg-color    : BLACK\n");
+        renderer.write("write-speed : INSTANT\n");
+        renderer.write("auto-clear  : NO\n\n");
     }
 
     private void setTextColor(final String color) {
-        if (colors.contains(color)) {
+        if (colors.contains(color.toUpperCase())) {
             renderer.write("Setting Text Color : ");       
             renderer.write(color);
             renderer.write("\n\n");
