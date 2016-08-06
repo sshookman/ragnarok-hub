@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Logger;
 
+//TODO: SEAN - Find a way to test this and then testing the commands will follow
 public class TelnetRenderer {
 	private final Logger logger = Logger.getLogger(TelnetRenderer.class.getName());
 
@@ -32,6 +33,7 @@ public class TelnetRenderer {
 		writer.flush();
 	}
 
+    //TODO: SEAN - Need to find a way to read in passwords without displayed typed text
 	public String read() throws IOException {
 		return reader.readLine();
 	}

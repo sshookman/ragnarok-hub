@@ -2,6 +2,7 @@ package golem.mud.hub.command;
 
 import golem.mud.hub.telnet.SessionContext;
 
+//TODO: SEAN - Find a way to test this code
 public class CommandInterpreter {
 
     public static CommandInterface getCommand(final SessionContext context, final String commandText) {

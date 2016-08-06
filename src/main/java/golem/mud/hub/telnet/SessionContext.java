@@ -5,6 +5,7 @@ import java.net.Socket;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
+//TODO: SEAN - Add test case
 public class SessionContext {
 	private final static Logger LOGGER = Logger.getLogger(SessionContext.class.getName());
 

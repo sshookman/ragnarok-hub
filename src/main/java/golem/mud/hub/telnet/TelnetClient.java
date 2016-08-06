@@ -41,6 +41,7 @@ public class TelnetClient implements Runnable {
         }
     }
 
+    //TODO: SEAN - This code should be refactored and should not live in the client
     private PlayerDO login() throws IOException {
         renderer.write("Enter Username: ");
         String username = renderer.read();
@@ -73,6 +74,7 @@ public class TelnetClient implements Runnable {
         return player;
     }
 
+    //TODO: SEAN - This code should probably be it's own class
     private void mainLoop(final PlayerDO player) throws IOException {
         if (player == null) {
             return;
