@@ -2,6 +2,7 @@ package golem.mud.hub.das;
 
 import org.junit.Test;
 import org.junit.BeforeClass;
+import org.junit.AfterClass;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
@@ -17,14 +18,20 @@ import golem.mud.hub.das.model.CommandDO;
 
 public class CommandDataServiceTest {
 
+    private static Connection golemMudHub;
 	private static CommandDataService commandDataService;
 
 	@BeforeClass
 	public static void setup() throws Exception {
-		Connection golemMudHub = ConnectionManager.establishConnection("test/GolemMudHubTest.gmh");
+		golemMudHub = ConnectionManager.establishConnection("test/GolemMudHubTest.gmh");
 		golemMudHub = ConnectionManager.initGolemMudHub(golemMudHub);
 		commandDataService = new CommandDataService(golemMudHub);
 	}
+
+    @AfterClass
+    public static void teardown() throws Exception {
+        golemMudHub = ConnectionManager.initGolemMudHub(golemMudHub);
+    }
 
 	@Test 
 	public void testCommandDataService() throws Exception {
