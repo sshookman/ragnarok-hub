@@ -1,22 +1,19 @@
 package golem.mud.hub.telnet;
 
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.IOException;
-import java.net.Socket;
 import java.util.logging.Logger;
 
-//TODO: SEAN - Find a way to test this and then testing the commands will follow
 public class TelnetRenderer {
 	private final Logger logger = Logger.getLogger(TelnetRenderer.class.getName());
 
 	private final BufferedReader reader;
 	private final PrintWriter writer;
 
-	public TelnetRenderer(final Socket socket) throws IOException {
-		reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		writer = new PrintWriter(socket.getOutputStream(), true);
+	public TelnetRenderer(final BufferedReader reader, final PrintWriter writer) {
+		this.reader = reader;
+		this.writer = writer;
 	}
 
 	public void write(final String message) {

@@ -5,6 +5,8 @@ import java.net.Socket;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
+import golem.mud.hub.util.SocketUtil;
+
 //TODO: SEAN - Add test case
 public class SessionContext {
 	private final static Logger LOGGER = Logger.getLogger(SessionContext.class.getName());
@@ -14,7 +16,7 @@ public class SessionContext {
 
     protected SessionContext(final Socket socket) throws IOException {
         this.socket = socket;
-        this.renderer = new TelnetRenderer(socket);
+        this.renderer = new TelnetRenderer(SocketUtil.getReader(socket), SocketUtil.getWriter(socket));
     }
 
     public TelnetRenderer getRenderer() {
