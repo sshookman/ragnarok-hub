@@ -2,7 +2,6 @@ package golem.mud.hub;
 
 import golem.mud.hub.telnet.TelnetServer;
 
-//TODO: SEAN - Start doing TDD
 public class Golem {
 
 	public static void main(String[] args) {

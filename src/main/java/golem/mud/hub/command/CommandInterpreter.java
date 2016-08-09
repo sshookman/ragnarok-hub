@@ -1,27 +1,27 @@
 package golem.mud.hub.command;
 
-import golem.mud.hub.telnet.SessionContext;
+import golem.mud.hub.telnet.TelnetSession;
 
 //TODO: SEAN - Find a way to test this code
 public class CommandInterpreter {
 
-    public static CommandInterface getCommand(final SessionContext context, final String commandText) {
+    public static CommandInterface getCommand(final TelnetSession session, final String commandText) {
 
         CommandInterface command = null;
 
         String[] commandArray = commandText.split(" ");
         switch (commandArray[0].toUpperCase()) {
             case "AUTHOR":
-                command = new AuthorCommand(context, commandText);
+                command = new AuthorCommand(session, commandText);
                 break;
             case "CONFIG":
-                command = new ConfigCommand(context, commandText);
+                command = new ConfigCommand(session, commandText);
                 break;
             case "HELP":
-                command = new HelpCommand(context, commandText);
+                command = new HelpCommand(session, commandText);
                 break;
             case "STORY":
-                command = new StoryCommand(context, commandText);
+                command = new StoryCommand(session, commandText);
                 break;
         }
 

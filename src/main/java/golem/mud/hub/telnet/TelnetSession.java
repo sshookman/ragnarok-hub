@@ -7,14 +7,13 @@ import java.util.logging.Level;
 
 import golem.mud.hub.util.SocketUtil;
 
-//TODO: SEAN - Add test case
-public class SessionContext {
-	private final static Logger LOGGER = Logger.getLogger(SessionContext.class.getName());
+public class TelnetSession {
+	private final static Logger LOGGER = Logger.getLogger(TelnetSession.class.getName());
 
     private final Socket socket;
 	private final TelnetRenderer renderer;
 
-    protected SessionContext(final Socket socket) throws IOException {
+    protected TelnetSession(final Socket socket) throws IOException {
         this.socket = socket;
         this.renderer = new TelnetRenderer(SocketUtil.getReader(socket), SocketUtil.getWriter(socket));
     }
@@ -31,10 +30,10 @@ public class SessionContext {
         }
     }
 
-    public static SessionContext instance(final Socket socket) {
+    public static TelnetSession instance(final Socket socket) {
         try {
-            return new SessionContext(socket);
-        } catch (IOException exception) {
+            return new TelnetSession(socket);
+        } catch (Exception exception) {
             LOGGER.log(Level.WARNING, "Failed to create context");
             return null;
         }

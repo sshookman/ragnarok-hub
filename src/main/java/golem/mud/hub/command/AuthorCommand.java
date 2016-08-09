@@ -1,6 +1,6 @@
 package golem.mud.hub.command;
 
-import golem.mud.hub.telnet.SessionContext;
+import golem.mud.hub.telnet.TelnetSession;
 import golem.mud.hub.telnet.TelnetRenderer;
 
 public class AuthorCommand implements CommandInterface {
@@ -8,8 +8,8 @@ public class AuthorCommand implements CommandInterface {
     private final TelnetRenderer renderer;
     private final String command;
 
-    public AuthorCommand(final SessionContext context, final String command) {
-        this.renderer = context.getRenderer();
+    public AuthorCommand(final TelnetSession session, final String command) {
+        this.renderer = session.getRenderer();
         this.command = command;
     }
 

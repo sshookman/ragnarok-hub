@@ -3,7 +3,7 @@ package golem.mud.hub.command;
 import java.util.List;
 import java.util.ArrayList;
 
-import golem.mud.hub.telnet.SessionContext;
+import golem.mud.hub.telnet.TelnetSession;
 import golem.mud.hub.telnet.TelnetRenderer;
 
 public class ConfigCommand implements CommandInterface {
@@ -12,8 +12,8 @@ public class ConfigCommand implements CommandInterface {
     private final String command;
     private final List<String> colors;
 
-    public ConfigCommand(final SessionContext context, final String command) {
-        this.renderer = context.getRenderer();
+    public ConfigCommand(final TelnetSession session, final String command) {
+        this.renderer = session.getRenderer();
         this.command = command;
         colors = new ArrayList<>();
         colors.add("RED");

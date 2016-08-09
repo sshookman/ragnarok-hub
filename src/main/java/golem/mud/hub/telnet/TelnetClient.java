@@ -19,11 +19,11 @@ public class TelnetClient implements Runnable {
 	private final PlayerDataService playerDS;
     private final Connection hubDatabase;
 
-    private final SessionContext sessionContext;
+    private final TelnetSession session;
 
     public TelnetClient(final Socket socket) throws Exception {
-        this.sessionContext = SessionContext.instance(socket);
- 		this.renderer = sessionContext.getRenderer();
+        this.session = TelnetSession.instance(socket);
+ 		this.renderer = session.getRenderer();
         this.hubDatabase = ConnectionManager.establishConnection(HUB_DB_PATH);
 		this.playerDS = new PlayerDataService(hubDatabase);
     }
@@ -37,7 +37,7 @@ public class TelnetClient implements Runnable {
             LOGGER.severe(exception.getMessage());
         } finally {
             renderer.write("Thanks for Playing!\n");
-            sessionContext.closeSession();
+            session.closeSession();
         }
     }
 
@@ -88,7 +88,7 @@ public class TelnetClient implements Runnable {
             renderer.write(" > ");
             
             commandString = renderer.read();
-            CommandInterface command = CommandInterpreter.getCommand(sessionContext, commandString);
+            CommandInterface command = CommandInterpreter.getCommand(session, commandString);
             if (command != null) {
                 command.execute();
             } else {
