@@ -2,12 +2,15 @@ package golem.mud.hub.command;
 
 import golem.mud.hub.telnet.TelnetSession;
 
-//TODO: SEAN - Find a way to test this code
 public class CommandInterpreter {
 
     public static CommandInterface getCommand(final TelnetSession session, final String commandText) {
 
         CommandInterface command = null;
+
+        if (session == null || commandText == null) {
+            return command;
+        }
 
         String[] commandArray = commandText.split(" ");
         switch (commandArray[0].toUpperCase()) {
