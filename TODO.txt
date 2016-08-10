@@ -1,0 +1,4 @@
+[ ] TDD [ ] Abstract the Command execution logic
+[ ] TDD [ ] Throw exceptions from Commands and handle them gracefully in main loop
+[ ] TDD [ ] Move the logic for login into a separate class
+[ ] TDD [ ] Move the main loop of the hud into a separate class

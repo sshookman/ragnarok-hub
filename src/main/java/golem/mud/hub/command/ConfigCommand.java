@@ -21,7 +21,6 @@ public class ConfigCommand implements CommandInterface {
         colors.add("GREEN");
     }
 
-//TODO: SEAN - Abstract this logic out - all commands will be doing roughly the same thing
     public void execute() {
         String[] commandArray = command.split(" ");
         int wordCount = commandArray.length;
