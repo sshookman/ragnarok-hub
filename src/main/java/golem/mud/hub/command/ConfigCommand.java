@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import golem.mud.hub.telnet.TelnetSession;
 import golem.mud.hub.telnet.TelnetRenderer;
+import golem.mud.hub.exception.CommandException;
 
 public class ConfigCommand implements CommandInterface {
 
@@ -34,7 +35,8 @@ public class ConfigCommand implements CommandInterface {
                         setTextColor(commandArray[2]);
                     }
                     break;
-
+                default:
+                    throw new CommandException("Operation Not Found", command);
             }
         }
     }

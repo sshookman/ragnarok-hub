@@ -1,6 +1,8 @@
 package golem.mud.hub.command;
 
+import golem.mud.hub.exception.CommandException;
+
 public interface CommandInterface {
 
-    void execute();
+    void execute() throws CommandException;
 }
