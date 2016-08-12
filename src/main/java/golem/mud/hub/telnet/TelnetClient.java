@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import golem.mud.hub.das.model.PlayerDO;
 import golem.mud.hub.das.ConnectionManager;
 import golem.mud.hub.das.PlayerDataService;
-import golem.mud.hub.command.CommandInterpreter;
+import golem.mud.hub.command.CommandFactory;
 import golem.mud.hub.command.CommandInterface;
 import golem.mud.hub.exception.CommandException;
 
@@ -80,6 +80,7 @@ public class TelnetClient implements Runnable {
         }
 
         showWelcome();
+        CommandFactory commandFactory = new CommandFactory(session);
 
         String commandString = "";
         while (!"quit".equals(commandString)) {
@@ -87,7 +88,7 @@ public class TelnetClient implements Runnable {
             renderer.write(" > ");
             
             commandString = renderer.read();
-            CommandInterface command = CommandInterpreter.getCommand(session, commandString);
+            CommandInterface command = commandFactory.buildCommand(commandString);
             if (command != null) {
                 try {
                     command.execute();
