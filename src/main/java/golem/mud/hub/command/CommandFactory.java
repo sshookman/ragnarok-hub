@@ -3,6 +3,7 @@ package golem.mud.hub.command;
 import java.util.List;
 import java.util.ArrayList;
 
+import golem.mud.hub.exception.CommandException;
 import golem.mud.hub.telnet.TelnetSession;
 
 public class CommandFactory {
@@ -16,7 +17,7 @@ public class CommandFactory {
     public CommandInterface buildCommand(final String commandText) {
 
         if (session == null || commandText == null) {
-            return null;
+            throw new CommandException("Invalid Command/Session", commandText);
         }
         
         List<CommandInterface> commands = new ArrayList<>();
@@ -28,6 +29,6 @@ public class CommandFactory {
             }
         }
 
-        return null;
+        throw new CommandException("Command Not Found", commandText);
     }
 }

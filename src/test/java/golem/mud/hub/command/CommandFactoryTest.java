@@ -14,6 +14,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.eq;
 
+import golem.mud.hub.exception.CommandException;
 import golem.mud.hub.telnet.TelnetSession;
 
 public class CommandFactoryTest {
@@ -29,9 +30,30 @@ public class CommandFactoryTest {
     }
 
     @Test
-    public void testGetNullCommand() {
-        assertNull(commandFactory.buildCommand(""));
-        assertNull(commandFactory.buildCommand(null));
+    public void testGetException() {
+        try {
+            commandFactory.buildCommand(null);
+        } catch (CommandException exception) {
+            assertNotNull(exception);
+            assertEquals("Expecting Invalid Error Message", "Invalid Command/Session", exception.getMessage());
+            assertNull(exception.getCommand());
+        }
+
+        try {
+            commandFactory.buildCommand("");
+        } catch (CommandException exception) {
+            assertNotNull(exception);
+            assertEquals("Expecting Not Found Error Message", "Command Not Found", exception.getMessage());
+            assertEquals("Expecting Empty Command String", "", exception.getCommand());
+        }
+
+        try {
+            commandFactory.buildCommand("This is not a command");
+        } catch (CommandException exception) {
+            assertNotNull(exception);
+            assertEquals("Expecting Not Found Error Message", "Command Not Found", exception.getMessage());
+            assertEquals("Expecting Command String", "This is not a command", exception.getCommand());
+        }
     }
 
     @Test

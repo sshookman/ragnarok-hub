@@ -30,7 +30,12 @@ public class TelnetRenderer {
 		writer.flush();
 	}
 
-    //TODO: SEAN - Need to find a way to read in passwords without displayed typed text
+    public void endl(final Integer count) {
+        for (int x = 0; x < count; x++) {
+            write("\n");
+        }
+    }
+
 	public String read() throws IOException {
 		return reader.readLine();
 	}
