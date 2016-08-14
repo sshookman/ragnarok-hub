@@ -30,6 +30,7 @@ public class TelnetSessionTest {
     public void testSession() {
         TelnetSession session = TelnetSession.instance(socketMock);
         assertNotNull(session.getRenderer());
+        assertNotNull(session.getConnection());
         session.closeSession();
     }
 
