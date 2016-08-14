@@ -33,7 +33,9 @@ public class FileUtil {
 
     private static String getFileTitle(final String folderPath, final String filePath, final String extension) {
         String fileTitle = filePath;
-        fileTitle = fileTitle.replace(extension, "");
+        if (extension != null) {
+            fileTitle = fileTitle.replace(extension, "");
+        }
         fileTitle = fileTitle.replace(folderPath + "/", "");
         fileTitle = fileTitle.replaceAll("_", " ");
         return fileTitle;
