@@ -22,13 +22,13 @@ Project Structure:
 ---
 
 ```
-src/main/java/golem/
+golem/mud/hub
 --command               -- Command Objects
---das/					-- Data Access Service Classes
-----model/				-- Database Objects
---exception/			-- Custom Exception Classes
---telnet/				-- Telnet Related Classes for Client, Server, Session, etc
---util/                 -- Various Static Utility Classes
+--das					-- Data Access Service Classes
+----model				-- Database Objects
+--exception 			-- Custom Exception Classes
+--telnet				-- Telnet Related Classes for Client, Server, Session, etc
+--util                  -- Various Static Utility Classes
 ```
 
 ---
