@@ -20,7 +20,10 @@ public class FileUtil {
         try {
             Files.walk(Paths.get(folderPath)).forEach(filePath -> {
                 if (Files.isRegularFile(filePath)) {
-                    files.put(getFileTitle(folderPath, filePath.toString(), extension), filePath.toString());
+                    String fileTitle = getFileTitle(folderPath, filePath.toString(), extension);
+                    if (fileTitle != null) {
+                        files.put(fileTitle, filePath.toString());
+                    }   
                 }
             });
         } catch (IOException exception) {
@@ -33,6 +36,9 @@ public class FileUtil {
     private static String getFileTitle(final String folderPath, final String filePath, final String extension) {
         String fileTitle = filePath;
         if (extension != null) {
+            if (!fileTitle.contains(extension)) {
+                return null;
+            }
             fileTitle = fileTitle.replace(extension, "");
         }
         fileTitle = fileTitle.replace(folderPath + "/", "");
