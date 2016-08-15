@@ -14,6 +14,7 @@ public class TelnetLogin {
         renderer.write("Enter Username: ");
         String username = renderer.read();
         PlayerDO player = playerDataService.getPlayer(username);
+
         if (player != null) {
             renderer.write("Enter Password: ");
             if (!playerDataService.authenticate(username, renderer.read())) {

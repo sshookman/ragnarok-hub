@@ -8,6 +8,7 @@ import java.util.logging.Level;
 
 import golem.mud.hub.util.SocketUtil;
 import golem.mud.hub.das.ConnectionManager;
+import golem.mud.hub.das.model.PlayerDO;
 
 public class TelnetSession {
 	private static final Logger LOGGER = Logger.getLogger(TelnetSession.class.getName());
@@ -16,6 +17,7 @@ public class TelnetSession {
     private final Socket socket;
 	private final TelnetRenderer renderer;
     private final Connection connection;
+    private PlayerDO player;
 
     protected TelnetSession(final Socket socket) throws Exception {
         this.socket = socket;
@@ -31,8 +33,17 @@ public class TelnetSession {
         return this.connection;
     }
 
+    public PlayerDO getPlayer() {
+        return this.player;
+    }
+
+    public void setPlayer(final PlayerDO player) {
+        this.player = player;
+    }
+
     public void closeSession() {
         try {
+            renderer.write("Thanks for Playing!\n");
             socket.close();
         } catch (IOException exception) {
             LOGGER.log(Level.WARNING, "Failed to close socket");
