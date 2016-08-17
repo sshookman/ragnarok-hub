@@ -22,6 +22,7 @@ public class CommandFactory {
         
         List<CommandInterface> commands = new ArrayList<>();
         commands.add(new AuthorListCommand(session));
+        commands.add(new StoryListCommand(session));
 
         for (CommandInterface commandInterface : commands) {
             if (commandInterface.matches(commandText.toUpperCase())) {
