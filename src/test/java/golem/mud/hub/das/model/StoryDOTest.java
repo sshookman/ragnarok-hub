@@ -9,9 +9,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class GolemDOTest {
+public class StoryDOTest {
 
-	private static final GolemDO golemClass = new GolemDO();
+	private static final StoryDO storyClass = new StoryDO();
 	private static ResultSet resultSet;
 
 	@BeforeClass
@@ -24,12 +24,12 @@ public class GolemDOTest {
 
 	@Test
 	public void testGetTable() throws Exception {
-		assertEquals("golem", golemClass.getTable());
+		assertEquals("story", storyClass.getTable());
 	}
 
 	@Test
 	public void testInstance() throws Exception {
-		GolemDO instance = golemClass.instance(resultSet);
+		StoryDO instance = storyClass.instance(resultSet);
 
 		assertNotNull(instance);
 		assertEquals(Integer.valueOf(1), instance.getRowId());
@@ -39,11 +39,11 @@ public class GolemDOTest {
 
 	@Test
 	public void testToMap() throws Exception {
-		GolemDO golem = golemClass.instance(resultSet);
-		Map<String, String> golemMap = golem.toMap();
+		StoryDO story = storyClass.instance(resultSet);
+		Map<String, String> storyMap = story.toMap();
 
-		assertNotNull(golemMap);
-		assertEquals("\"NAME\"", golemMap.get("name"));
-		assertEquals("\"PATH\"", golemMap.get("path"));
+		assertNotNull(storyMap);
+		assertEquals("\"NAME\"", storyMap.get("name"));
+		assertEquals("\"PATH\"", storyMap.get("path"));
 	}
 }

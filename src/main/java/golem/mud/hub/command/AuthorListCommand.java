@@ -11,7 +11,6 @@ import golem.mud.hub.das.model.AuthorDO;
 public class AuthorListCommand extends AbstractAuthorCommand {
 
     private final TelnetRenderer renderer;
-
     private final AuthorDataService authorDataService;
 
     public AuthorListCommand(final TelnetSession session) {

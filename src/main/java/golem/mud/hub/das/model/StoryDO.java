@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.HashMap;
 
-public class GolemDO extends AbstractDO {
+public class StoryDO extends AbstractDO {
 
 	private Integer rowId;
 	private String name;
@@ -39,12 +39,12 @@ public class GolemDO extends AbstractDO {
 
 	@Override
 	public String getTable() {
-		return "golem";
+		return "story";
 	}
 
 	@Override
-	public GolemDO instance(ResultSet result) throws SQLException {
-		GolemDO instance = new GolemDO();
+	public StoryDO instance(ResultSet result) throws SQLException {
+		StoryDO instance = new StoryDO();
 		instance.setRowId(result.getInt("id"));
 		instance.setName(result.getString("name"));
 		instance.setPath(result.getString("path"));
