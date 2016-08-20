@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -51,5 +52,19 @@ public class SavedDOTest {
 		assertEquals("\"PATH\"", savedMap.get("path"));
 		assertEquals("2", savedMap.get("player_id"));
 		assertEquals("3", savedMap.get("golem_id"));
+	}
+
+	@Test
+	public void testToMapNulls() throws Exception {
+		SavedDO saved = new SavedDO();
+        saved.setName("NAME");
+        saved.setPlayerId(2);
+		Map<String, String> savedMap = saved.toMap();
+
+		assertNotNull(savedMap);
+		assertEquals("\"NAME\"", savedMap.get("name"));
+		assertNull(savedMap.get("path"));
+		assertEquals("2", savedMap.get("player_id"));
+		assertNull(savedMap.get("golem_id"));
 	}
 }
