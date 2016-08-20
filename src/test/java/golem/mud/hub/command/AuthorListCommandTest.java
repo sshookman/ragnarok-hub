@@ -3,6 +3,7 @@ package golem.mud.hub.command;
 import java.sql.Connection;
 import org.junit.Test;
 import org.junit.BeforeClass;
+import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertNotNull;
@@ -16,6 +17,8 @@ import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.anyInt;
 
 import golem.mud.hub.das.ConnectionManager;
+import golem.mud.hub.das.AuthorDataService;
+import golem.mud.hub.das.model.AuthorDO;
 import golem.mud.hub.telnet.TelnetSession;
 import golem.mud.hub.telnet.TelnetRenderer;
 
@@ -32,6 +35,16 @@ public class AuthorListCommandTest {
         renderer = mock(TelnetRenderer.class);
 
 		connection = ConnectionManager.establishConnection("test/GolemMudHubTest.gmh");
+		connection = ConnectionManager.initGolemMudHub(connection);
+        AuthorDataService authorDataService = new AuthorDataService(connection);
+
+        AuthorDO authorBob = new AuthorDO();
+        authorBob.setUsername("Bob");
+        AuthorDO authorJerry = new AuthorDO();
+        authorJerry.setUsername("Jerry");
+
+        authorDataService.create(authorBob);
+        authorDataService.create(authorJerry);
 
         when(session.getRenderer()).thenReturn(renderer);
         when(session.getConnection()).thenReturn(connection);
@@ -39,6 +52,11 @@ public class AuthorListCommandTest {
         doNothing().when(renderer).endl(anyInt());
 
         authorListCommand = new AuthorListCommand(session);
+    }
+
+    @AfterClass
+    public static void teardown() throws Exception {
+        ConnectionManager.initGolemMudHub(connection);
     }
 
     @Test

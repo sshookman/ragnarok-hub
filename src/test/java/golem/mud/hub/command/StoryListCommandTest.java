@@ -3,6 +3,7 @@ package golem.mud.hub.command;
 import java.sql.Connection;
 import org.junit.Test;
 import org.junit.BeforeClass;
+import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertNotNull;
@@ -16,6 +17,8 @@ import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.anyInt;
 
 import golem.mud.hub.das.ConnectionManager;
+import golem.mud.hub.das.StoryDataService;
+import golem.mud.hub.das.model.StoryDO;
 import golem.mud.hub.telnet.TelnetSession;
 import golem.mud.hub.telnet.TelnetRenderer;
 
@@ -32,13 +35,31 @@ public class StoryListCommandTest {
         renderer = mock(TelnetRenderer.class);
 
 		connection = ConnectionManager.establishConnection("test/GolemMudHubTest.gmh");
+		connection = ConnectionManager.initGolemMudHub(connection);
+        StoryDataService storyDataService = new StoryDataService(connection);
 
+        StoryDO storyFire = new StoryDO();
+        storyFire.setName("Fire");
+        storyFire.setPath("stories/Fire.glm");
+
+        StoryDO storyIce = new StoryDO();
+        storyIce.setName("Ice");
+        storyIce.setPath("stories/Ice.glm");
+
+        storyDataService.create(storyFire);
+        storyDataService.create(storyIce);
+        
         when(session.getRenderer()).thenReturn(renderer);
         when(session.getConnection()).thenReturn(connection);
         doNothing().when(renderer).write(anyString());
         doNothing().when(renderer).endl(anyInt());
 
         storyListCommand = new StoryListCommand(session);
+    }
+
+    @AfterClass
+    public static void teardown() throws Exception {
+        ConnectionManager.initGolemMudHub(connection);
     }
 
     @Test
