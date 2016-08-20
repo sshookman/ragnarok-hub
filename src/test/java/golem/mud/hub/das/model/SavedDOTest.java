@@ -57,12 +57,12 @@ public class SavedDOTest {
 	@Test
 	public void testToMapNulls() throws Exception {
 		SavedDO saved = new SavedDO();
-        saved.setName("NAME");
+        saved.setName("");
         saved.setPlayerId(2);
 		Map<String, String> savedMap = saved.toMap();
 
 		assertNotNull(savedMap);
-		assertEquals("\"NAME\"", savedMap.get("name"));
+		assertNull(savedMap.get("name"));
 		assertNull(savedMap.get("path"));
 		assertEquals("2", savedMap.get("player_id"));
 		assertNull(savedMap.get("golem_id"));
