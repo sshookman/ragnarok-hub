@@ -79,4 +79,16 @@ public class CommandFactoryTest {
         assertNotNull(storyCommandCaps);
         assertTrue("Commands starting with 'STORY' should be StoryCommands", storyCommandCaps instanceof StoryListCommand);
     }
+
+    @Test
+    public void testGetCommandListCommand() {
+
+        CommandInterface commandCommand = commandFactory.buildCommand("command ls");
+        assertNotNull(commandCommand);
+        assertTrue("Commands starting with 'command' should be CommandCommands", commandCommand instanceof CommandListCommand);
+
+        CommandInterface commandCommandCaps = commandFactory.buildCommand("COMMAND LIST");
+        assertNotNull(commandCommandCaps);
+        assertTrue("Commands starting with 'COMMAND' should be CommandCommands", commandCommandCaps instanceof CommandListCommand);
+    }
 }

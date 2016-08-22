@@ -21,6 +21,7 @@ public class CommandFactory {
         }
         
         List<CommandInterface> commands = new ArrayList<>();
+        commands.add(new CommandListCommand(session));
         commands.add(new AuthorListCommand(session));
         commands.add(new StoryListCommand(session));
 
