@@ -41,7 +41,6 @@ public class TelnetSessionTest {
         assertNull(getPlayer.getPassword());
         assertNotNull(session.getRenderer());
         assertNotNull(session.getConnection());
-        session.closeSession();
 
         session.closeSession();
     }

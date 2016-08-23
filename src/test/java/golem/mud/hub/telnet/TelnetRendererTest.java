@@ -66,4 +66,9 @@ public class TelnetRendererTest {
             assertEquals("Expected Message to be 'error'", "error", exception.getMessage());
         }
     }
+
+    @Test
+    public void testEndl() {
+        renderer.endl(5);
+    }
 }
