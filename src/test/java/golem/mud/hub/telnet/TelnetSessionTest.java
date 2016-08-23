@@ -14,6 +14,8 @@ import java.net.Socket;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
+import golem.mud.hub.das.model.PlayerDO;
+
 public class TelnetSessionTest {
 
     private static Socket socketMock;
@@ -29,8 +31,18 @@ public class TelnetSessionTest {
     @Test
     public void testSession() {
         TelnetSession session = TelnetSession.instance(socketMock);
+        PlayerDO player = new PlayerDO();
+        player.setUsername("NAME");
+        session.setPlayer(player);
+        PlayerDO getPlayer = session.getPlayer();
+
+        assertNotNull(getPlayer);
+        assertEquals("NAME", getPlayer.getUsername());
+        assertNull(getPlayer.getPassword());
         assertNotNull(session.getRenderer());
         assertNotNull(session.getConnection());
+        session.closeSession();
+
         session.closeSession();
     }
 
