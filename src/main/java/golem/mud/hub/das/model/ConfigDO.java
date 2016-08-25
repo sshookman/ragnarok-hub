@@ -3,7 +3,7 @@ package golem.mud.hub.das.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
-//import java.util.HashMap;
+import java.util.HashMap;
 
 public class ConfigDO extends AbstractDO {
 
@@ -48,16 +48,25 @@ public class ConfigDO extends AbstractDO {
 
 	@Override
 	public String getTable() {
-		return "player";
+		return "config";
 	}
 
 	@Override
 	public ConfigDO instance(ResultSet result) throws SQLException {
-        return null;
+		ConfigDO instance = new ConfigDO();
+		instance.setRowId(result.getInt("id"));
+		instance.setPlayerId(result.getInt("player_id"));
+		instance.setTextSpeed(result.getInt("text_speed"));
+		instance.setTextColor(result.getString("text_color"));
+		return instance;
 	}	
 
 	@Override
 	public Map<String, String> toMap() {
-        return null;
+		Map<String, String> dataMap = new HashMap<String, String>();
+		addNotNull("player_id", getPlayerId(), dataMap);
+		addNotNull("text_speed", getTextSpeed(), dataMap);
+		addNotNull("text_color", getTextColor(), dataMap);
+		return dataMap;
 	}
 }
