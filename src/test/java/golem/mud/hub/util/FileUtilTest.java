@@ -4,8 +4,21 @@ import java.util.Map;
 import org.junit.Test;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class FileUtilTest {
+
+    @Test
+    public void testInstantiate() {
+        assertNotNull(new FileUtil());
+    }
+
+	@Test
+	public void testListInvalidFolder() throws Exception {
+        Map<String, String> files = FileUtil.list("invalid");
+        assertNotNull(files);
+        assertTrue(files.isEmpty());
+    }
 
 	@Test
 	public void testListFolder() throws Exception {
