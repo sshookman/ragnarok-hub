@@ -71,6 +71,9 @@ public class PlayerDataServiceTest {
 
         boolean wtFailure = playerDataService.authenticate("Hi", null);
         assertFalse(wtFailure);
+
+        boolean nullFailure = playerDataService.authenticate(null, null);
+        assertFalse(nullFailure);
     }
 
 	public Integer testReadSearch() throws Exception {

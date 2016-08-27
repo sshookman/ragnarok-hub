@@ -8,6 +8,11 @@ import static org.junit.Assert.fail;
 
 public class ConnectionManagerTest {
 
+    @Test
+    public void testInstantiate() {
+        assertNotNull(new ConnectionManager());
+    }
+
 	@Test
 	public void testEstablishConnection() throws Exception {
 		Connection game = ConnectionManager.establishConnection("server/GOLEM.gmh");

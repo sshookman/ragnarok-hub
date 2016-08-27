@@ -22,10 +22,14 @@ public class CommandFactoryTest {
     private static TelnetSession session;
     private static CommandFactory commandFactory;
 
+    private static CommandFactory nullCommandFactory;
+
     @BeforeClass
     public static void setup() {
         session = mock(TelnetSession.class);
         commandFactory = new CommandFactory(session);
+        nullCommandFactory = new CommandFactory(null);
+
         when(session.getRenderer()).thenReturn(null);
     }
 
@@ -37,6 +41,14 @@ public class CommandFactoryTest {
             assertNotNull(exception);
             assertEquals("Expecting Invalid Error Message", "Invalid Command/Session", exception.getMessage());
             assertNull(exception.getCommand());
+        }
+
+        try {
+            nullCommandFactory.buildCommand("null Session");
+        } catch (CommandException exception) {
+            assertNotNull(exception);
+            assertEquals("Expecting Invalid Error Message", "Invalid Command/Session", exception.getMessage());
+            assertEquals("Expecting Command String", "null Session", exception.getCommand());
         }
 
         try {

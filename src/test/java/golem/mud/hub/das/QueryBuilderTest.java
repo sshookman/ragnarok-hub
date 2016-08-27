@@ -8,6 +8,11 @@ import static org.junit.Assert.assertNotNull;
 
 public class QueryBuilderTest {
 
+    @Test
+    public void testInstantiate() {
+        assertNotNull(new QueryBuilder());
+    }
+
 	@Test
 	public void testSelectQuery() throws Exception {
 		String selectWhere = new QueryBuilder
