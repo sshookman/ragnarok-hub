@@ -1,4 +1,4 @@
-package golem.mud.hub.das;
+package golem.mud.das;
 
 public class QueryConstants {
 

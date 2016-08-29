@@ -1,9 +1,9 @@
-package golem.mud.hub.das;
+package golem.mud.das;
 
 import java.util.Map;
 import java.util.HashMap;
 
-import static golem.mud.hub.das.QueryConstants.*;
+import static golem.mud.das.QueryConstants.*;
 
 public class QueryBuilder {
 	

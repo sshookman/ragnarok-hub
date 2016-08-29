@@ -1,4 +1,4 @@
-package golem.mud.hub.das;
+package golem.mud.das;
 
 import org.junit.Test;
 import java.util.Map;

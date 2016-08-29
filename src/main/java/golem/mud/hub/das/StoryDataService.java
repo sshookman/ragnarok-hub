@@ -3,6 +3,7 @@ package golem.mud.hub.das;
 import java.sql.Connection;
 
 import golem.mud.hub.das.model.StoryDO;
+import golem.mud.das.AbstractDataService;
 
 public class StoryDataService extends AbstractDataService<StoryDO> {
 

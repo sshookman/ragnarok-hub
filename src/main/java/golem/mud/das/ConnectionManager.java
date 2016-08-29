@@ -1,4 +1,4 @@
-package golem.mud.hub.das;
+package golem.mud.das;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -13,7 +13,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import golem.mud.hub.das.ConnectionManager;
+import golem.mud.das.ConnectionManager;
 import golem.mud.hub.das.model.ConfigDO;
 
 public class ConfigDataServiceTest {

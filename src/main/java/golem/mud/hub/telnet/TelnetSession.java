@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 import golem.mud.hub.util.SocketUtil;
-import golem.mud.hub.das.ConnectionManager;
+import golem.mud.das.ConnectionManager;
 import golem.mud.hub.das.model.PlayerDO;
 
 public class TelnetSession {
