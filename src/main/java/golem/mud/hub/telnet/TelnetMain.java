@@ -3,7 +3,7 @@ package golem.mud.hub.telnet;
 import java.io.IOException;
 
 import golem.mud.hub.das.model.PlayerDO;
-import golem.mud.hub.command.CommandFactory;
+import golem.mud.hub.command.HubCommandFactory;
 import golem.mud.hub.exception.CommandException;
 
 public class TelnetMain {
@@ -21,7 +21,7 @@ public class TelnetMain {
         renderer.write("Welcome to the Dragonfly Library\n");
         renderer.write("================================\n\n");
 
-        CommandFactory commandFactory = new CommandFactory(session);
+        HubCommandFactory commandFactory = new HubCommandFactory(session);
         String commandString = "";
 
         while (!"quit".equals(commandString)) {

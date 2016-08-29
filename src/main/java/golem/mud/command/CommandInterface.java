@@ -1,4 +1,4 @@
-package golem.mud.hub.command;
+package golem.mud.command;
 
 import golem.mud.hub.exception.CommandException;
 

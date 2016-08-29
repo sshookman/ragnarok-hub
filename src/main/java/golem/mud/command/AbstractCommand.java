@@ -1,4 +1,4 @@
-package golem.mud.hub.command;
+package golem.mud.command;
 
 import java.util.regex.Pattern;
 

@@ -5,12 +5,13 @@ import java.util.ArrayList;
 
 import golem.mud.hub.exception.CommandException;
 import golem.mud.hub.telnet.TelnetSession;
+import golem.mud.command.CommandInterface;
 
-public class CommandFactory {
+public class HubCommandFactory {
 
     private TelnetSession session;
 
-    public CommandFactory(final TelnetSession session) {
+    public HubCommandFactory(final TelnetSession session) {
         this.session = session;
     }
 

@@ -16,19 +16,20 @@ import static org.mockito.Mockito.eq;
 
 import golem.mud.hub.exception.CommandException;
 import golem.mud.hub.telnet.TelnetSession;
+import golem.mud.command.CommandInterface;
 
-public class CommandFactoryTest {
+public class HubCommandFactoryTest {
 
     private static TelnetSession session;
-    private static CommandFactory commandFactory;
+    private static HubCommandFactory commandFactory;
 
-    private static CommandFactory nullCommandFactory;
+    private static HubCommandFactory nullCommandFactory;
 
     @BeforeClass
     public static void setup() {
         session = mock(TelnetSession.class);
-        commandFactory = new CommandFactory(session);
-        nullCommandFactory = new CommandFactory(null);
+        commandFactory = new HubCommandFactory(session);
+        nullCommandFactory = new HubCommandFactory(null);
 
         when(session.getRenderer()).thenReturn(null);
     }
