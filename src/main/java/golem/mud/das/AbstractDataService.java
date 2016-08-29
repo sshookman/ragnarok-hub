@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import golem.mud.hub.das.model.AbstractDO;
+import golem.mud.das.model.AbstractDO;
 
 public abstract class AbstractDataService<D extends AbstractDO> {
 	private final Logger LOGGER = Logger.getLogger(AbstractDataService.class.getName());
