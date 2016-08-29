@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import golem.mud.hub.util.ResourceLoader;
+import golem.mud.util.ResourceLoader;
 
 public class ConnectionManager {
 	private static final Logger LOGGER = Logger.getLogger(ConnectionManager.class.getName());

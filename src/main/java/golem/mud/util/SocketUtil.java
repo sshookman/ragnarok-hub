@@ -1,4 +1,4 @@
-package golem.mud.hub.util;
+package golem.mud.util;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

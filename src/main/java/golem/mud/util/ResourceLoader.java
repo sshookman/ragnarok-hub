@@ -1,4 +1,4 @@
-package golem.mud.hub.util;
+package golem.mud.util;
 
 import java.io.File;
 import java.util.logging.Logger;
