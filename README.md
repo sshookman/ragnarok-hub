@@ -9,7 +9,6 @@ Common Commands
 ---
 
 - **Validate:**       mvn pmd:pmd pmd:cpd
-- **Coverage:**       mvn cobertura:cobertura
 - **Build:**          mvn clean package
 - **Docker Build:**   docker build -t seanshookman/golem .
 - **Docker Run:**     docker run --name golem -d -p 1127:1127 seanshookman/golem
@@ -22,13 +21,17 @@ Project Structure:
 ---
 
 ```
-golem/mud/hub
---command               -- Command Objects
---das					-- Data Access Service Classes
-----model				-- Database Objects
---exception 			-- Custom Exception Classes
---telnet				-- Telnet Related Classes for Client, Server, Session, etc
---util                  -- Various Static Utility Classes
+golem/mud
+--command               -- Common Command Interface and Abstract Classes
+--das                   -- Common Data Service Classes and Abstract Class
+----model				-- Common Database Objects and Abstract Class
+--exception 			-- Common Exception Classes
+--hub
+----command             -- Hub Command Objects
+----das					-- Hub Data Access Service Classes
+------model				-- Hub Database Objects
+----telnet				-- Hub Telnet Classes
+--util                  -- Common Utility Classes
 ```
 
 ---
