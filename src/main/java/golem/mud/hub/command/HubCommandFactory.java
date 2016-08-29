@@ -3,7 +3,7 @@ package golem.mud.hub.command;
 import java.util.List;
 import java.util.ArrayList;
 
-import golem.mud.hub.exception.CommandException;
+import golem.mud.exception.CommandException;
 import golem.mud.hub.telnet.TelnetSession;
 import golem.mud.command.CommandInterface;
 

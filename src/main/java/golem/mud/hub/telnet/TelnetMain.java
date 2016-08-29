@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import golem.mud.hub.das.model.PlayerDO;
 import golem.mud.hub.command.HubCommandFactory;
-import golem.mud.hub.exception.CommandException;
+import golem.mud.exception.CommandException;
 
 public class TelnetMain {
 

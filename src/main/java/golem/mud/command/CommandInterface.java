@@ -1,6 +1,6 @@
 package golem.mud.command;
 
-import golem.mud.hub.exception.CommandException;
+import golem.mud.exception.CommandException;
 
 public interface CommandInterface {
 
