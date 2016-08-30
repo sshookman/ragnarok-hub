@@ -9,18 +9,6 @@ import golem.mud.das.model.AbstractDO;
 
 public class EntityDO extends AbstractDO {
 
-	private Integer rowId;
-
-	@Override
-	public Integer getRowId() {
-		return rowId;
-	}
-
-	@Override
-	public void setRowId(Integer rowId) {
-		this.rowId = rowId;
-	}
-
 	@Override
 	public String getTable() {
 		return "entity";

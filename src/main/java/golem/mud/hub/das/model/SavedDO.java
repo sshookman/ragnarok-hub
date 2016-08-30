@@ -9,21 +9,10 @@ import golem.mud.das.model.AbstractDO;
 
 public class SavedDO extends AbstractDO {
 
-	private Integer rowId;
 	private String name;
 	private String path;
     private Integer playerId;
     private Integer golemId;
-
-	@Override
-	public Integer getRowId() {
-		return rowId;
-	}
-
-	@Override
-	public void setRowId(Integer rowId) {
-		this.rowId = rowId;
-	}
 
 	public String getName() {
 		return this.name;

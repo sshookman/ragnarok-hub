@@ -9,19 +9,8 @@ import golem.mud.das.model.AbstractDO;
 
 public class StoryDO extends AbstractDO {
 
-	private Integer rowId;
 	private String name;
 	private String path;
-
-	@Override
-	public Integer getRowId() {
-		return rowId;
-	}
-
-	@Override
-	public void setRowId(Integer rowId) {
-		this.rowId = rowId;
-	}
 
 	public String getName() {
 		return this.name;

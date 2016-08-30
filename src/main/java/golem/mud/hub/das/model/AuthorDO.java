@@ -9,18 +9,7 @@ import golem.mud.das.model.AbstractDO;
 
 public class AuthorDO extends AbstractDO {
 
-	private Integer rowId;
 	private String username;
-
-	@Override
-	public Integer getRowId() {
-		return rowId;
-	}
-
-	@Override
-	public void setRowId(Integer rowId) {
-		this.rowId = rowId;
-	}
 
 	public String getUsername() {
 		return this.username;

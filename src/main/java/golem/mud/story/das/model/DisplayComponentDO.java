@@ -7,18 +7,7 @@ import java.util.HashMap;
 
 public class DisplayComponentDO extends AbstractComponentDO {
 
-	private Integer rowId;
     private String message;
-
-	@Override
-	public Integer getRowId() {
-		return rowId;
-	}
-
-	@Override
-	public void setRowId(Integer rowId) {
-		this.rowId = rowId;
-	}
 
     public String getMessage() {
         return message;

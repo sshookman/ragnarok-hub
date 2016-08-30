@@ -9,18 +9,7 @@ import golem.mud.das.model.AbstractDO;
 
 public class ScreenDO extends AbstractDO {
     
-    private Integer rowId;
     private String message;
-
-    @Override
-    public Integer getRowId() {
-        return this.rowId;
-    }
-
-    @Override
-    public void setRowId(Integer rowId) {
-        this.rowId = rowId;
-    }
 
     public String getMessage() {
         return this.message;

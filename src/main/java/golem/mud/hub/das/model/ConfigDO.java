@@ -9,20 +9,9 @@ import golem.mud.das.model.AbstractDO;
 
 public class ConfigDO extends AbstractDO {
 
-	private Integer rowId;
     private Integer playerId;
     private Integer textSpeed;
     private String textColor;
-
-	@Override
-	public Integer getRowId() {
-		return rowId;
-	}
-
-	@Override
-	public void setRowId(Integer rowId) {
-		this.rowId = rowId;
-	}
 
     public Integer getPlayerId() {
         return this.playerId;

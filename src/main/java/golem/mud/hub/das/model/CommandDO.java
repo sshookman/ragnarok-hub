@@ -9,19 +9,8 @@ import golem.mud.das.model.AbstractDO;
 
 public class CommandDO extends AbstractDO {
 
-	private Integer rowId;
 	private String name;
 	private String targets;
-
-	@Override
-	public Integer getRowId() {
-		return rowId;
-	}
-
-	@Override
-	public void setRowId(Integer rowId) {
-		this.rowId = rowId;
-	}
 
     public String getName() {
         return this.name;

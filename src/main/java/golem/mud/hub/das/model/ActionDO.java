@@ -9,22 +9,11 @@ import golem.mud.das.model.AbstractDO;
 
 public class ActionDO extends AbstractDO {
 
-	private Integer rowId;
     private String type;
     private Integer screenId;
     private Integer golemId;
     private String property;
     private String value;
-
-	@Override
-	public Integer getRowId() {
-		return rowId;
-	}
-
-	@Override
-	public void setRowId(Integer rowId) {
-		this.rowId = rowId;
-	}
 
     public String getType() {
         return this.type;

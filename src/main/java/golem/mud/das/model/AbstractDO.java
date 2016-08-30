@@ -6,13 +6,15 @@ import java.util.Map;
 
 public abstract class AbstractDO {
 
-	public abstract Integer getRowId();
-	public abstract void setRowId(Integer rowId);
+    protected Integer rowId;
 
-	public abstract String getTable();
-	public abstract AbstractDO instance(ResultSet result) throws SQLException;
+    public Integer getRowId() {
+        return rowId;
+    }
 
-	public abstract Map<String, String> toMap();
+    public void setRowId(Integer rowId) {
+        this.rowId = rowId;
+    }
 
     protected void addNull(final String name, final Map<String, String> map) {
         map.put(name, "null");
@@ -29,4 +31,8 @@ public abstract class AbstractDO {
 			map.put(name, value.toString());
 		}
 	}
+
+	public abstract String getTable();
+	public abstract AbstractDO instance(ResultSet result) throws SQLException;
+	public abstract Map<String, String> toMap();
 }

@@ -9,19 +9,8 @@ import golem.mud.das.model.AbstractDO;
 
 public class PlayerDO extends AbstractDO {
 
-	private Integer rowId;
 	private String username;
 	private String password;
-
-	@Override
-	public Integer getRowId() {
-		return rowId;
-	}
-
-	@Override
-	public void setRowId(Integer rowId) {
-		this.rowId = rowId;
-	}
 
 	public String getUsername() {
 		return this.username;
