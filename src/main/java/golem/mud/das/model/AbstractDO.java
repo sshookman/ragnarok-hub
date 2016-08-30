@@ -14,6 +14,10 @@ public abstract class AbstractDO {
 
 	public abstract Map<String, String> toMap();
 
+    protected void addNull(final String name, final Map<String, String> map) {
+        map.put(name, "null");
+	}
+
     protected void addNotNull(final String name, final String value, final Map<String, String> map) {
 		if (value != null && !value.isEmpty()) {
 			map.put(name, "\""+value+"\"");
