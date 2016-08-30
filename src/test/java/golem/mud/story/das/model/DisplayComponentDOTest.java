@@ -24,7 +24,7 @@ public class DisplayComponentDOTest {
 
 	@Test
 	public void testGetTable() throws Exception {
-		assertEquals("displayComponent", displayComponentClass.getTable());
+		assertEquals("c_display", displayComponentClass.getTable());
 	}
 
 	@Test

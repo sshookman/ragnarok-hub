@@ -30,7 +30,7 @@ public class DisplayComponentDO extends AbstractComponentDO {
 
 	@Override
 	public String getTable() {
-		return "displayComponent";
+		return "c_display";
 	}
 
 	@Override
