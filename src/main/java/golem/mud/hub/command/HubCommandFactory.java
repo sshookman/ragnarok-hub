@@ -25,6 +25,7 @@ public class HubCommandFactory {
         commands.add(new CommandListCommand(session));
         commands.add(new AuthorListCommand(session));
         commands.add(new StoryListCommand(session));
+        commands.add(new StoryPlayCommand(session));
 
         for (CommandInterface commandInterface : commands) {
             if (commandInterface.matches(commandText.toUpperCase())) {
