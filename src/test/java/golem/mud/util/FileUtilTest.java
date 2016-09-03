@@ -17,8 +17,8 @@ public class FileUtilTest {
 
     @BeforeClass
     public static void setup() throws Exception {
-        file1 = new File("src/test/resources/library/one.test");
-        file2 = new File("src/test/resources/library/two.tst");
+        file1 = new File(PATH + "/one.test");
+        file2 = new File(PATH + "/two.tst");
         file1.createNewFile();
         file2.createNewFile();
     }
@@ -43,12 +43,12 @@ public class FileUtilTest {
 
 	@Test
 	public void testListFolder() throws Exception {
-        Map<String, String> files = FileUtil.list("src/test/resources/library");
+        Map<String, String> files = FileUtil.list(PATH);
         assertNotNull(files);
         assertEquals(3, files.size());
-        assertEquals("src/test/resources/library/one.test", files.get("one.test"));
-        assertEquals("src/test/resources/library/two.tst", files.get("two.tst"));
-        assertEquals("src/test/resources/library/.gitkeep", files.get(".gitkeep"));
+        assertEquals(PATH + "/one.test", files.get("one.test"));
+        assertEquals(PATH + "/two.tst", files.get("two.tst"));
+        assertEquals(PATH + "/.gitkeep", files.get(".gitkeep"));
 	}
 
 	@Test
@@ -56,7 +56,7 @@ public class FileUtilTest {
         Map<String, String> files = FileUtil.list(PATH, ".test");
         assertNotNull(files);
         assertEquals(1, files.size());
-        assertEquals("src/test/resources/library/one.test", files.get("one"));
+        assertEquals(PATH + "/one.test", files.get("one"));
 	}
     
 	@Test
