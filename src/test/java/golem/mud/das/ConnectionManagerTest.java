@@ -1,12 +1,24 @@
 package golem.mud.das;
 
-import org.junit.Test;
 import java.sql.Connection;
+import java.io.File;
+import org.junit.Test;
+import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 public class ConnectionManagerTest {
+
+    private static final String PATH = "src/test/resources/library/";
+
+    @AfterClass
+    public static void teardown() {
+        File file1 = new File(PATH + "/GolemMudHubTest.gmh");
+        File file2 = new File(PATH + "/GolemTest.glm");
+        file1.delete();
+        file2.delete();
+    }
 
     @Test
     public void testInstantiate() {
@@ -14,10 +26,7 @@ public class ConnectionManagerTest {
     }
 
 	@Test
-	public void testEstablishConnection() throws Exception {
-		Connection game = ConnectionManager.establishConnection("server/GOLEM.gmh");
-		assertNotNull(game);
-		
+	public void testNotFoundException() throws Exception {
 		try {
 			ConnectionManager.establishConnection("not-a-library/NotAGame.sqlite");
 			fail("Exception Expected");
@@ -28,7 +37,8 @@ public class ConnectionManagerTest {
 
 	@Test
 	public void testInitGolemMudHub() throws Exception {
-		Connection hubTest = ConnectionManager.establishConnection("test/GolemMudHubTest.gmh");
+		Connection hubTest = ConnectionManager.establishConnection(PATH + "GolemMudHubTest.gmh");
+		assertNotNull(hubTest);
 
 		hubTest = ConnectionManager.initGolemMudHub(hubTest);
 		assertNotNull(hubTest);
@@ -36,7 +46,7 @@ public class ConnectionManagerTest {
 
 	@Test
 	public void testInitGolem() throws Exception {
-		Connection glmTest = ConnectionManager.establishConnection("test/GolemTest.glm");
+		Connection glmTest = ConnectionManager.establishConnection(PATH + "GolemTest.glm");
 
 		glmTest = ConnectionManager.initGolem(glmTest);
 		assertNotNull(glmTest);

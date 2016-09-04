@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 
 public class FileUtilTest {
 
-    private static final String PATH = "src/test/resources/library";
+    private static final String PATH = "src/test/resources/temp";
     private static File file1;
     private static File file2;
 
