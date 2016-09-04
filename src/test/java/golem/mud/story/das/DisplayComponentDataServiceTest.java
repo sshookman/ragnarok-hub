@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.sql.Connection;
+import java.io.File;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertNotNull;
@@ -18,19 +19,22 @@ import golem.mud.story.das.model.DisplayComponentDO;
 
 public class DisplayComponentDataServiceTest {
 
+    private static final String PATH = "src/test/resources/library/";
+
     private static Connection story;
 	private static DisplayComponentDataService displayComponentDataService;
 
 	@BeforeClass
 	public static void setup() throws Exception {
-		story = ConnectionManager.establishConnection("test/GolemTest.glm");
+		story = ConnectionManager.establishConnection(PATH + "GolemTest.glm");
 		story = ConnectionManager.initGolem(story);
 		displayComponentDataService = new DisplayComponentDataService(story);
 	}
 
     @AfterClass
     public static void teardown() throws Exception {
-        story = ConnectionManager.initGolemMudHub(story);
+        File file = new File(PATH + "GolemTest.glm");
+        file.delete();
     }
 
 	@Test 

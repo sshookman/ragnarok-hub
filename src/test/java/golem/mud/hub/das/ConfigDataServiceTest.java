@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 import java.sql.Connection;
+import java.io.File;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertNotNull;
@@ -18,19 +19,22 @@ import golem.mud.hub.das.model.ConfigDO;
 
 public class ConfigDataServiceTest {
 
+    private static final String PATH = "src/test/resources/library/";
+
     private static Connection golemMudHub;
 	private static ConfigDataService configDataService;
 
 	@BeforeClass
 	public static void setup() throws Exception {
-		golemMudHub = ConnectionManager.establishConnection("test/GolemMudHubTest.gmh");
+		golemMudHub = ConnectionManager.establishConnection(PATH + "GolemMudHubTest.gmh");
 		golemMudHub = ConnectionManager.initGolemMudHub(golemMudHub);
 		configDataService = new ConfigDataService(golemMudHub);
 	}
 
     @AfterClass
     public static void teardown() throws Exception {
-        golemMudHub = ConnectionManager.initGolemMudHub(golemMudHub);
+        File file = new File(PATH + "GolemMudHubTest.gmh");
+        file.delete();
     }
 
 	@Test 

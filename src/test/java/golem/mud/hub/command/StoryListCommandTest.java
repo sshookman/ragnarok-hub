@@ -1,6 +1,7 @@
 package golem.mud.hub.command;
 
 import java.sql.Connection;
+import java.io.File;
 import org.junit.Test;
 import org.junit.BeforeClass;
 import org.junit.AfterClass;
@@ -24,6 +25,8 @@ import golem.mud.hub.telnet.TelnetRenderer;
 
 public class StoryListCommandTest {
 
+    private static final String PATH = "src/test/resources/library/";
+
     private static StoryListCommand storyListCommand;
     private static TelnetSession session;
     private static TelnetRenderer renderer;
@@ -34,7 +37,7 @@ public class StoryListCommandTest {
         session = mock(TelnetSession.class);
         renderer = mock(TelnetRenderer.class);
 
-		connection = ConnectionManager.establishConnection("test/GolemMudHubTest.gmh");
+		connection = ConnectionManager.establishConnection(PATH + "GolemMudHubTest.gmh");
 		connection = ConnectionManager.initGolemMudHub(connection);
         StoryDataService storyDataService = new StoryDataService(connection);
 
@@ -59,7 +62,8 @@ public class StoryListCommandTest {
 
     @AfterClass
     public static void teardown() throws Exception {
-        ConnectionManager.initGolemMudHub(connection);
+        File file = new File(PATH + "GolemMudHubTest.gmh");
+        file.delete();
     }
 
     @Test

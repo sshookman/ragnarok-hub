@@ -4,6 +4,7 @@ import java.sql.Connection;
 import org.junit.Test;
 import org.junit.BeforeClass;
 import org.junit.AfterClass;
+import java.io.File;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertNotNull;
@@ -24,6 +25,8 @@ import golem.mud.hub.telnet.TelnetRenderer;
 
 public class AuthorListCommandTest {
 
+    private static final String PATH = "src/test/resources/library/";
+
     private static AuthorListCommand authorListCommand;
     private static TelnetSession session;
     private static TelnetRenderer renderer;
@@ -34,7 +37,7 @@ public class AuthorListCommandTest {
         session = mock(TelnetSession.class);
         renderer = mock(TelnetRenderer.class);
 
-		connection = ConnectionManager.establishConnection("test/GolemMudHubTest.gmh");
+		connection = ConnectionManager.establishConnection(PATH + "GolemMudHubTest.gmh");
 		connection = ConnectionManager.initGolemMudHub(connection);
         AuthorDataService authorDataService = new AuthorDataService(connection);
 
@@ -56,7 +59,8 @@ public class AuthorListCommandTest {
 
     @AfterClass
     public static void teardown() throws Exception {
-        ConnectionManager.initGolemMudHub(connection);
+        File file = new File(PATH + "GolemMudHubTest.gmh");
+        file.delete();
     }
 
     @Test
