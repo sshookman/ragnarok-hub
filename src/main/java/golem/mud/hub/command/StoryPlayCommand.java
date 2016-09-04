@@ -1,21 +1,20 @@
 package golem.mud.hub.command;
 
 import java.util.List;
-import java.util.HashMap;
 
 import golem.mud.hub.telnet.TelnetSession;
-import golem.mud.hub.telnet.TelnetRenderer;
 import golem.mud.hub.das.StoryDataService;
 import golem.mud.hub.das.model.StoryDO;
+import golem.mud.story.reader.StoryReader;
 
 public class StoryPlayCommand extends AbstractStoryCommand {
 
-    private final TelnetRenderer renderer;
+    private final TelnetSession session;
     private final StoryDataService storyDataService;
     private String command;
 
     public StoryPlayCommand(final TelnetSession session) {
-        this.renderer = session.getRenderer();
+        this.session = session;
         this.storyDataService = new StoryDataService(session.getConnection());
     }
 
@@ -32,18 +31,21 @@ public class StoryPlayCommand extends AbstractStoryCommand {
 
     public void execute() {
         String[] parts = command.split(" ");
-        String story = "";
+        String storyName = "";
         for (int x = 2; x < parts.length; x++) {
             if (x != 2) {
-                story += " ";
+                storyName += " ";
             }
-            story += parts[x];
+            storyName += parts[x];
         }
-        renderer.write("Searching for Story: " + story);
-        List<StoryDO> stories = storyDataService.read(new HashMap<>());
-        for (StoryDO s : stories) {
-            renderer.endl(1);
-            renderer.write(s.getName());
+
+        StoryDO search = new StoryDO();
+        search.setName(storyName);
+        List<StoryDO> stories = storyDataService.read(search.toMap());
+        if (stories != null && !stories.isEmpty()) {
+            StoryDO story = stories.get(0);
+            StoryReader reader = new StoryReader();
+            reader.play(session, story.getPath());
         }
     }
 }
