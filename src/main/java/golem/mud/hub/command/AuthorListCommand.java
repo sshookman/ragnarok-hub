@@ -7,6 +7,7 @@ import golem.mud.hub.telnet.TelnetSession;
 import golem.mud.hub.telnet.TelnetRenderer;
 import golem.mud.hub.das.AuthorDataService;
 import golem.mud.hub.das.model.AuthorDO;
+import golem.mud.command.CommandResponse;
 
 public class AuthorListCommand extends AbstractAuthorCommand {
 
@@ -22,12 +23,13 @@ public class AuthorListCommand extends AbstractAuthorCommand {
         return CMD + " (LS|LIST)";
     }
 
-    public void execute() {
+    public CommandResponse execute() {
         renderer.write("All Authors:");
         List<AuthorDO> authors = authorDataService.read(new HashMap<>());
         for (AuthorDO author : authors) {
             renderer.endl(1);
             renderer.write(author.getUsername());
         }
+        return new CommandResponse(null);
     }
 }

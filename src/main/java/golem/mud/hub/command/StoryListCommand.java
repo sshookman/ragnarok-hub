@@ -7,6 +7,7 @@ import golem.mud.hub.telnet.TelnetSession;
 import golem.mud.hub.telnet.TelnetRenderer;
 import golem.mud.hub.das.StoryDataService;
 import golem.mud.hub.das.model.StoryDO;
+import golem.mud.command.CommandResponse;
 
 public class StoryListCommand extends AbstractStoryCommand {
 
@@ -22,12 +23,13 @@ public class StoryListCommand extends AbstractStoryCommand {
         return CMD + " (LS|LIST)";
     }
 
-    public void execute() {
+    public CommandResponse execute() {
         renderer.write("Stories:");
         List<StoryDO> stories = storyDataService.read(new HashMap<>());
         for (StoryDO story : stories) {
             renderer.endl(1);
             renderer.write(story.getName());
         }
+        return new CommandResponse(null);
     }
 }

@@ -2,6 +2,7 @@ package golem.mud.hub.command;
 
 import golem.mud.hub.telnet.TelnetSession;
 import golem.mud.hub.telnet.TelnetRenderer;
+import golem.mud.command.CommandResponse;
 
 public class CommandListCommand extends AbstractCommandCommand {
 
@@ -15,7 +16,7 @@ public class CommandListCommand extends AbstractCommandCommand {
         return CMD + " (LS|LIST)";
     }
 
-    public void execute() {
+    public CommandResponse execute() {
         renderer.write("Commands:");
         renderer.endl(1);
         renderer.write("COMMAND LIST");
@@ -23,5 +24,6 @@ public class CommandListCommand extends AbstractCommandCommand {
         renderer.write("AUTHOR LIST");
         renderer.endl(1);
         renderer.write("STORY LIST");
+        return new CommandResponse(null);
     }
 }

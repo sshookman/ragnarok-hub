@@ -6,5 +6,5 @@ public interface CommandInterface {
 
     String getRegex();
     boolean matches(final String text);
-    void execute() throws CommandException;
+    CommandResponse execute() throws CommandException;
 }
