@@ -1,4 +1,4 @@
-package golem.mud.util;
+package golem.mud.common.util;
 
 import org.junit.Test;
 import static org.junit.Assert.assertNotNull;

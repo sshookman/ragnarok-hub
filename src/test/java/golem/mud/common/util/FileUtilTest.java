@@ -1,4 +1,4 @@
-package golem.mud.util;
+package golem.mud.common.util;
 
 import java.util.Map;
 import java.io.File;

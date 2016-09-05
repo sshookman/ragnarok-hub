@@ -1,6 +1,6 @@
 package golem.mud.story.das.model;
 
-import golem.mud.das.model.AbstractDO;
+import golem.mud.common.das.model.AbstractDO;
 
 public abstract class AbstractComponentDO extends AbstractDO {
 

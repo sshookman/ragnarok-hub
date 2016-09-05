@@ -1,4 +1,4 @@
-package golem.mud.das;
+package golem.mud.common.das;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;

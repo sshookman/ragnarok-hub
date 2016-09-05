@@ -3,9 +3,9 @@ package golem.mud.hub.command;
 import java.util.List;
 import java.util.ArrayList;
 
-import golem.mud.exception.CommandException;
+import golem.mud.common.exception.CommandException;
+import golem.mud.common.command.CommandInterface;
 import golem.mud.hub.telnet.TelnetSession;
-import golem.mud.command.CommandInterface;
 
 public class HubCommandFactory {
 

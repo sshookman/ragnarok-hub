@@ -1,4 +1,4 @@
-package golem.mud.das;
+package golem.mud.common.das;
 
 import java.sql.Connection;
 import java.io.File;

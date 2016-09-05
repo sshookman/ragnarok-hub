@@ -14,9 +14,9 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.eq;
 
-import golem.mud.exception.CommandException;
+import golem.mud.common.exception.CommandException;
 import golem.mud.hub.telnet.TelnetSession;
-import golem.mud.command.CommandInterface;
+import golem.mud.common.command.CommandInterface;
 
 public class HubCommandFactoryTest {
 

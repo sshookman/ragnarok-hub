@@ -7,7 +7,7 @@ import golem.mud.hub.telnet.TelnetSession;
 import golem.mud.hub.telnet.TelnetRenderer;
 import golem.mud.hub.das.StoryDataService;
 import golem.mud.hub.das.model.StoryDO;
-import golem.mud.command.CommandResponse;
+import golem.mud.common.command.CommandResponse;
 
 public class StoryListCommand extends AbstractStoryCommand {
 

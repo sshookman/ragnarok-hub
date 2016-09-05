@@ -1,4 +1,4 @@
-package golem.mud.util;
+package golem.mud.common.util;
 
 import java.io.File;
 import org.junit.Test;

@@ -17,7 +17,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.anyInt;
 
-import golem.mud.das.ConnectionManager;
+import golem.mud.common.das.ConnectionManager;
 import golem.mud.hub.das.AuthorDataService;
 import golem.mud.hub.das.model.AuthorDO;
 import golem.mud.hub.telnet.TelnetSession;

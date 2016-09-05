@@ -2,7 +2,7 @@ package golem.mud.hub.command;
 
 import golem.mud.hub.telnet.TelnetSession;
 import golem.mud.hub.telnet.TelnetRenderer;
-import golem.mud.command.CommandResponse;
+import golem.mud.common.command.CommandResponse;
 
 public class CommandListCommand extends AbstractCommandCommand {
 

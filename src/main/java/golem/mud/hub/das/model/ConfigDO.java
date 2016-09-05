@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.HashMap;
 
-import golem.mud.das.model.AbstractDO;
+import golem.mud.common.das.model.AbstractDO;
 
 public class ConfigDO extends AbstractDO {
 

@@ -1,4 +1,4 @@
-package golem.mud.exception;
+package golem.mud.common.exception;
 
 public class CommandException extends RuntimeException {
 

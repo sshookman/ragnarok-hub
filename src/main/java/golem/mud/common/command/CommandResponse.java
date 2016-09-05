@@ -1,4 +1,4 @@
-package golem.mud.command;
+package golem.mud.common.command;
 
 public class CommandResponse {
 

@@ -7,7 +7,7 @@ import golem.mud.hub.telnet.TelnetSession;
 import golem.mud.hub.telnet.TelnetRenderer;
 import golem.mud.hub.das.AuthorDataService;
 import golem.mud.hub.das.model.AuthorDO;
-import golem.mud.command.CommandResponse;
+import golem.mud.common.command.CommandResponse;
 
 public class AuthorListCommand extends AbstractAuthorCommand {
 

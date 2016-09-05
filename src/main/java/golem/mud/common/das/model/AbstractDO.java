@@ -1,4 +1,4 @@
-package golem.mud.das.model;
+package golem.mud.common.das.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

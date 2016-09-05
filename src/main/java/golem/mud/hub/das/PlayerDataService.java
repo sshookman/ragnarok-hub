@@ -5,7 +5,7 @@ import java.util.List;
 import java.sql.Connection;
 
 import golem.mud.hub.das.model.PlayerDO;
-import golem.mud.das.AbstractDataService;
+import golem.mud.common.das.AbstractDataService;
 
 public class PlayerDataService extends AbstractDataService<PlayerDO> {
 

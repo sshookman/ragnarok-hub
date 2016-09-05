@@ -3,7 +3,7 @@ package golem.mud.story.das;
 import java.sql.Connection;
 
 import golem.mud.story.das.model.EntityDO;
-import golem.mud.das.AbstractDataService;
+import golem.mud.common.das.AbstractDataService;
 
 public class EntityDataService extends AbstractDataService<EntityDO> {
 

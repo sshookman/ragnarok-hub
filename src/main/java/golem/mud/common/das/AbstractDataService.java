@@ -1,4 +1,4 @@
-package golem.mud.das;
+package golem.mud.common.das;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import golem.mud.das.model.AbstractDO;
+import golem.mud.common.das.model.AbstractDO;
 
 public abstract class AbstractDataService<D extends AbstractDO> {
 	private final Logger LOGGER = Logger.getLogger(AbstractDataService.class.getName());

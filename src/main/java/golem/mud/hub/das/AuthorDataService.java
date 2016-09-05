@@ -3,7 +3,7 @@ package golem.mud.hub.das;
 import java.sql.Connection;
 
 import golem.mud.hub.das.model.AuthorDO;
-import golem.mud.das.AbstractDataService;
+import golem.mud.common.das.AbstractDataService;
 
 public class AuthorDataService extends AbstractDataService<AuthorDO> {
 
