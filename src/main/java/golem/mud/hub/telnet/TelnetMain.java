@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import golem.mud.hub.das.model.PlayerDO;
 import golem.mud.hub.command.HubCommandFactory;
+import golem.mud.story.reader.StoryReader;
 import golem.mud.common.exception.CommandException;
 import golem.mud.common.command.CommandResponse;
 
@@ -33,7 +34,7 @@ public class TelnetMain {
             
             try {
                 CommandResponse response = commandFactory.buildCommand(commandString).execute();
-                handleResponse(renderer, response);
+                handleResponse(session, response);
             } catch (CommandException exception) {
                 renderer.write(exception.getMessage());
             }
@@ -42,14 +43,16 @@ public class TelnetMain {
         }
     }
 
-    private static void handleResponse(TelnetRenderer renderer, CommandResponse response) throws IOException {
+    private static void handleResponse(TelnetSession session, CommandResponse response) throws IOException {
+        TelnetRenderer renderer = session.getRenderer();
         if (response != null && response.getData() != null) {
             renderer.write("Do you wish to play ");
             renderer.write(response.getStringData());
             renderer.write("? (y/n):");
             String play = renderer.read();
             if ("Y".equalsIgnoreCase(play) || "YES".equalsIgnoreCase(play)) {
-                renderer.write("START GAME");
+                StoryReader reader = new StoryReader();
+                reader.play(session, response.getStringData());
             }
         }
     }
