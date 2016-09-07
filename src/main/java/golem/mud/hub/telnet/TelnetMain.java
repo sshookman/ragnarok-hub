@@ -1,7 +1,5 @@
 package golem.mud.hub.telnet;
 
-import java.io.IOException;
-
 import golem.mud.hub.das.model.PlayerDO;
 import golem.mud.hub.command.HubCommandFactory;
 import golem.mud.story.reader.StoryReader;
@@ -10,7 +8,7 @@ import golem.mud.common.command.CommandResponse;
 
 public class TelnetMain {
 
-    public static void mainLoop(final TelnetSession session) throws IOException {
+    public static void mainLoop(final TelnetSession session) throws Exception {
 
         PlayerDO player = session.getPlayer();
         TelnetRenderer renderer = session.getRenderer();
@@ -43,7 +41,7 @@ public class TelnetMain {
         }
     }
 
-    private static void handleResponse(TelnetSession session, CommandResponse response) throws IOException {
+    private static void handleResponse(TelnetSession session, CommandResponse response) throws Exception {
         TelnetRenderer renderer = session.getRenderer();
         if (response != null && response.getData() != null) {
             renderer.write("Do you wish to play ");
@@ -51,8 +49,8 @@ public class TelnetMain {
             renderer.write("? (y/n):");
             String play = renderer.read();
             if ("Y".equalsIgnoreCase(play) || "YES".equalsIgnoreCase(play)) {
-                StoryReader reader = new StoryReader();
-                reader.play(session, response.getStringData());
+                StoryReader reader = new StoryReader(session, response.getStringData());
+                reader.play();
             }
         }
     }

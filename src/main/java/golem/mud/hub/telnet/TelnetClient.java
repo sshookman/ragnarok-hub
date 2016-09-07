@@ -1,6 +1,5 @@
 package golem.mud.hub.telnet;
 
-import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Logger;
 
@@ -18,12 +17,12 @@ public class TelnetClient implements Runnable {
         try {
             session.setPlayer(TelnetLogin.login(session));
             TelnetMain.mainLoop(session);
-        } catch (IOException exception) {
+        } catch (Exception exception) {
             LOGGER.severe(exception.getMessage());
+            session.getRenderer().write(exception.getMessage());
+            session.getRenderer().endl(1);
         } finally {
             session.closeSession();
         }
     }
-
 }
-
