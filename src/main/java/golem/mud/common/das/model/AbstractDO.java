@@ -32,6 +32,11 @@ public abstract class AbstractDO {
 		}
 	}
 
+    protected void addNotNull(final String name, final Boolean value, final Map<String, String> map) {
+        String stringValue = value != null && value ? "True" : "False";
+	    map.put(name, stringValue);
+	}
+
 	public abstract String getTable();
 	public abstract AbstractDO instance(ResultSet result) throws SQLException;
 	public abstract Map<String, String> toMap();
