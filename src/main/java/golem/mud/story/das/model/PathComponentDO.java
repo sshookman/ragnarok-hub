@@ -51,7 +51,7 @@ public class PathComponentDO extends AbstractComponentDO {
     }
 
     public String getDisplayMessage() {
-        if (displayMessage == null && name != null && direction != null) {
+        if (displayMessage == null && direction != null && name != null) {
             return DISPLAY_MESSAGE.replace("{name}", name).replace("{direction}", getDirectionDisplay());
         } else {
             return displayMessage;

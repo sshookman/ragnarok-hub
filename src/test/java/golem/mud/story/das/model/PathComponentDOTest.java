@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -34,11 +36,26 @@ public class PathComponentDOTest {
 	}
 
     @Test
+    public void testDirectionDisplay() {
+        PathComponentDO path = new PathComponentDO();
+        assertTrue(path.getDirectionDisplay().isEmpty());
+
+        path.setDirection(Direction.NORTH);
+        assertEquals("north", path.getDirectionDisplay());
+    }
+
+    @Test
     public void testDefaultMessages() {
         PathComponentDO path = new PathComponentDO();
+        assertNull(path.getDisplayMessage());
+        assertNull(path.getTransitionMessage());
+
+        path.setDirection(Direction.SOUTH);
+        assertNull(path.getDisplayMessage());
+        assertEquals("You go south.", path.getTransitionMessage());
+
         path.setName("door");
         path.setDirection(Direction.SOUTHEAST);
-
         assertEquals("There is a door to the southeast.", path.getDisplayMessage());
         assertEquals("You go southeast.", path.getTransitionMessage());
     }
