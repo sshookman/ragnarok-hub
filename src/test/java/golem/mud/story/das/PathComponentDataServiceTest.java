@@ -53,7 +53,7 @@ public class PathComponentDataServiceTest {
 		pathComponent.setEntityId(3);
 		pathComponent.setDestEntityId(5);
 		pathComponent.setName("name");
-		pathComponent.setDirection(Direction.NORTH_WEST);
+		pathComponent.setDirection(Direction.NORTHWEST);
 		pathComponent.setDisplayMessage("DIS MESS");
 		pathComponent.setTransitionMessage("TRA MESS");
 		boolean success = pathComponentDataService.create(pathComponent);
@@ -79,7 +79,7 @@ public class PathComponentDataServiceTest {
 		assertEquals(Integer.valueOf(3), pathComponent.getEntityId());
 		assertEquals(Integer.valueOf(5), pathComponent.getDestEntityId());
 		assertEquals("name", pathComponent.getName());
-		assertEquals(Direction.NORTH_WEST, pathComponent.getDirection());
+		assertEquals(Direction.NORTHWEST, pathComponent.getDirection());
 		assertEquals("DIS MESS", pathComponent.getDisplayMessage());
 		assertEquals("TRA MESS", pathComponent.getTransitionMessage());
 		
@@ -94,7 +94,7 @@ public class PathComponentDataServiceTest {
 		assertEquals(Integer.valueOf(3), pathComponentFiltered.getEntityId());
 		assertEquals(Integer.valueOf(5), pathComponentFiltered.getDestEntityId());
 		assertEquals("name", pathComponentFiltered.getName());
-		assertEquals(Direction.NORTH_WEST, pathComponentFiltered.getDirection());
+		assertEquals(Direction.NORTHWEST, pathComponentFiltered.getDirection());
 		assertEquals("DIS MESS", pathComponentFiltered.getDisplayMessage());
 		assertEquals("TRA MESS", pathComponentFiltered.getTransitionMessage());
 
@@ -112,7 +112,7 @@ public class PathComponentDataServiceTest {
 		pathComponent.setEntityId(2);
 		pathComponent.setDestEntityId(6);
 		pathComponent.setName("eman");
-		pathComponent.setDirection(Direction.SOUTH_EAST);
+		pathComponent.setDirection(Direction.SOUTHEAST);
 		pathComponent.setDisplayMessage("DAT MESS");
 		pathComponent.setTransitionMessage("TAR MESS");
 		boolean success = pathComponentDataService.update(pathComponentRowId, pathComponent);
@@ -134,7 +134,7 @@ public class PathComponentDataServiceTest {
 		assertEquals(Integer.valueOf(2), pathComponent.getEntityId());
 		assertEquals(Integer.valueOf(6), pathComponent.getDestEntityId());
 		assertEquals("eman", pathComponent.getName());
-		assertEquals(Direction.SOUTH_EAST, pathComponent.getDirection());
+		assertEquals(Direction.SOUTHEAST, pathComponent.getDirection());
 		assertEquals("DAT MESS", pathComponent.getDisplayMessage());
 		assertEquals("TAR MESS", pathComponent.getTransitionMessage());
 

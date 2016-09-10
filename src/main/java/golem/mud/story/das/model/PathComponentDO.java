@@ -9,6 +9,9 @@ import golem.mud.common.enums.Direction;
 
 public class PathComponentDO extends AbstractComponentDO {
 
+    private static final String DISPLAY_MESSAGE = "There is a {name} to the {direction}.";
+    private static final String TRANSIT_MESSAGE = "You go {direction}.";
+
     private Integer destEntityId;
     private String name;
     private Direction direction;
@@ -35,12 +38,24 @@ public class PathComponentDO extends AbstractComponentDO {
         return direction;
     }
 
+    public String getDirectionDisplay() {
+        if (direction != null) {
+            return direction.toString().toLowerCase();
+        } else {
+            return "";
+        }
+    }
+
     public void setDirection(Direction direction) {
         this.direction = direction;
     }
 
     public String getDisplayMessage() {
-        return displayMessage;
+        if (displayMessage == null && name != null && direction != null) {
+            return DISPLAY_MESSAGE.replace("{name}", name).replace("{direction}", getDirectionDisplay());
+        } else {
+            return displayMessage;
+        }
     }
 
     public void setDisplayMessage(String displayMessage) {
@@ -48,7 +63,11 @@ public class PathComponentDO extends AbstractComponentDO {
     }
 
     public String getTransitionMessage() {
-        return transitionMessage;
+        if (transitionMessage == null && direction != null) {
+            return TRANSIT_MESSAGE.replace("{direction}", getDirectionDisplay());
+        } else {
+            return transitionMessage;
+        }
     }
 
     public void setTransitionMessage(String transitionMessage) {

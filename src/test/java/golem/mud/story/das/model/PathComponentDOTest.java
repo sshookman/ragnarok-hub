@@ -33,6 +33,16 @@ public class PathComponentDOTest {
 		assertEquals("c_path", pathComponentClass.getTable());
 	}
 
+    @Test
+    public void testDefaultMessages() {
+        PathComponentDO path = new PathComponentDO();
+        path.setName("door");
+        path.setDirection(Direction.SOUTHEAST);
+
+        assertEquals("There is a door to the southeast.", path.getDisplayMessage());
+        assertEquals("You go southeast.", path.getTransitionMessage());
+    }
+
 	@Test
 	public void testInstance() throws Exception {
 		PathComponentDO instance = pathComponentClass.instance(resultSet);
