@@ -65,8 +65,14 @@ public class QueryBuilder {
 		}
 
 		public InsertQuery value(final String field, final String value) {
-			fieldsBuilder.append(" ").append(field);
-			valuesBuilder.append(" ").append(value);
+            if (fieldsBuilder.length() != 0) {
+                fieldsBuilder.append(",");
+            }
+            if (valuesBuilder.length() != 0) {
+                valuesBuilder.append(",");
+            }
+            fieldsBuilder.append(field);
+            valuesBuilder.append(value);
 			return this;
 		}
 		
@@ -80,8 +86,6 @@ public class QueryBuilder {
 		public String build() {
 			String fields = fieldsBuilder.toString().trim();
 			String values = valuesBuilder.toString().trim();
-			fields = fields.replaceAll(" ", ",");
-			values = values.replaceAll(" ", ",");
 
 			String query = INSERT_TEMPLATE;
 			query = query.replace("{TABLE}", table);
@@ -107,8 +111,10 @@ public class QueryBuilder {
 		}
 
 		public UpdateQuery set(final String field, final String value) {
+            if (setBuilder.length() != 0) {
+                setBuilder.append(",");
+            }
 			setBuilder
-				.append(" ")
 				.append(field)
 				.append("=")
 				.append(value);
@@ -124,7 +130,6 @@ public class QueryBuilder {
 
 		public String build() {
 			String set = setBuilder.toString().trim();
-			set = set.replaceAll(" ", ",");
 
 			String query = UPDATE_TEMPLATE;
 			query = query.replace("{TABLE}", table);
