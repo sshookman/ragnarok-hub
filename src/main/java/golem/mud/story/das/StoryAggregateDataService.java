@@ -9,11 +9,13 @@ public class StoryAggregateDataService {
 
     public EntityDataService entityService;
     public DisplayComponentDataService displayService;
+    public PathComponentDataService pathService;
 
     public StoryAggregateDataService(String storyPath) throws Exception {
         Connection story = ConnectionManager.establishConnection(storyPath); 
         this.entityService = new EntityDataService(story);
         this.displayService = new DisplayComponentDataService(story);
+        this.pathService = new PathComponentDataService(story);
     }
 
     public DisplayComponentDO getStartingPoint() {
