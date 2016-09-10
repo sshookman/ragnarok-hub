@@ -23,6 +23,9 @@ CREATE TABLE "c_pickup" (
 CREATE TABLE "c_path" (
         "id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE,
         "entity_id" INTEGER NOT NULL,
+        "dest_entity_id" INTEGER NOT NULL,
         "name" TEXT NOT NULL,
-        "message" TEXT NOT NULL
+        "direction" TEXT NOT NULL,
+        "display_message" TEXT,
+        "transition_message" TEXT
     );

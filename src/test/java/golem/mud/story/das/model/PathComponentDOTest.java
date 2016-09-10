@@ -9,6 +9,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import golem.mud.common.enums.Direction;
+
 public class PathComponentDOTest {
 
 	private static final PathComponentDO pathComponentClass = new PathComponentDO();
@@ -19,8 +21,11 @@ public class PathComponentDOTest {
 		resultSet = mock(ResultSet.class);
 		when(resultSet.getInt("id")).thenReturn(1);
 		when(resultSet.getInt("entity_id")).thenReturn(3);
+		when(resultSet.getInt("dest_entity_id")).thenReturn(5);
 		when(resultSet.getString("name")).thenReturn("NAME");
-		when(resultSet.getString("message")).thenReturn("MESSAGE");
+		when(resultSet.getString("direction")).thenReturn("NORTH");
+		when(resultSet.getString("display_message")).thenReturn("DISPLAY MESSAGE");
+		when(resultSet.getString("transition_message")).thenReturn("TRANSITION MESSAGE");
 	}
 
 	@Test
@@ -35,8 +40,11 @@ public class PathComponentDOTest {
 		assertNotNull(instance);
 		assertEquals(Integer.valueOf(1), instance.getRowId());
 		assertEquals(Integer.valueOf(3), instance.getEntityId());
+		assertEquals(Integer.valueOf(5), instance.getDestEntityId());
 		assertEquals("NAME", instance.getName());
-		assertEquals("MESSAGE", instance.getMessage());
+		assertEquals(Direction.NORTH, instance.getDirection());
+		assertEquals("DISPLAY MESSAGE", instance.getDisplayMessage());
+		assertEquals("TRANSITION MESSAGE", instance.getTransitionMessage());
 	}
 
 	@Test
@@ -46,7 +54,10 @@ public class PathComponentDOTest {
 
 		assertNotNull(pathComponentMap);
 		assertEquals("3", pathComponentMap.get("entity_id"));
+		assertEquals("5", pathComponentMap.get("dest_entity_id"));
 		assertEquals("\"NAME\"", pathComponentMap.get("name"));
-		assertEquals("\"MESSAGE\"", pathComponentMap.get("message"));
+		assertEquals("\"NORTH\"", pathComponentMap.get("direction"));
+		assertEquals("\"DISPLAY MESSAGE\"", pathComponentMap.get("display_message"));
+		assertEquals("\"TRANSITION MESSAGE\"", pathComponentMap.get("transition_message"));
 	}
 }

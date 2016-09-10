@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
+import golem.mud.common.enums.Direction;
+
 public abstract class AbstractDO {
 
     protected Integer rowId;
@@ -37,6 +39,12 @@ public abstract class AbstractDO {
 	    map.put(name, stringValue);
 	}
 
+    protected void addNotNull(final String name, final Direction value, final Map<String, String> map) {
+		if (value != null) {
+			map.put(name, "\""+value.toString()+"\"");
+		}
+	}
+    
 	public abstract String getTable();
 	public abstract AbstractDO instance(ResultSet result) throws SQLException;
 	public abstract Map<String, String> toMap();
