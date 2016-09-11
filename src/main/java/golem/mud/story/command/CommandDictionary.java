@@ -10,39 +10,39 @@ import static golem.mud.common.enums.CommandType.*;
 
 public class CommandDictionary {
 
-    private List<CommandWord> global;
-    private List<CommandWord> context;
+    private List<CommandWord> globals;
+    private List<CommandWord> contextuals;
 
     public CommandDictionary() {
-        global = new ArrayList<>();
-        context = new ArrayList<>();
+        globals = new ArrayList<>();
+        contextuals = new ArrayList<>();
         addGlobals();
     }
 
-    public List<CommandWord> getGlobal() {
-        return global;
+    public List<CommandWord> getGlobals() {
+        return globals;
     }
 
-    public List<CommandWord> getContext() {
-        return context;
+    public List<CommandWord> getContextuals() {
+        return contextuals;
     }
 
     public void clearContext() {
-        context = new ArrayList<>();
+        contextuals = new ArrayList<>();
     }
 
-    public void addContext(List<PathComponentDO> paths) {
+    public void addContextuals(List<PathComponentDO> paths) {
         paths.stream()
-            .forEach((path) -> context.addAll(CommandWordFactory.buildCommandWords(path)));
+            .forEach((path) -> contextuals.addAll(CommandWordFactory.buildCommandWords(path)));
     }
 
     private void addGlobals() {
         //Movement Globals
-        global.add(new CommandWord("go", new Integer[]{1}, new CommandType[]{MOVEMENT_DIRECTIONAL, MOVEMENT_NAMED}, false));
-        global.add(new CommandWord("walk", new Integer[]{1}, new CommandType[]{MOVEMENT_DIRECTIONAL, MOVEMENT_NAMED}, false));
-        global.add(new CommandWord("run", new Integer[]{1}, new CommandType[]{MOVEMENT_DIRECTIONAL, MOVEMENT_NAMED}, false));
-        global.add(new CommandWord("move", new Integer[]{1}, new CommandType[]{MOVEMENT_DIRECTIONAL, MOVEMENT_NAMED}, false));
-        global.add(new CommandWord("to", new Integer[]{2}, new CommandType[]{MOVEMENT_NAMED}, false));
-        global.add(new CommandWord("toward", new Integer[]{2}, new CommandType[]{MOVEMENT_NAMED}, false));
+        globals.add(new CommandWord("go", new Integer[]{1}, new CommandType[]{MOVEMENT_DIRECTIONAL, MOVEMENT_NAMED}, false));
+        globals.add(new CommandWord("walk", new Integer[]{1}, new CommandType[]{MOVEMENT_DIRECTIONAL, MOVEMENT_NAMED}, false));
+        globals.add(new CommandWord("run", new Integer[]{1}, new CommandType[]{MOVEMENT_DIRECTIONAL, MOVEMENT_NAMED}, false));
+        globals.add(new CommandWord("move", new Integer[]{1}, new CommandType[]{MOVEMENT_DIRECTIONAL, MOVEMENT_NAMED}, false));
+        globals.add(new CommandWord("to", new Integer[]{2}, new CommandType[]{MOVEMENT_NAMED}, false));
+        globals.add(new CommandWord("toward", new Integer[]{2}, new CommandType[]{MOVEMENT_NAMED}, false));
     }
 }
