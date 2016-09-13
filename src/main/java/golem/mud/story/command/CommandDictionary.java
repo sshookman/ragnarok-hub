@@ -27,6 +27,11 @@ public class CommandDictionary {
         return contextuals;
     }
 
+    public List<CommandWord> search(String word, Integer position, CommandType[] types) {
+
+        return null;
+    }
+
     public void clearContext() {
         contextuals = new ArrayList<>();
     }

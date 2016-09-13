@@ -6,6 +6,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import golem.mud.common.enums.CommandType;
 import golem.mud.story.das.model.PathComponentDO;
@@ -61,6 +62,11 @@ public class CommandDictionaryTest {
         assertCommandWord(contextuals.get(1), "south", new Integer[]{2}, new CommandType[]{MOVEMENT_DIRECTIONAL}, true);
         assertCommandWord(contextuals.get(2), "window", new Integer[]{3}, new CommandType[]{MOVEMENT_NAMED}, true);
         assertCommandWord(contextuals.get(3), "east", new Integer[]{2}, new CommandType[]{MOVEMENT_DIRECTIONAL}, true);
+
+        dictionary.clearContext();
+        List<CommandWord> emptyContext = dictionary.getContextuals();
+        assertNotNull(emptyContext);
+        assertTrue(emptyContext.isEmpty());
     }
 
     private void assertCommandWord(CommandWord commandWord, String word, Integer[] positions, CommandType[] types, Boolean lastWord) {
