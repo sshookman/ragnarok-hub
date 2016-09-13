@@ -24,6 +24,29 @@ public class CommandDictionaryTest {
     }
 
     @Test
+    public void testSearch() {
+        List<CommandWord> results = dictionary.search("walk", 1, new CommandType[]{MOVEMENT_NAMED});
+        assertNotNull(results);
+        assertEquals(1, results.size());
+        assertCommandWord(results.get(0), "walk", new Integer[]{1}, new CommandType[]{MOVEMENT_DIRECTIONAL, MOVEMENT_NAMED}, false);
+
+        PathComponentDO path = new PathComponentDO();
+        path.setName("door");
+        path.setDirection(SOUTH);
+
+        List<PathComponentDO> paths = new ArrayList<>(1);
+        paths.add(path);
+
+        dictionary.clearContext();
+        dictionary.addContextuals(paths);
+
+        List<CommandWord> contextuals = dictionary.search("door", 3, new CommandType[]{MOVEMENT_NAMED});
+        assertNotNull(contextuals);
+        assertEquals(1, contextuals.size());
+        assertCommandWord(contextuals.get(0), "door", new Integer[]{3}, new CommandType[]{MOVEMENT_NAMED}, true);
+    }
+
+    @Test
     public void testMovementGlobals() {
         List<CommandWord> globals = dictionary.getGlobals();
 

@@ -1,5 +1,9 @@
 package golem.mud.story.command;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import golem.mud.common.enums.CommandType;
 
 public class CommandWord {
@@ -14,6 +18,29 @@ public class CommandWord {
         this.positions = positions;
         this.types = types;
         this.lastWord = lastWord;
+    }
+
+    public boolean matches(String word, Integer position, CommandType[] types) {
+
+        if (this.positions != null && this.types != null) {
+            List<Integer> positionList = new ArrayList<>(Arrays.asList(this.positions));
+            List<CommandType> typeList = new ArrayList<>(Arrays.asList(this.types));
+
+            if (this.word != null && this.word.equalsIgnoreCase(word)
+                    && positionList.contains(position)) { 
+
+                if (types == null || types.length == 0) {
+                    return true;
+                }
+                for (CommandType type : types) {
+                    if (typeList.contains(type)) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
     public String getWord() {

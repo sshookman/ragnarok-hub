@@ -2,6 +2,7 @@ package golem.mud.story.command;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import golem.mud.common.enums.CommandType;
 import golem.mud.story.das.model.PathComponentDO;
@@ -28,8 +29,17 @@ public class CommandDictionary {
     }
 
     public List<CommandWord> search(String word, Integer position, CommandType[] types) {
+        List<CommandWord> results = new ArrayList<>();
+        results.addAll(search(globals, word, position, types));
+        results.addAll(search(contextuals, word, position, types));
 
-        return null;
+        return results;
+    }
+
+    private List<CommandWord> search(List<CommandWord> commandWords, String word, Integer position, CommandType[] types) {
+        return commandWords.stream()
+            .filter((commandWord) -> commandWord.matches(word, position, types))
+            .collect(Collectors.toList());
     }
 
     public void clearContext() {
@@ -42,7 +52,6 @@ public class CommandDictionary {
     }
 
     private void addGlobals() {
-        //Movement Globals
         globals.add(new CommandWord("go", new Integer[]{1}, new CommandType[]{MOVEMENT_DIRECTIONAL, MOVEMENT_NAMED}, false));
         globals.add(new CommandWord("walk", new Integer[]{1}, new CommandType[]{MOVEMENT_DIRECTIONAL, MOVEMENT_NAMED}, false));
         globals.add(new CommandWord("run", new Integer[]{1}, new CommandType[]{MOVEMENT_DIRECTIONAL, MOVEMENT_NAMED}, false));
