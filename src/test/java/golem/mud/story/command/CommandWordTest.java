@@ -28,25 +28,35 @@ public class CommandWordTest {
 
     @Test
     public void testMatches() {
+        List<CommandType> typeNamed = new ArrayList<>();
+        List<CommandType> typeDirectional = new ArrayList<>();
+        List<CommandType> typeEmpty = new ArrayList<>();
+        List<CommandType> typePickup = new ArrayList<>();
+
+        typeNamed.add(MOVEMENT_NAMED);
+        typeDirectional.add(MOVEMENT_DIRECTIONAL);
+        typePickup.add(OBJECT_PICKUP);
+
         CommandWord word = new CommandWord("walk", new Integer[]{1,2}, new CommandType[]{MOVEMENT_NAMED, MOVEMENT_DIRECTIONAL}, false);
 
-        assertTrue(word.matches("walk", 2, new CommandType[]{MOVEMENT_NAMED}));
-        assertTrue(word.matches("walk", 1, new CommandType[]{MOVEMENT_NAMED}));
-        assertTrue(word.matches("walk", 1, new CommandType[]{MOVEMENT_DIRECTIONAL}));
-        assertTrue(word.matches("walk", 1, new CommandType[]{}));
+        assertTrue(word.matches("walk", 2, typeNamed));
+        assertTrue(word.matches("walk", 1, typeNamed));
+        assertTrue(word.matches("walk", 1, typeDirectional));
+        assertTrue(word.matches("walk", 1, typeEmpty));
         assertTrue(word.matches("walk", 1, null));
 
-        assertFalse(word.matches("run", 1, new CommandType[]{MOVEMENT_DIRECTIONAL}));
-        assertFalse(word.matches("walk", 3, new CommandType[]{MOVEMENT_DIRECTIONAL}));
-        assertFalse(word.matches("walk", 2, new CommandType[]{OBJECT_PICKUP}));
+        assertFalse(word.matches("run", 1, typeDirectional));
+        assertFalse(word.matches("walk", 3, typeDirectional));
+        assertFalse(word.matches("walk", 2, typePickup));
 
         CommandWord nullNameWord = new CommandWord(null, new Integer[]{1,2}, new CommandType[]{MOVEMENT_NAMED, MOVEMENT_DIRECTIONAL}, false);
-        assertFalse(nullNameWord.matches("walk", 2, new CommandType[]{MOVEMENT_NAMED}));
+        assertFalse(nullNameWord.matches("walk", 2, typeNamed));
 
         CommandWord nullPositionsWord = new CommandWord("walk", null, new CommandType[]{MOVEMENT_NAMED, MOVEMENT_DIRECTIONAL}, false);
-        assertFalse(nullPositionsWord.matches("walk", 2, new CommandType[]{MOVEMENT_NAMED}));
+        
+        assertFalse(nullPositionsWord.matches("walk", 2, typeNamed));
 
         CommandWord nullTypesWord = new CommandWord(null, new Integer[]{1,2}, null, false);
-        assertFalse(nullTypesWord.matches("walk", 2, new CommandType[]{MOVEMENT_NAMED}));
+        assertFalse(nullTypesWord.matches("walk", 2, typeNamed));
     }
 }

@@ -28,7 +28,7 @@ public class CommandDictionary {
         return contextuals;
     }
 
-    public List<CommandWord> search(String word, Integer position, CommandType[] types) {
+    public List<CommandWord> search(String word, Integer position, List<CommandType> types) {
         List<CommandWord> results = new ArrayList<>();
         results.addAll(search(globals, word, position, types));
         results.addAll(search(contextuals, word, position, types));
@@ -36,7 +36,7 @@ public class CommandDictionary {
         return results;
     }
 
-    private List<CommandWord> search(List<CommandWord> commandWords, String word, Integer position, CommandType[] types) {
+    private List<CommandWord> search(List<CommandWord> commandWords, String word, Integer position, List<CommandType> types) {
         return commandWords.stream()
             .filter((commandWord) -> commandWord.matches(word, position, types))
             .collect(Collectors.toList());

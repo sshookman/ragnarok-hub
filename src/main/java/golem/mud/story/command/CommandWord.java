@@ -20,7 +20,7 @@ public class CommandWord {
         this.lastWord = lastWord;
     }
 
-    public boolean matches(String word, Integer position, CommandType[] types) {
+    public boolean matches(String word, Integer position, List<CommandType> types) {
 
         if (this.positions != null && this.types != null) {
             List<Integer> positionList = new ArrayList<>(Arrays.asList(this.positions));
@@ -29,7 +29,7 @@ public class CommandWord {
             if (this.word != null && this.word.equalsIgnoreCase(word)
                     && positionList.contains(position)) { 
 
-                if (types == null || types.length == 0) {
+                if (types == null || types.size() == 0) {
                     return true;
                 }
                 for (CommandType type : types) {

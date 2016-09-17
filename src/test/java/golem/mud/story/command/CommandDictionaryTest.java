@@ -25,7 +25,9 @@ public class CommandDictionaryTest {
 
     @Test
     public void testSearch() {
-        List<CommandWord> results = dictionary.search("walk", 1, new CommandType[]{MOVEMENT_NAMED});
+        List<CommandType> types = new ArrayList<>();
+        types.add(MOVEMENT_NAMED);
+        List<CommandWord> results = dictionary.search("walk", 1, types);
         assertNotNull(results);
         assertEquals(1, results.size());
         assertCommandWord(results.get(0), "walk", new Integer[]{1}, new CommandType[]{MOVEMENT_DIRECTIONAL, MOVEMENT_NAMED}, false);
@@ -40,7 +42,7 @@ public class CommandDictionaryTest {
         dictionary.clearContext();
         dictionary.addContextuals(paths);
 
-        List<CommandWord> contextuals = dictionary.search("door", 3, new CommandType[]{MOVEMENT_NAMED});
+        List<CommandWord> contextuals = dictionary.search("door", 3, types);
         assertNotNull(contextuals);
         assertEquals(1, contextuals.size());
         assertCommandWord(contextuals.get(0), "door", new Integer[]{3}, new CommandType[]{MOVEMENT_NAMED}, true);
