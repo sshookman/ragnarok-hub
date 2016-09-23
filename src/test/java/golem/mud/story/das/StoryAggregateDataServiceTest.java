@@ -51,6 +51,8 @@ public class StoryAggregateDataServiceTest {
     @Test
     public void testGetStartingPoint() {
 
+        assertNull(services.getStartingPoint());
+
         assertTrue(services.entityService.create(new EntityDO()));
 
         EntryComponentDO entry = new EntryComponentDO();
