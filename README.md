@@ -1,5 +1,5 @@
-# Golem MUD Hub
-Java Based MUD Engine and Telnet Hub for MUDs 
+# Golem MUD/IF Hub
+Java Based MUD/IF Engine and Telnet Hub for Multi-User Dungeons and Interactive Fiction 
 
 ![Build](https://travis-ci.org/sshookman/ProjectRead.svg?branch=master) ![License](https://img.shields.io/badge/license-GPL%20v3-brightgreen.svg) [![Coverage](https://codecov.io/gh/sshookman/ProjectRead/branch/master/graph/badge.svg)](https://codecov.io/gh/sshookman/ProjectRead)
 
