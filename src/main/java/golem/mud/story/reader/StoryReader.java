@@ -1,16 +1,15 @@
 package golem.mud.story.reader;
 
-import java.io.IOException;
-
-import golem.mud.hub.telnet.TelnetSession;
 import golem.mud.hub.telnet.TelnetRenderer;
+import golem.mud.hub.telnet.TelnetSession;
 import golem.mud.story.das.StoryAggregateDataService;
-import golem.mud.story.das.model.DisplayComponentDO;;
+import golem.mud.story.das.model.DisplayComponentDO;
+import java.io.IOException;
 
 public class StoryReader {
 
-    private TelnetRenderer renderer;
-    private StoryAggregateDataService services;
+    private final TelnetRenderer renderer;
+    private final StoryAggregateDataService services;
 
     public StoryReader(TelnetSession session, String storyPath) throws Exception {
         this.renderer = session.getRenderer();
@@ -23,7 +22,7 @@ public class StoryReader {
         renderer.write(entry.getMessage());
         renderer.endl(1);
 
-        String commandString = ""; 
+        String commandString = "";
         while (!"quit".equals(commandString)) {
             renderer.endl(1);
             renderer.write(" > ");
