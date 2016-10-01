@@ -10,3 +10,6 @@ buildNumber.properties
 *.swp
 nohup.out
 tags
+nb-configuration.xml
+nbactions-DEV.xml
+nbactions.xml
