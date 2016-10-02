@@ -1,29 +1,30 @@
 package golem.mud.common.das;
 
-import java.sql.Connection;
 import java.io.File;
-import org.junit.Test;
+import java.sql.Connection;
 import org.junit.AfterClass;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
+import org.junit.Test;
 
 public class ConnectionManagerTest {
 
-    private static final String PATH = "src/test/resources/library/";
+	private static final String PATH = "src/test/resources/library/";
 
-    @AfterClass
-    public static void teardown() {
-        File file1 = new File(PATH + "/GolemMudHubTest.gmh");
-        File file2 = new File(PATH + "/GolemTest.glm");
-        file1.delete();
-        file2.delete();
-    }
+	@AfterClass
+	public static void teardown() {
+		File file1 = new File(PATH + "/GolemMudHubTest.gmh");
+		File file2 = new File(PATH + "/GolemTest.glm");
+		File file3 = new File(PATH + "/Save.sglm");
+		file1.delete();
+		file2.delete();
+		file3.delete();
+	}
 
-    @Test
-    public void testInstantiate() {
-        assertNotNull(new ConnectionManager());
-    }
+	@Test
+	public void testInstantiate() {
+		assertNotNull(new ConnectionManager());
+	}
 
 	@Test
 	public void testNotFoundException() throws Exception {
@@ -50,5 +51,13 @@ public class ConnectionManagerTest {
 
 		glmTest = ConnectionManager.initGolem(glmTest);
 		assertNotNull(glmTest);
+	}
+
+	@Test
+	public void testInitSaveGame() throws Exception {
+		Connection sglmTest = ConnectionManager.establishConnection(PATH + "Save.sglm");
+
+		sglmTest = ConnectionManager.initSaveGame(sglmTest);
+		assertNotNull(sglmTest);
 	}
 }

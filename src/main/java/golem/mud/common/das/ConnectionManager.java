@@ -1,34 +1,41 @@
 package golem.mud.common.das;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
-import java.sql.SQLException;
+import golem.mud.common.util.ResourceLoader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import golem.mud.common.util.ResourceLoader;
-
 public class ConnectionManager {
+
 	private static final Logger LOGGER = Logger.getLogger(ConnectionManager.class.getName());
 	private static final ResourceLoader RESOURCE_LOADER = new ResourceLoader();
-
-	private static Connection init(final Connection connection, final String fileName) throws FileNotFoundException, SQLException {
-		String query = getFile(fileName);
-		Statement statement = connection.createStatement();
-		statement.executeUpdate(query);
-		statement.close();
-		return connection;
-	}
 
 	public static Connection establishConnection(final String dbFile) throws Exception {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			return DriverManager.getConnection("jdbc:sqlite:" + dbFile);
 		} catch (Exception exception) {
-			LOGGER.severe("Failed to Connect to Database: " + exception.getMessage());
+			LOGGER.log(Level.SEVERE, "Failed to Connect to Database: {0}", exception.getMessage());
+			throw exception;
+		}
+	}
+
+	public static Connection establishConnectionInMemory(final String dbFile) throws Exception {
+		try {
+			Class.forName("org.sqlite.JDBC");
+			Connection connection = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
+			try (Statement statement = connection.createStatement()) {
+				statement.executeUpdate("ATTACH DATABASE " + dbFile + "AS :memory:");
+			}
+			return connection;
+		} catch (Exception exception) {
+			LOGGER.log(Level.SEVERE, "Failed to Connect to Database: {0}", exception.getMessage());
 			throw exception;
 		}
 	}
@@ -39,6 +46,18 @@ public class ConnectionManager {
 
 	public static Connection initGolem(final Connection connection) throws FileNotFoundException, SQLException {
 		return init(connection, "GOLEM.sql");
+	}
+
+	public static Connection initSaveGame(final Connection connection) throws FileNotFoundException, SQLException {
+		return init(connection, "SAVE.sql");
+	}
+
+	private static Connection init(final Connection connection, final String fileName) throws FileNotFoundException, SQLException {
+		String query = getFile(fileName);
+		Statement statement = connection.createStatement();
+		statement.executeUpdate(query);
+		statement.close();
+		return connection;
 	}
 
 	private static String getFile(String fileName) throws FileNotFoundException {
