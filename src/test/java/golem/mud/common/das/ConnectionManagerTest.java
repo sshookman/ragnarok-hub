@@ -60,4 +60,10 @@ public class ConnectionManagerTest {
 		sglmTest = ConnectionManager.initSaveGame(sglmTest);
 		assertNotNull(sglmTest);
 	}
+
+	@Test
+	public void testEstablishConnectionInMemory() throws Exception {
+		Connection memory = ConnectionManager.establishConnectionInMemory(PATH + "GolemTest.glm");
+		assertNotNull(memory);
+	}
 }

@@ -29,9 +29,9 @@ public class ConnectionManager {
 	public static Connection establishConnectionInMemory(final String dbFile) throws Exception {
 		try {
 			Class.forName("org.sqlite.JDBC");
-			Connection connection = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
+			Connection connection = DriverManager.getConnection("jdbc:sqlite::memory:");
 			try (Statement statement = connection.createStatement()) {
-				statement.executeUpdate("ATTACH DATABASE " + dbFile + "AS :memory:");
+				statement.executeUpdate("ATTACH DATABASE '" + dbFile + "' AS 'aux'");
 			}
 			return connection;
 		} catch (Exception exception) {
