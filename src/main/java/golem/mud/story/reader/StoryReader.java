@@ -8,43 +8,80 @@ import golem.mud.story.command.CommandDictionary;
 import golem.mud.story.command.CommandParser;
 import golem.mud.story.das.StoryAggregateDataService;
 import golem.mud.story.das.model.DisplayComponentDO;
-import java.io.IOException;
+import golem.mud.story.das.model.PathComponentDO;
+import java.util.List;
 
 public class StoryReader {
 
-	private final StoryContext context;
+	private final TelnetRenderer renderer;
+	private final StoryAggregateDataService services;
 	private final CommandDictionary commandDictionary;
+	private final StoryContext context;
 	private final CommandParser commandParser;
 
 	public StoryReader(TelnetSession session, String storyPath) throws Exception {
-		TelnetRenderer renderer = session.getRenderer();
-		StoryAggregateDataService services = new StoryAggregateDataService(storyPath);
-
+		this.renderer = session.getRenderer();
+		this.services = new StoryAggregateDataService(storyPath);
 		this.commandDictionary = new CommandDictionary();
 		this.context = new StoryContext(renderer, services);
 		this.commandParser = new CommandParser(this.commandDictionary);
 	}
 
-	public void play() throws IOException {
+	public void start() {
+		renderer.write("[N]EW GAME");
+		renderer.endl(1);
+		renderer.write("[L]OAD GAME");
+		renderer.endl(2);
 
-		DisplayComponentDO location = context.services.getStartingLocation();
-		String command = "";
+		renderer.write(" > ");
+		renderer.read();
 
-		while (!"quit".equals(command)) {
+		play(services.getStartingLocation());
+	}
+
+	private void play(DisplayComponentDO location) {
+
+		while (true) {
 			try {
-				context.renderer.write(location.getMessage());
-				context.renderer.endl(2);
-				context.renderer.write(" > ");
-				command = context.renderer.read();
+				loadContextualData(location.getEntityId());
 
-				AbstractAction action = commandParser.evaluate(command);
-				action.execute(context);
+				renderer.write(location.getMessage());
+				renderer.endl(2);
+				renderer.write(" > ");
 
-				DisplayComponentDO newLocation = context.services.getCurrentLocation();
+				String command = renderer.read();
+				if (!evaluateCommand(command)) {
+					break;
+				}
+
+				DisplayComponentDO newLocation = services.getCurrentLocation();
 				location = (newLocation != null) ? newLocation : location;
-			} catch (IOException | CommandException exception) {
-				context.renderer.write("ERROR: " + exception.getMessage());
+
+			} catch (CommandException exception) {
+				renderer.write(exception.getMessage());
+				renderer.endl(2);
+			} catch (Exception exception) {
+				renderer.write("[DEBUG] " + exception.getMessage());
+				renderer.endl(2);
 			}
+		}
+	}
+
+	private void loadContextualData(Integer entityId) {
+		PathComponentDO search = new PathComponentDO();
+		search.setEntityId(entityId);
+
+		List<PathComponentDO> paths = services.pathService.read(search.toMap());
+		commandDictionary.addContextuals(paths);
+	}
+
+	private boolean evaluateCommand(String command) {
+		AbstractAction action = commandParser.evaluate(command);
+		if (action != null) {
+			action.execute(context);
+			return true;
+		} else {
+			return false;
 		}
 	}
 }

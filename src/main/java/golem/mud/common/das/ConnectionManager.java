@@ -49,7 +49,18 @@ public class ConnectionManager {
 	}
 
 	public static Connection initSaveGame(final Connection connection) throws FileNotFoundException, SQLException {
-		return init(connection, "SAVE.sql");
+
+		Statement statement = connection.createStatement();
+		statement.executeUpdate(
+				"DROP TABLE IF EXISTS \"state\";\n"
+				+ "\n"
+				+ "CREATE TABLE \"state\" (\n"
+				+ "        \"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE,\n"
+				+ "        \"location_entity_id\" INTEGER NOT NULL\n"
+				+ "    );");
+
+		statement.close();
+		return connection;
 	}
 
 	private static Connection init(final Connection connection, final String fileName) throws FileNotFoundException, SQLException {

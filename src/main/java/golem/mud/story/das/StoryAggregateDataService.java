@@ -14,7 +14,9 @@ public class StoryAggregateDataService {
 	public PathComponentDataService pathService;
 
 	public StoryAggregateDataService(String storyPath) throws Exception {
-		Connection story = ConnectionManager.establishConnection(storyPath);
+		Connection story = ConnectionManager.establishConnectionInMemory(storyPath);
+		story = ConnectionManager.initSaveGame(story);
+
 		this.stateService = new StateDataService(story);
 		this.entityService = new EntityDataService(story);
 		this.entryService = new EntryComponentDataService(story);

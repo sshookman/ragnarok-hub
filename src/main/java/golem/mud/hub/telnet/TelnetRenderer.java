@@ -1,11 +1,12 @@
 package golem.mud.hub.telnet;
 
 import java.io.BufferedReader;
-import java.io.PrintWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.logging.Logger;
 
 public class TelnetRenderer {
+
 	private final Logger logger = Logger.getLogger(TelnetRenderer.class.getName());
 
 	private final BufferedReader reader;
@@ -22,22 +23,26 @@ public class TelnetRenderer {
 	}
 
 	public void write(final String message, final int speed) {
-		for (int index = 0; index < message.length(); index++){
- 			sleep(speed);
- 		    char character = message.charAt(index);        
- 			writer.write(character);
- 		}
+		for (int index = 0; index < message.length(); index++) {
+			sleep(speed);
+			char character = message.charAt(index);
+			writer.write(character);
+		}
 		writer.flush();
 	}
 
-    public void endl(final Integer count) {
-        for (int x = 0; x < count; x++) {
-            write("\n");
-        }
-    }
+	public void endl(final Integer count) {
+		for (int x = 0; x < count; x++) {
+			write("\n");
+		}
+	}
 
-	public String read() throws IOException {
-		return reader.readLine();
+	public String read() {
+		try {
+			return reader.readLine();
+		} catch (IOException ex) {
+			return "";
+		}
 	}
 
 	private void sleep(final int speed) {

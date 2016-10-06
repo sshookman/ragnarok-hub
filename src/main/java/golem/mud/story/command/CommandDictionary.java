@@ -50,6 +50,7 @@ public class CommandDictionary {
 	}
 
 	private void addGlobals() {
+		globals.add(new CommandWord("quit", new Integer[]{1}, new CommandType[]{QUIT}, true));
 		globals.add(new CommandWord("go", new Integer[]{1}, new CommandType[]{MOVEMENT_DIRECTIONAL, MOVEMENT_NAMED}, false));
 		globals.add(new CommandWord("walk", new Integer[]{1}, new CommandType[]{MOVEMENT_DIRECTIONAL, MOVEMENT_NAMED}, false));
 		globals.add(new CommandWord("run", new Integer[]{1}, new CommandType[]{MOVEMENT_DIRECTIONAL, MOVEMENT_NAMED}, false));

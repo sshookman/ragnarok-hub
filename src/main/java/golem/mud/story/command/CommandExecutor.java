@@ -14,6 +14,7 @@ public class CommandExecutor {
 				return new MoveNamedAction(command);
 			case MOVEMENT_DIRECTIONAL:
 			case OBJECT_PICKUP:
+			case QUIT:
 			default:
 				return null;
 		}
