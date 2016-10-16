@@ -21,20 +21,22 @@ public class MoveNamedAction extends AbstractAction {
 		PathComponentDataService pathService = context.services.pathService;
 		StateDataService stateService = context.services.stateService;
 
-		PathComponentDO search = new PathComponentDO();
-		search.setName(pathName);
+		List<StateDO> states = stateService.read(new StateDO().toMap());
+		if (states != null && !states.isEmpty()) {
+			StateDO state = states.get(0);
 
-		List<PathComponentDO> paths = pathService.read(search.toMap());
+			PathComponentDO search = new PathComponentDO();
+			search.setName(pathName);
+			search.setEntityId(state.getLocationEntityId());
 
-		if (paths != null && !paths.isEmpty()) {
-			PathComponentDO path = paths.get(0);
-			List<StateDO> states = stateService.read(new StateDO().toMap());
+			List<PathComponentDO> paths = pathService.read(search.toMap());
 
-			if (states != null && !states.isEmpty()) {
-				StateDO state = states.get(0);
+			if (paths != null && !paths.isEmpty()) {
+				PathComponentDO path = paths.get(0);
 				state.setLocationEntityId(path.getDestEntityId());
 				stateService.update(state.getRowId(), state);
 			}
 		}
+
 	}
 }

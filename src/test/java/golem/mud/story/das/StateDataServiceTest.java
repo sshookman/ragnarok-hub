@@ -40,6 +40,7 @@ public class StateDataServiceTest {
 
 	@Test
 	public void testEntityDataService() throws Exception {
+		testDelete(1);
 		testCreate();
 		int stateRowId = testReadSearch();
 		testUpdate(stateRowId);

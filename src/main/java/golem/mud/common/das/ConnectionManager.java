@@ -20,7 +20,7 @@ public class ConnectionManager {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			return DriverManager.getConnection("jdbc:sqlite:" + dbFile);
-		} catch (Exception exception) {
+		} catch (ClassNotFoundException | SQLException exception) {
 			LOGGER.log(Level.SEVERE, "Failed to Connect to Database: {0}", exception.getMessage());
 			throw exception;
 		}
@@ -34,7 +34,7 @@ public class ConnectionManager {
 				statement.executeUpdate("ATTACH DATABASE '" + dbFile + "' AS 'aux'");
 			}
 			return connection;
-		} catch (Exception exception) {
+		} catch (ClassNotFoundException | SQLException exception) {
 			LOGGER.log(Level.SEVERE, "Failed to Connect to Database: {0}", exception.getMessage());
 			throw exception;
 		}
@@ -57,7 +57,9 @@ public class ConnectionManager {
 				+ "CREATE TABLE \"state\" (\n"
 				+ "        \"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE,\n"
 				+ "        \"location_entity_id\" INTEGER NOT NULL\n"
-				+ "    );");
+				+ "    );\n"
+				+ "\n"
+				+ "INSERT INTO state (location_entity_id) VALUES (1);");
 
 		statement.close();
 		return connection;
