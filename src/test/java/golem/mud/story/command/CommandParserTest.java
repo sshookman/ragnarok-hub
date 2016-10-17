@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 import org.junit.Test;
 
@@ -25,7 +24,7 @@ public class CommandParserTest {
 		dictionary.addContextuals(paths);
 		CommandParser parser = new CommandParser(dictionary);
 
-		assertNull(parser.evaluate("walk south"));
+		assertNotNull(parser.evaluate("walk south"));
 		assertNotNull(parser.evaluate("walk to door"));
 
 		try {

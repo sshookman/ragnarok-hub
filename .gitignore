@@ -13,3 +13,4 @@ tags
 nb-configuration.xml
 nbactions-DEV.xml
 nbactions.xml
+library/*
