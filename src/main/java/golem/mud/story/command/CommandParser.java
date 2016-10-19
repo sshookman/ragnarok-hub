@@ -27,7 +27,7 @@ public class CommandParser {
 			List<CommandType> typeList = new ArrayList<>();
 			for (CommandWord commandWord : commandWords) {
 				if (commandWord.isLastWord()) {
-					AbstractAction action = CommandExecutor.execute(command, commandWord.getTypes()[0]);
+					AbstractAction action = CommandActionResolver.execute(command, commandWord.getTypes()[0]);
 					return action;
 				}
 				for (CommandType type : commandWord.getTypes()) {

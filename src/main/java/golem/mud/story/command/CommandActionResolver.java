@@ -6,7 +6,7 @@ import golem.mud.story.action.AbstractAction;
 import golem.mud.story.action.MoveDirectionAction;
 import golem.mud.story.action.MoveNamedAction;
 
-public class CommandExecutor {
+public class CommandActionResolver {
 
 	public static AbstractAction execute(String command, CommandType type) {
 
