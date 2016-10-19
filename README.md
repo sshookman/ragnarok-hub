@@ -21,21 +21,21 @@
 The Golem MUD/IF Hub (Title WIP) is a Java-based Multi-User Dungeon and Interactive Fiction Engine
 accessible through a Telnet connection.
 
-### Purpose
+#### Purpose
 
 The purpose is to create a single online library filled with various interactive stories and games
 that can be accessed from any device capable of establishing a telnet connection. The HUB will serve
 as the gateway to the stories as well as a portal for authentication and cloud storage of saved game
 states. In order to act as a library the hub will also allow for the uploading of stories.
 
-### Plans
+#### Plans
 
 Once in a usable and stable state the hub will be launched on a public server and will be accessible
 through telnet on port 1127.
 
 ## Getting Started
 
-### Running with Docker
+#### Running with Docker
 
 You must have docker installed and running in order to perform the following commands.
 
@@ -49,7 +49,7 @@ Once this is done, the Golem docker container will be running and serving the Te
 the Golem MUD/IF Hub out of port 1127. Don't forget to kill (and optionally remove) the container
 once you are finished.
 
-### Connecting to the Hub
+#### Connecting to the Hub
 
 Assuming you are running the server on your local machine (or local docker) you can use
 the following command to connect to the server. Otherwise, simply change 'localhost' below to the
@@ -64,5 +64,5 @@ This will connect you to the Golem Hub where you can log in and start playing st
 
 ## Contributing
 
-Feel free to dive in and contribute! [Open an issue](https://github.com/RichardLitt/standard-readme/issues/new) or submit PRs.
+Feel free to dive in and contribute! [Open an issue](https://github.com/sshookman/ProjectRead/issues/new) or submit PRs.
 This project follows the [Contributor Covenant](http://contributor-covenant.org/version/1/3/0/) Code of Conduct.
