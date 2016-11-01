@@ -3,8 +3,8 @@ package golem.mud.hub.command;
 import java.util.List;
 import java.util.HashMap;
 
-import golem.mud.hub.telnet.TelnetSession;
-import golem.mud.hub.telnet.TelnetRenderer;
+import golem.mud.common.telnet.TelnetSession;
+import golem.mud.common.telnet.TelnetRenderer;
 import golem.mud.hub.das.AuthorDataService;
 import golem.mud.hub.das.model.AuthorDO;
 import golem.mud.common.command.CommandResponse;

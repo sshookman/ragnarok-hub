@@ -20,8 +20,8 @@ import static org.mockito.Mockito.anyInt;
 import golem.mud.common.das.ConnectionManager;
 import golem.mud.hub.das.StoryDataService;
 import golem.mud.hub.das.model.StoryDO;
-import golem.mud.hub.telnet.TelnetSession;
-import golem.mud.hub.telnet.TelnetRenderer;
+import golem.mud.common.telnet.TelnetSession;
+import golem.mud.common.telnet.TelnetRenderer;
 
 public class StoryListCommandTest {
 

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import golem.mud.common.exception.CommandException;
 import golem.mud.common.command.CommandInterface;
-import golem.mud.hub.telnet.TelnetSession;
+import golem.mud.common.telnet.TelnetSession;
 
 public class HubCommandFactory {
 

@@ -1,4 +1,4 @@
-package golem.mud.hub.telnet;
+package golem.mud.common.telnet;
 
 import java.io.IOException;
 

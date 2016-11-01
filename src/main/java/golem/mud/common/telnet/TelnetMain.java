@@ -1,4 +1,4 @@
-package golem.mud.hub.telnet;
+package golem.mud.common.telnet;
 
 import golem.mud.common.command.CommandResponse;
 import golem.mud.common.exception.CommandException;

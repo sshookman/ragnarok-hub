@@ -2,7 +2,7 @@ package golem.mud.hub.command;
 
 import java.util.List;
 
-import golem.mud.hub.telnet.TelnetSession;
+import golem.mud.common.telnet.TelnetSession;
 import golem.mud.hub.das.StoryDataService;
 import golem.mud.hub.das.model.StoryDO;
 import golem.mud.common.command.CommandResponse;

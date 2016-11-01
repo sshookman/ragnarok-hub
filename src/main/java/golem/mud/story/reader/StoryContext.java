@@ -1,6 +1,6 @@
 package golem.mud.story.reader;
 
-import golem.mud.hub.telnet.TelnetRenderer;
+import golem.mud.common.telnet.TelnetRenderer;
 import golem.mud.story.das.StoryAggregateDataService;
 
 public class StoryContext {

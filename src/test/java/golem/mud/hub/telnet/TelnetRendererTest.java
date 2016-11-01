@@ -1,5 +1,6 @@
 package golem.mud.hub.telnet;
 
+import golem.mud.common.telnet.TelnetRenderer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;

@@ -1,4 +1,4 @@
-package golem.mud.hub.telnet;
+package golem.mud.common.telnet;
 
 import java.net.Socket;
 import java.util.logging.Logger;

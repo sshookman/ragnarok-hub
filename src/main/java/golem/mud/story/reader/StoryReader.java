@@ -1,8 +1,8 @@
 package golem.mud.story.reader;
 
 import golem.mud.common.exception.CommandException;
-import golem.mud.hub.telnet.TelnetRenderer;
-import golem.mud.hub.telnet.TelnetSession;
+import golem.mud.common.telnet.TelnetRenderer;
+import golem.mud.common.telnet.TelnetSession;
 import golem.mud.story.action.AbstractAction;
 import golem.mud.story.command.CommandDictionary;
 import golem.mud.story.command.CommandParser;
