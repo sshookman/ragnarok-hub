@@ -12,6 +12,16 @@ public class TelnetRenderer {
 	private final BufferedReader reader;
 	private final PrintWriter writer;
 
+	private static final String RESET = "\u001B[0m";
+	public static final String BLACK = "\u001B[30m";
+	public static final String RED = "\u001B[31m";
+	public static final String GREEN = "\u001B[32m";
+	public static final String YELLOW = "\u001B[33m";
+	public static final String BLUE = "\u001B[34m";
+	public static final String PURPLE = "\u001B[35m";
+	public static final String CYAN = "\u001B[36m";
+	public static final String WHITE = "\u001B[37m";
+
 	public TelnetRenderer(final BufferedReader reader, final PrintWriter writer) {
 		this.reader = reader;
 		this.writer = writer;
@@ -22,12 +32,19 @@ public class TelnetRenderer {
 		writer.flush();
 	}
 
+	public void write(final String message, final String color) {
+		write(color + message + RESET);
+	}
+
 	public void write(final String message, final int speed) {
-		for (int index = 0; index < message.length(); index++) {
-			sleep(speed);
-			char character = message.charAt(index);
-			writer.write(character);
-		}
+		writeByLetter(message, speed);
+		writer.flush();
+	}
+
+	public void write(final String message, final String color, final int speed) {
+		writer.write(color);
+		writeByLetter(message, speed);
+		writer.write(RESET);
 		writer.flush();
 	}
 
@@ -42,6 +59,14 @@ public class TelnetRenderer {
 			return reader.readLine();
 		} catch (IOException ex) {
 			return "";
+		}
+	}
+
+	private void writeByLetter(final String message, final int speed) {
+		for (int index = 0; index < message.length(); index++) {
+			sleep(speed);
+			char character = message.charAt(index);
+			writer.write(character);
 		}
 	}
 

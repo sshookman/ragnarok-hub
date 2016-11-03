@@ -28,9 +28,9 @@ public class StoryReader {
 	}
 
 	public void start() {
-		renderer.write("[N]EW GAME");
+		renderer.write("[N]EW GAME", TelnetRenderer.GREEN);
 		renderer.endl(1);
-		renderer.write("[L]OAD GAME");
+		renderer.write("[L]OAD GAME", TelnetRenderer.YELLOW);
 		renderer.endl(2);
 
 		renderer.write(" > ");
