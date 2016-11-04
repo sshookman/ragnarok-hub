@@ -22,7 +22,6 @@ public class WelcomeController {
 	}
 
 	public void welcome() {
-		//This can be abstracted for all Controllers
 		Map<String, Object> model = new HashMap<>();
 		model.put("options", options);
 
