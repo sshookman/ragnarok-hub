@@ -16,3 +16,5 @@ nbactions.xml
 library/*
 /nbproject/
 /.nb-gradle/
+/build/
+.gradle/
