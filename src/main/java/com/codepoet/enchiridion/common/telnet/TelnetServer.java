@@ -3,31 +3,42 @@ package com.codepoet.enchiridion.common.telnet;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TelnetServer {
 
-	private final Logger logger = Logger.getLogger(TelnetServer.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(TelnetServer.class.getName());
+	private static final int PORT = 1127;
 
-	private ServerSocket server = null;
 	private final ExecutorService executor = Executors.newFixedThreadPool(5);
-	private final int port;
+	private ServerSocket server = null;
+	private Map<String, TelnetSession> sessions;
 
-	public TelnetServer(String port) {
-		this.port = port != null ? Integer.valueOf(port).intValue() : 1127;
-	}
-
-	public void run() {
+	public TelnetServer() {
+		sessions = new HashMap<>();
 
 		try {
-			server = new ServerSocket(port);
-			logger.info("Server listening on port : " + port);
+			server = new ServerSocket(PORT);
+			LOGGER.info("Server listening on port : " + PORT);
 
 			while (true) {
 				Socket socket = server.accept();
-				executor.execute(new TelnetClient(socket));
+				TelnetSession session = TelnetSession.instance(socket);
+				TelnetClient client = new TelnetClient(session);
+
+				executor.execute(client);
+
+				sessions.put(session.getIdentifier(), session);
+				LOGGER.info("Established New Client Session");
+
+				cleanupConnections();
 			}
 
 		} catch (Exception e) {
@@ -36,12 +47,25 @@ public class TelnetServer {
 	}
 
 	public boolean isRunning() {
-		return !server.isClosed();
+		return (server != null && !server.isClosed());
 	}
 
 	public void shutDown() throws IOException {
 		if (server != null) {
 			server.close();
 		}
+	}
+
+	private void cleanupConnections() {
+		Map<String, TelnetSession> openSessions = new HashMap<>();
+		sessions.entrySet().parallelStream().forEach((entry) -> {
+			if (entry.getValue().isOpen()) {
+				openSessions.put(entry.getKey(), entry.getValue());
+			}
+		});
+
+		LOGGER.log(Level.INFO, "Closed {0} Client Session(s)", sessions.size() - openSessions.size());
+		LOGGER.log(Level.INFO, "{0} Open Client Session(s)", openSessions.size());
+		sessions = openSessions;
 	}
 }
