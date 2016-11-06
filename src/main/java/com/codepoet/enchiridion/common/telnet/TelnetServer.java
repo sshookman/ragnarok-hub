@@ -1,6 +1,6 @@
 package com.codepoet.enchiridion.common.telnet;
 
-import com.codepoet.enchiridion.hub.EnchiridionHub;
+import com.codepoet.enchiridion.hub.controller.HubControllers;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
@@ -17,14 +17,14 @@ public class TelnetServer {
 	private static final int PORT = 1127;
 
 	private final TelnetSessionManager sessionManager;
-	private final EnchiridionHub hub;
+	private final HubControllers hubControllers;
 	private final ExecutorService executor = Executors.newFixedThreadPool(5);
 	private ServerSocket server = null;
 
 	@Autowired
-	public TelnetServer(final TelnetSessionManager sessionManager, final EnchiridionHub hub) {
+	public TelnetServer(final TelnetSessionManager sessionManager, final HubControllers hubControllers) {
 		this.sessionManager = sessionManager;
-		this.hub = hub;
+		this.hubControllers = hubControllers;
 		start();
 	}
 
@@ -43,12 +43,12 @@ public class TelnetServer {
 		while (true) {
 			Socket socket = server.accept();
 			TelnetSession session = TelnetSession.instance(socket);
-			TelnetClient client = new TelnetClient(hub, session.getIdentifier());
-
-			executor.execute(client);
-			LOGGER.log(Level.INFO, "Established New Client Session");
+			TelnetClient client = new TelnetClient(hubControllers, session);
 
 			sessionManager.addSession(session);
+			executor.execute(client);
+			LOGGER.log(Level.INFO, "Opening Session {0}", session.getId());
+
 			sessionManager.verifySessions();
 		}
 	}

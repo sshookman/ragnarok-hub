@@ -18,21 +18,21 @@ public class TelnetSession {
 	//private final Connection connection;
 	//private PlayerDO player;
 
-	private String identifier;
+	private String id;
 
 	protected TelnetSession(final Socket socket) throws Exception {
 		this.socket = socket;
 		this.renderer = new TelnetRenderer(SocketUtil.getReader(socket), SocketUtil.getWriter(socket));
 		//this.connection = ConnectionManager.establishConnection(HUB_DB_PATH);
-		this.identifier = new BigInteger(130, new SecureRandom()).toString(32);
+		this.id = new BigInteger(130, new SecureRandom()).toString(32);
 	}
 
 	public TelnetRenderer getRenderer() {
 		return this.renderer;
 	}
 
-	public String getIdentifier() {
-		return identifier;
+	public String getId() {
+		return id;
 	}
 
 //	public Connection getConnection() {

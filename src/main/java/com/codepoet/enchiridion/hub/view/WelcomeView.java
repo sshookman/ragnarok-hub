@@ -1,17 +1,12 @@
 package com.codepoet.enchiridion.hub.view;
 
 import com.codepoet.enchiridion.common.telnet.TelnetRenderer;
-import com.codepoet.enchiridion.common.telnet.TelnetSessionManager;
 import java.util.List;
 import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class WelcomeView {
-
-	@Autowired
-	private TelnetSessionManager sessionManager;
 
 	private final String welcomeTemplate = ""
 			+ "----------------------------------------------------------------------------------------------------\n"
@@ -36,11 +31,10 @@ public class WelcomeView {
 			+ "{{OPTIONS}}"
 			+ "\n";
 
-	public void welcome(final String sessionId, Map<String, Object> model) {
-		TelnetRenderer renderer = sessionManager.getSession(sessionId).getRenderer();
+	public String render(final TelnetRenderer renderer, Map<String, Object> model) {
 		String welcome = buildWelcomeView(model);
-
 		renderer.write(welcome, TelnetRenderer.PURPLE);
+		return renderer.read();
 	}
 
 	private String buildWelcomeView(Map<String, Object> model) {

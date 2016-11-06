@@ -27,6 +27,14 @@ public class TelnetRenderer {
 		this.writer = writer;
 	}
 
+	public String read() {
+		try {
+			return reader.readLine();
+		} catch (IOException ex) {
+			return "";
+		}
+	}
+
 	public void write(final String message) {
 		writer.write(message);
 		writer.flush();
@@ -51,14 +59,6 @@ public class TelnetRenderer {
 	public void endl(final Integer count) {
 		for (int x = 0; x < count; x++) {
 			write("\n");
-		}
-	}
-
-	public String read() {
-		try {
-			return reader.readLine();
-		} catch (IOException ex) {
-			return "";
 		}
 	}
 

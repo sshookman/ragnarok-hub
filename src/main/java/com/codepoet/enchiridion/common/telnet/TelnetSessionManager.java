@@ -17,7 +17,7 @@ public class TelnetSessionManager {
 	}
 
 	public void addSession(TelnetSession session) {
-		sessions.put(session.getIdentifier(), session);
+		sessions.put(session.getId(), session);
 	}
 
 	public TelnetSession getSession(String sessionId) {
@@ -40,8 +40,8 @@ public class TelnetSessionManager {
 			}
 		});
 
-		LOGGER.log(Level.INFO, "Closed {0} Client Session(s)", sessions.size() - openSessions.size());
-		LOGGER.log(Level.INFO, "{0} Open Client Session(s)", openSessions.size());
+		LOGGER.log(Level.INFO, "Removed {0} Session(s)", sessions.size() - openSessions.size());
+		LOGGER.log(Level.INFO, "Currently {0} Session(s) Remaining", openSessions.size());
 		sessions = openSessions;
 	}
 }
