@@ -1,30 +1,18 @@
-package com.codepoet.enchiridion.hub.controller;
+package com.codepoet.enchiridion.hub.screen.welcome;
 
-import com.codepoet.enchiridion.common.telnet.TelnetSession;
-import com.codepoet.enchiridion.common.telnet.TelnetSessionManager;
+import com.codepoet.enchiridion.client.Session;
 import com.codepoet.enchiridion.hub.route.Route;
 import com.codepoet.enchiridion.hub.route.RouteNames;
-import com.codepoet.enchiridion.hub.view.WelcomeView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
 public class WelcomeController {
 
-	@Autowired
-	private TelnetSessionManager sessionManager;
+	private WelcomeView welcomeView = new WelcomeView();
 
-	@Autowired
-	private WelcomeView welcomeView;
-
-	public Route welcome(final String sessionId) {
-		//Obtain Session
-		TelnetSession session = sessionManager.getSession(sessionId);
-
+	public Route welcome(final Session session) {
 		//Build Model
 		List<String> options = new ArrayList<>();
 		options.add("Library");

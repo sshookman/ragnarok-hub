@@ -1,11 +1,9 @@
-package com.codepoet.enchiridion.hub.view;
+package com.codepoet.enchiridion.hub.screen.welcome;
 
-import com.codepoet.enchiridion.common.telnet.TelnetRenderer;
+import com.codepoet.enchiridion.client.Renderer;
 import java.util.List;
 import java.util.Map;
-import org.springframework.stereotype.Component;
 
-@Component
 public class WelcomeView {
 
 	private final String welcomeTemplate = ""
@@ -31,9 +29,9 @@ public class WelcomeView {
 			+ "{{OPTIONS}}"
 			+ "\n";
 
-	public String render(final TelnetRenderer renderer, Map<String, Object> model) {
+	public String render(final Renderer renderer, Map<String, Object> model) {
 		String welcome = buildWelcomeView(model);
-		renderer.write(welcome, TelnetRenderer.PURPLE);
+		renderer.write(welcome, Renderer.PURPLE);
 		return renderer.read();
 	}
 

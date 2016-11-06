@@ -1,16 +1,14 @@
-package com.codepoet.enchiridion.common.telnet;
+package com.codepoet.enchiridion.client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TelnetRenderer {
+public class Renderer {
 
-	private final Logger logger = Logger.getLogger(TelnetRenderer.class.getName());
-
-	private final BufferedReader reader;
-	private final PrintWriter writer;
+	private final Logger LOGGER = Logger.getLogger(Renderer.class.getName());
 
 	private static final String RESET = "\u001B[0m";
 	public static final String BLACK = "\u001B[30m";
@@ -22,7 +20,10 @@ public class TelnetRenderer {
 	public static final String CYAN = "\u001B[36m";
 	public static final String WHITE = "\u001B[37m";
 
-	public TelnetRenderer(final BufferedReader reader, final PrintWriter writer) {
+	private final BufferedReader reader;
+	private final PrintWriter writer;
+
+	public Renderer(final BufferedReader reader, final PrintWriter writer) {
 		this.reader = reader;
 		this.writer = writer;
 	}
@@ -74,8 +75,7 @@ public class TelnetRenderer {
 		try {
 			Thread.sleep(speed);
 		} catch (Exception exception) {
-			logger.severe("Failed to sleep thread");
-			return;
+			LOGGER.log(Level.SEVERE, "Failed to Sleep Thread: {0}", exception.getMessage());
 		}
 	}
 }

@@ -1,6 +1,8 @@
-package com.codepoet.enchiridion.common.telnet;
+package com.codepoet.enchiridion.server;
 
-import com.codepoet.enchiridion.hub.controller.HubControllers;
+import com.codepoet.enchiridion.client.Client;
+import com.codepoet.enchiridion.client.Session;
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
@@ -11,26 +13,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TelnetServer {
+public class Server {
 
-	private static final Logger LOGGER = Logger.getLogger(TelnetServer.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(Server.class.getName());
 	private static final int PORT = 1127;
 
-	private final TelnetSessionManager sessionManager;
-	private final HubControllers hubControllers;
+	private final SessionManager sessionManager;
 	private final ExecutorService executor = Executors.newFixedThreadPool(5);
-	private ServerSocket server = null;
+	private final ServerSocket server;
 
 	@Autowired
-	public TelnetServer(final TelnetSessionManager sessionManager, final HubControllers hubControllers) {
+	public Server(final SessionManager sessionManager) throws IOException {
 		this.sessionManager = sessionManager;
-		this.hubControllers = hubControllers;
+		this.server = new ServerSocket(PORT);
 		start();
 	}
 
 	private void start() {
 		try {
-			server = new ServerSocket(PORT);
 			LOGGER.log(Level.INFO, "Server Listening on Port : {0}", PORT);
 			listen();
 		} catch (Exception exception) {
@@ -42,8 +42,8 @@ public class TelnetServer {
 	private void listen() throws Exception {
 		while (true) {
 			Socket socket = server.accept();
-			TelnetSession session = TelnetSession.instance(socket);
-			TelnetClient client = new TelnetClient(hubControllers, session);
+			Session session = Session.instance(socket);
+			Client client = new Client(session);
 
 			sessionManager.addSession(session);
 			executor.execute(client);
@@ -52,5 +52,4 @@ public class TelnetServer {
 			sessionManager.verifySessions();
 		}
 	}
-
 }

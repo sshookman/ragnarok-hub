@@ -1,5 +1,6 @@
-package com.codepoet.enchiridion.common.telnet;
+package com.codepoet.enchiridion.server;
 
+import com.codepoet.enchiridion.client.Session;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -7,33 +8,33 @@ import java.util.logging.Logger;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TelnetSessionManager {
+public class SessionManager {
 
-	private static final Logger LOGGER = Logger.getLogger(TelnetSessionManager.class.getName());
-	private Map<String, TelnetSession> sessions;
+	private static final Logger LOGGER = Logger.getLogger(SessionManager.class.getName());
+	private Map<String, Session> sessions;
 
-	public TelnetSessionManager() {
+	public SessionManager() {
 		sessions = new HashMap<>();
 	}
 
-	public void addSession(TelnetSession session) {
+	public void addSession(Session session) {
 		sessions.put(session.getId(), session);
 	}
 
-	public TelnetSession getSession(String sessionId) {
+	public Session getSession(String sessionId) {
 		return sessions.get(sessionId);
 	}
 
-	public Map<String, TelnetSession> getSessions() {
+	public Map<String, Session> getSessions() {
 		return sessions;
 	}
 
-	public void setSessions(final Map<String, TelnetSession> sessions) {
+	public void setSessions(final Map<String, Session> sessions) {
 		this.sessions = sessions;
 	}
 
 	public void verifySessions() {
-		Map<String, TelnetSession> openSessions = new HashMap<>();
+		Map<String, Session> openSessions = new HashMap<>();
 		sessions.entrySet().parallelStream().forEach((entry) -> {
 			if (entry.getValue().isOpen()) {
 				openSessions.put(entry.getKey(), entry.getValue());
