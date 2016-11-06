@@ -1,30 +1,29 @@
 package com.codepoet.enchiridion.hub.controller;
 
-import com.codepoet.enchiridion.common.telnet.TelnetSession;
 import com.codepoet.enchiridion.hub.view.WelcomeView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class WelcomeController {
 
-	private final WelcomeView welcomeView;
-	private final List<String> options;
+	@Autowired
+	private WelcomeView welcomeView;
 
-	public WelcomeController(TelnetSession session) {
-		welcomeView = new WelcomeView(session);
-		options = new ArrayList<>();
+	public void welcome(final String sessionId) {
+		List<String> options = new ArrayList<>();
 		options.add("Library");
 		options.add("Authors");
 		options.add("Stories");
 		options.add("Config");
-	}
 
-	public void welcome() {
 		Map<String, Object> model = new HashMap<>();
 		model.put("options", options);
 
-		welcomeView.welcome(model);
+		welcomeView.welcome(sessionId, model);
 	}
 }

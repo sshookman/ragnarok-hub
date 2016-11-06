@@ -10,6 +10,7 @@ buildscript {
 	}
 }
 
+apply plugin: 'application'
 apply plugin: 'java'
 apply plugin: 'jacoco'
 apply plugin: 'eclipse'
@@ -19,6 +20,9 @@ jar {
 	baseName = 'enchiridion'
 	version = '0.0.1-SNAPSHOT'
 }
+
+mainClassName = "com.codepoet.enchiridion.EnchiridionApplication"
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 

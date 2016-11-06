@@ -1,14 +1,13 @@
 package com.codepoet.enchiridion.common.telnet;
 
-import java.io.IOException;
+import com.codepoet.enchiridion.hub.EnchiridionHub;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,55 +16,41 @@ public class TelnetServer {
 	private static final Logger LOGGER = Logger.getLogger(TelnetServer.class.getName());
 	private static final int PORT = 1127;
 
+	private final TelnetSessionManager sessionManager;
+	private final EnchiridionHub hub;
 	private final ExecutorService executor = Executors.newFixedThreadPool(5);
 	private ServerSocket server = null;
-	private Map<String, TelnetSession> sessions;
 
-	public TelnetServer() {
-		sessions = new HashMap<>();
+	@Autowired
+	public TelnetServer(final TelnetSessionManager sessionManager, final EnchiridionHub hub) {
+		this.sessionManager = sessionManager;
+		this.hub = hub;
+		start();
+	}
 
+	private void start() {
 		try {
 			server = new ServerSocket(PORT);
-			LOGGER.info("Server listening on port : " + PORT);
-
-			while (true) {
-				Socket socket = server.accept();
-				TelnetSession session = TelnetSession.instance(socket);
-				TelnetClient client = new TelnetClient(session);
-
-				executor.execute(client);
-
-				sessions.put(session.getIdentifier(), session);
-				LOGGER.info("Established New Client Session");
-
-				cleanupConnections();
-			}
-
-		} catch (Exception e) {
+			LOGGER.log(Level.INFO, "Server Listening on Port : {0}", PORT);
+			listen();
+		} catch (Exception exception) {
+			LOGGER.log(Level.WARNING, "Shutting Down Due To {0}", exception.getMessage());
 			executor.shutdown();
 		}
 	}
 
-	public boolean isRunning() {
-		return (server != null && !server.isClosed());
-	}
+	private void listen() throws Exception {
+		while (true) {
+			Socket socket = server.accept();
+			TelnetSession session = TelnetSession.instance(socket);
+			TelnetClient client = new TelnetClient(hub, session.getIdentifier());
 
-	public void shutDown() throws IOException {
-		if (server != null) {
-			server.close();
+			executor.execute(client);
+			LOGGER.log(Level.INFO, "Established New Client Session");
+
+			sessionManager.addSession(session);
+			sessionManager.verifySessions();
 		}
 	}
 
-	private void cleanupConnections() {
-		Map<String, TelnetSession> openSessions = new HashMap<>();
-		sessions.entrySet().parallelStream().forEach((entry) -> {
-			if (entry.getValue().isOpen()) {
-				openSessions.put(entry.getKey(), entry.getValue());
-			}
-		});
-
-		LOGGER.log(Level.INFO, "Closed {0} Client Session(s)", sessions.size() - openSessions.size());
-		LOGGER.log(Level.INFO, "{0} Open Client Session(s)", openSessions.size());
-		sessions = openSessions;
-	}
 }

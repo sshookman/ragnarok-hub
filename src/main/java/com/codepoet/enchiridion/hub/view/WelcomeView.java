@@ -1,13 +1,18 @@
 package com.codepoet.enchiridion.hub.view;
 
 import com.codepoet.enchiridion.common.telnet.TelnetRenderer;
-import com.codepoet.enchiridion.common.telnet.TelnetSession;
+import com.codepoet.enchiridion.common.telnet.TelnetSessionManager;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class WelcomeView {
 
-	private final TelnetRenderer renderer;
+	@Autowired
+	private TelnetSessionManager sessionManager;
+
 	private final String welcomeTemplate = ""
 			+ "----------------------------------------------------------------------------------------------------\n"
 			+ "The______  _        _______          _________ _______ _________ ______  _________ _______  _\n"
@@ -31,37 +36,39 @@ public class WelcomeView {
 			+ "{{OPTIONS}}"
 			+ "\n";
 
-	public WelcomeView(TelnetSession session) {
-		renderer = session.getRenderer();
+	public void welcome(final String sessionId, Map<String, Object> model) {
+		TelnetRenderer renderer = sessionManager.getSession(sessionId).getRenderer();
+		String welcome = buildWelcomeView(model);
+
+		renderer.write(welcome, TelnetRenderer.PURPLE);
 	}
 
-	public void welcome(Map<String, Object> model) {
-		renderer.write(buildWelcomeView(model), TelnetRenderer.PURPLE);
-	}
-
-	public String buildWelcomeView(Map<String, Object> model) {
-
+	private String buildWelcomeView(Map<String, Object> model) {
 		String welcomeView = welcomeTemplate;
 
 		if (model != null && model.containsKey("options")) {
 
 			Object optionsObject = model.get("options");
 			if (optionsObject instanceof List) {
-
-				StringBuilder optionsBuilder = new StringBuilder();
-				List<String> optionList = (List<String>) optionsObject;
-				int index = 1;
-
-				for (String option : optionList) {
-					optionsBuilder
-							.append("    [").append(index++).append("] ")
-							.append(option).append("\n");
-				}
-
+				StringBuilder optionsBuilder = buildOptionsList(optionsObject);
 				welcomeView = welcomeView.replace("{{OPTIONS}}", optionsBuilder.toString());
 			}
 		}
 
 		return welcomeView;
+	}
+
+	private StringBuilder buildOptionsList(Object optionsObject) {
+		StringBuilder optionsBuilder = new StringBuilder();
+		List<String> optionList = (List<String>) optionsObject;
+
+		int index = 1;
+		for (String option : optionList) {
+			optionsBuilder
+					.append("    [").append(index++).append("] ")
+					.append(option).append("\n");
+		}
+
+		return optionsBuilder;
 	}
 }
