@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class WelcomeView {
 
-	private final String welcomeTemplate = ""
+	private static final String WELCOME_TEMPLATE = ""
 			+ "----------------------------------------------------------------------------------------------------\n"
 			+ "The______  _        _______          _________ _______ _________ ______  _________ _______  _\n"
 			+ " (  ____ \\( (    /|(  ____ \\|\\     /|\\__   __/(  ____ )\\__   __/(  __  \\ \\__   __/(  ___  )( (    /|\n"
@@ -29,14 +29,14 @@ public class WelcomeView {
 			+ "{{OPTIONS}}"
 			+ "\n";
 
-	public String render(final Renderer renderer, Map<String, Object> model) {
+	public static String render(final Renderer renderer, Map<String, Object> model) {
 		String welcome = buildWelcomeView(model);
 		renderer.write(welcome, Renderer.PURPLE);
-		return renderer.read();
+		return renderer.prompt();
 	}
 
-	private String buildWelcomeView(Map<String, Object> model) {
-		String welcomeView = welcomeTemplate;
+	private static String buildWelcomeView(Map<String, Object> model) {
+		String welcomeView = WELCOME_TEMPLATE;
 
 		if (model != null && model.containsKey("options")) {
 
@@ -50,7 +50,7 @@ public class WelcomeView {
 		return welcomeView;
 	}
 
-	private StringBuilder buildOptionsList(Object optionsObject) {
+	private static StringBuilder buildOptionsList(Object optionsObject) {
 		StringBuilder optionsBuilder = new StringBuilder();
 		List<String> optionList = (List<String>) optionsObject;
 

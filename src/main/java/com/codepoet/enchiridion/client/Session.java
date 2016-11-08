@@ -1,6 +1,5 @@
 package com.codepoet.enchiridion.client;
 
-import com.codepoet.enchiridion.common.util.SocketUtil;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.Socket;
@@ -19,30 +18,7 @@ public class Session {
 	protected Session(final Socket socket) throws Exception {
 		this.id = new BigInteger(130, new SecureRandom()).toString(32);
 		this.socket = socket;
-		this.renderer = new Renderer(SocketUtil.buildReader(socket), SocketUtil.buildWriter(socket));
-	}
-
-	public Renderer getRenderer() {
-		return this.renderer;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public boolean isOpen() {
-		return socket != null && !socket.isClosed();
-	}
-
-	public void closeSession() {
-		try {
-			renderer.endl(1);
-			renderer.write("Thanks for Playing!");
-			renderer.endl(1);
-			socket.close();
-		} catch (IOException exception) {
-			LOGGER.log(Level.SEVERE, "Failed to Close Session: {0}", exception.getMessage());
-		}
+		this.renderer = new Renderer(socket);
 	}
 
 	public static Session instance(final Socket socket) {
@@ -53,4 +29,28 @@ public class Session {
 			return null;
 		}
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public Renderer getRenderer() {
+		return this.renderer;
+	}
+
+	public boolean isOpen() {
+		return socket != null && !socket.isClosed();
+	}
+
+	public void close() {
+		try {
+			renderer.endl(1);
+			renderer.write("Thanks for Playing!");
+			renderer.endl(1);
+			socket.close();
+		} catch (IOException exception) {
+			LOGGER.log(Level.SEVERE, "Failed to Close Session: {0}", exception.getMessage());
+		}
+	}
+
 }

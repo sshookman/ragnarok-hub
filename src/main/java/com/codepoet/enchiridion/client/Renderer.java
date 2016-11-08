@@ -1,8 +1,10 @@
 package com.codepoet.enchiridion.client;
 
+import com.codepoet.enchiridion.common.util.SocketUtil;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,9 +25,14 @@ public class Renderer {
 	private final BufferedReader reader;
 	private final PrintWriter writer;
 
-	public Renderer(final BufferedReader reader, final PrintWriter writer) {
-		this.reader = reader;
-		this.writer = writer;
+	public Renderer(final Socket socket) throws IOException {
+		this.reader = SocketUtil.buildReader(socket);
+		this.writer = SocketUtil.buildWriter(socket);
+	}
+
+	public String prompt() {
+		write(" > ");
+		return read();
 	}
 
 	public String read() {

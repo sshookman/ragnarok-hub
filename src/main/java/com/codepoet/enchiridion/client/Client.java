@@ -1,8 +1,8 @@
 package com.codepoet.enchiridion.client;
 
-import com.codepoet.enchiridion.hub.route.Route;
-import com.codepoet.enchiridion.hub.route.RouteNames;
-import com.codepoet.enchiridion.hub.route.Router;
+import com.codepoet.enchiridion.hub.route.ControllerManager;
+import com.codepoet.enchiridion.hub.screen.welcome.WelcomeView;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,29 +11,27 @@ public class Client implements Runnable {
 	private final static Logger LOGGER = Logger.getLogger(Client.class.getName());
 
 	private final Session session;
-	private final Router router;
+	private final ControllerManager controllerManager;
 
-	public Client(final Session session) throws Exception {
+	public Client(final Session session, final ControllerManager controllerManager) throws Exception {
 		this.session = session;
-		this.router = new Router(session);
+		this.controllerManager = controllerManager;
 	}
 
 	@Override
 	public void run() {
 		try {
-			inputLoop();
+			mainLoop();
 		} catch (Exception exception) {
 			LOGGER.log(Level.SEVERE, exception.getMessage());
 		} finally {
 			LOGGER.log(Level.INFO, "Closing Session {0}", session.getId());
-			session.closeSession();
+			session.close();
 		}
 	}
 
-	private void inputLoop() {
-		Route route = new Route(RouteNames.WELCOME);
-		while (route != null) {
-			route = router.resolve(route);
-		}
+	private void mainLoop() {
+		Map<String, Object> model = controllerManager.welcomeController.welcome();
+		WelcomeView.render(session.getRenderer(), model);
 	}
 }
