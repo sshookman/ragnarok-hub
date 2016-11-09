@@ -1,5 +1,6 @@
-package com.codepoet.enchiridion.client;
+package com.codepoet.enchiridion.server;
 
+import com.codepoet.enchiridion.render.Renderer;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.Socket;

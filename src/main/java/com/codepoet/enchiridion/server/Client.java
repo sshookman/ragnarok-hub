@@ -1,7 +1,7 @@
-package com.codepoet.enchiridion.client;
+package com.codepoet.enchiridion.server;
 
-import com.codepoet.enchiridion.hub.route.ControllerManager;
-import com.codepoet.enchiridion.hub.screen.welcome.WelcomeView;
+import com.codepoet.enchiridion.controller.ControllerManager;
+import com.codepoet.enchiridion.view.WelcomeView;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;

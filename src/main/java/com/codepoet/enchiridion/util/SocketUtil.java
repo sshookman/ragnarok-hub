@@ -1,4 +1,4 @@
-package com.codepoet.enchiridion.common.util;
+package com.codepoet.enchiridion.util;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

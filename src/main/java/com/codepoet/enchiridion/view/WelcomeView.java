@@ -1,6 +1,6 @@
-package com.codepoet.enchiridion.hub.screen.welcome;
+package com.codepoet.enchiridion.view;
 
-import com.codepoet.enchiridion.client.Renderer;
+import com.codepoet.enchiridion.render.Renderer;
 import java.util.List;
 import java.util.Map;
 

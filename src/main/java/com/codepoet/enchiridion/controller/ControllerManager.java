@@ -1,6 +1,6 @@
-package com.codepoet.enchiridion.hub.route;
+package com.codepoet.enchiridion.controller;
 
-import com.codepoet.enchiridion.hub.screen.welcome.WelcomeController;
+import com.codepoet.enchiridion.controller.WelcomeController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

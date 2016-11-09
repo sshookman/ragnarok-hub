@@ -1,4 +1,4 @@
-package com.codepoet.enchiridion.hub.screen.welcome;
+package com.codepoet.enchiridion.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;

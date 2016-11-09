@@ -1,6 +1,5 @@
 package com.codepoet.enchiridion.server;
 
-import com.codepoet.enchiridion.client.Session;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -19,10 +18,6 @@ public class SessionManager {
 
 	public void addSession(Session session) {
 		sessions.put(session.getId(), session);
-	}
-
-	public Session getSession(String sessionId) {
-		return sessions.get(sessionId);
 	}
 
 	public Map<String, Session> getSessions() {

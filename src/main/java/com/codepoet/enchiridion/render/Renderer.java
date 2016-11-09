@@ -1,6 +1,6 @@
-package com.codepoet.enchiridion.client;
+package com.codepoet.enchiridion.render;
 
-import com.codepoet.enchiridion.common.util.SocketUtil;
+import com.codepoet.enchiridion.util.SocketUtil;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
