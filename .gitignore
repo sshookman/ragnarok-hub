@@ -18,3 +18,4 @@ library/*
 /.nb-gradle/
 /build/
 .gradle/
+*.jar
