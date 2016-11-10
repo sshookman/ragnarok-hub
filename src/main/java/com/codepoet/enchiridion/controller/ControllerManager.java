@@ -1,6 +1,5 @@
 package com.codepoet.enchiridion.controller;
 
-import com.codepoet.enchiridion.controller.WelcomeController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -8,5 +7,14 @@ import org.springframework.stereotype.Component;
 public class ControllerManager {
 
 	@Autowired
-	public WelcomeController welcomeController;
+	private WelcomeController welcomeController;
+
+	public Controller resolve(String ctrl) {
+		switch (ctrl) {
+			case "welcome":
+				return welcomeController;
+			default:
+				return null;
+		}
+	}
 }

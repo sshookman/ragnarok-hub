@@ -4,7 +4,7 @@ import com.codepoet.enchiridion.render.Renderer;
 import java.util.List;
 import java.util.Map;
 
-public class WelcomeView {
+public class WelcomeView implements View {
 
 	private static final String WELCOME_TEMPLATE = ""
 			+ "----------------------------------------------------------------------------------------------------\n"
@@ -29,13 +29,14 @@ public class WelcomeView {
 			+ "{{OPTIONS}}"
 			+ "\n";
 
-	public static String render(final Renderer renderer, Map<String, Object> model) {
+	@Override
+	public String render(final Renderer renderer, Map<String, Object> model) {
 		String welcome = buildWelcomeView(model);
 		renderer.write(welcome, Renderer.PURPLE);
 		return renderer.prompt();
 	}
 
-	private static String buildWelcomeView(Map<String, Object> model) {
+	private String buildWelcomeView(Map<String, Object> model) {
 		String welcomeView = WELCOME_TEMPLATE;
 
 		if (model != null && model.containsKey("options")) {
@@ -50,7 +51,7 @@ public class WelcomeView {
 		return welcomeView;
 	}
 
-	private static StringBuilder buildOptionsList(Object optionsObject) {
+	private StringBuilder buildOptionsList(Object optionsObject) {
 		StringBuilder optionsBuilder = new StringBuilder();
 		List<String> optionList = (List<String>) optionsObject;
 

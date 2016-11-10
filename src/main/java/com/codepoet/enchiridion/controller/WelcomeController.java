@@ -7,9 +7,10 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 
 @Component
-public class WelcomeController {
+public class WelcomeController implements Controller {
 
-	public Map<String, Object> welcome() {
+	@Override
+	public Map<String, Object> run() {
 		List<String> options = new ArrayList<>();
 		options.add("Library");
 		options.add("Authors");

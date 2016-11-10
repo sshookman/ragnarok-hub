@@ -1,7 +1,9 @@
 package com.codepoet.enchiridion.server;
 
+import com.codepoet.enchiridion.controller.Controller;
 import com.codepoet.enchiridion.controller.ControllerManager;
-import com.codepoet.enchiridion.view.WelcomeView;
+import com.codepoet.enchiridion.view.View;
+import com.codepoet.enchiridion.view.ViewManager;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,10 +14,12 @@ public class Client implements Runnable {
 
 	private final Session session;
 	private final ControllerManager controllerManager;
+	private final ViewManager viewManager;
 
 	public Client(final Session session, final ControllerManager controllerManager) throws Exception {
 		this.session = session;
 		this.controllerManager = controllerManager;
+		this.viewManager = new ViewManager();
 	}
 
 	@Override
@@ -31,7 +35,13 @@ public class Client implements Runnable {
 	}
 
 	private void mainLoop() {
-		Map<String, Object> model = controllerManager.welcomeController.welcome();
-		WelcomeView.render(session.getRenderer(), model);
+		Controller controller = controllerManager.resolve("welcome");
+
+		while (controller != null) {
+			Map<String, Object> model = controller.run();
+			View view = viewManager.resolve(model.get("view").toString());
+			String ctrl = view.render(session.getRenderer(), model);
+			controller = controllerManager.resolve(ctrl);
+		}
 	}
 }
