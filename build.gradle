@@ -7,6 +7,7 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath('info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.10')
 	}
 }
 
@@ -15,6 +16,7 @@ apply plugin: 'java'
 apply plugin: 'jacoco'
 apply plugin: 'eclipse'
 apply plugin: 'spring-boot'
+apply plugin: "info.solidsoft.pitest"
 
 jar {
 	baseName = 'enchiridion'
@@ -37,5 +39,9 @@ dependencies {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.10'
+	gradleVersion = '2.10'
+}
+
+pitest {
+    targetClasses = ['com.codepoets.enchiridion.*']
 }
