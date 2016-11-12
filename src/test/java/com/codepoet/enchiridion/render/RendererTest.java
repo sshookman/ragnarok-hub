@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Mockito.mock;
@@ -70,6 +71,9 @@ public class RendererTest {
 		String response2 = renderer.read();
 		assertNotNull(response2);
 		assertEquals("2", response2);
+
+		String response3 = renderer.read();
+		assertNull(response3);
 	}
 
 	@Test
