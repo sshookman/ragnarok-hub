@@ -19,7 +19,7 @@ apply plugin: 'spring-boot'
 apply plugin: "info.solidsoft.pitest"
 
 pitest {
-    targetClasses = ['com.codepoets.enchiridion.*']
+    targetClasses = ['com.codepoet.enchiridion.*']
 	timestampedReports = false
 }
 
