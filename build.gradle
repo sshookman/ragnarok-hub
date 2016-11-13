@@ -23,6 +23,12 @@ pitest {
 	timestampedReports = false
 }
 
+jacocoTestReport {
+    reports {
+        xml.enabled true
+    }
+}
+
 jar {
 	baseName = 'enchiridion'
 	version = '0.0.1-SNAPSHOT'
