@@ -28,7 +28,7 @@ public class SessionManager {
 		this.sessions = sessions;
 	}
 
-	public void verifySessions() {
+	public void removeClosedSessions() {
 		Map<String, Session> openSessions = new HashMap<>();
 		sessions.entrySet().parallelStream().forEach((entry) -> {
 			if (entry.getValue().isOpen()) {

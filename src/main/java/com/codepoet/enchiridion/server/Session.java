@@ -53,5 +53,4 @@ public class Session {
 			LOGGER.log(Level.SEVERE, "Failed to Close Session: {0}", exception.getMessage());
 		}
 	}
-
 }

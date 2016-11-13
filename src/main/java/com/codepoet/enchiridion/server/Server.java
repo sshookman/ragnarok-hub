@@ -50,7 +50,7 @@ public class Server {
 			executor.execute(client);
 			LOGGER.log(Level.INFO, "Opening Session {0}", session.getId());
 
-			sessionManager.verifySessions();
+			sessionManager.removeClosedSessions();
 		}
 	}
 }
