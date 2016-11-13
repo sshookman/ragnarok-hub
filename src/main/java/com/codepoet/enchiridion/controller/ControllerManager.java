@@ -25,6 +25,5 @@ public class ControllerManager {
 			LOGGER.log(Level.WARNING, "Failed to Resolve Controller: {0}", exception.getMessage());
 			return null;
 		}
-
 	}
 }
