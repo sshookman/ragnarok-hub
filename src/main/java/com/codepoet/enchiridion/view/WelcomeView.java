@@ -36,22 +36,21 @@ public class WelcomeView implements View {
 		return renderer.prompt();
 	}
 
-	private String buildWelcomeView(Map<String, Object> model) {
+	public String buildWelcomeView(Map<String, Object> model) {
 		String welcomeView = WELCOME_TEMPLATE;
+		String options = "";
 
 		if (model != null && model.containsKey("options")) {
-
 			Object optionsObject = model.get("options");
 			if (optionsObject instanceof List) {
-				StringBuilder optionsBuilder = buildOptionsList(optionsObject);
-				welcomeView = welcomeView.replace("{{OPTIONS}}", optionsBuilder.toString());
+				options = buildOptionsList(optionsObject);
 			}
 		}
 
-		return welcomeView;
+		return welcomeView.replace("{{OPTIONS}}", options);
 	}
 
-	private StringBuilder buildOptionsList(Object optionsObject) {
+	private String buildOptionsList(Object optionsObject) {
 		StringBuilder optionsBuilder = new StringBuilder();
 		List<String> optionList = (List<String>) optionsObject;
 
@@ -62,6 +61,6 @@ public class WelcomeView implements View {
 					.append(option).append("\n");
 		}
 
-		return optionsBuilder;
+		return optionsBuilder.toString();
 	}
 }
