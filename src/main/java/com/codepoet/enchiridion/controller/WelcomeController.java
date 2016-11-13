@@ -19,6 +19,7 @@ public class WelcomeController implements Controller {
 
 		Map<String, Object> model = new HashMap<>();
 		model.put("options", options);
+		model.put("view", "welcome");
 
 		return model;
 	}
