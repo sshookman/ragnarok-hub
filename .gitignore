@@ -19,3 +19,4 @@ library/*
 /build/
 .gradle/
 *.jar
+*.log
