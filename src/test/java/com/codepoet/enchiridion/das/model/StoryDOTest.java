@@ -1,5 +1,6 @@
 package com.codepoet.enchiridion.das.model;
 
+import com.codepoet.enchiridion.das.model.StoryDO;
 import java.sql.ResultSet;
 import java.util.Map;
 import static org.junit.Assert.*;
