@@ -1,4 +1,4 @@
-# Golem MUD/IF Hub
+# Enchiridion Library
 
 ![Build](https://travis-ci.org/sshookman/ProjectRead.svg?branch=master) ![License](https://img.shields.io/badge/license-GPL%20v3-brightgreen.svg) [![Coverage](https://codecov.io/gh/sshookman/ProjectRead/branch/master/graph/badge.svg)](https://codecov.io/gh/sshookman/ProjectRead)
 
@@ -18,8 +18,8 @@
 
 ## About
 
-The Golem MUD/IF Hub (Title WIP) is a Java-based Multi-User Dungeon and Interactive Fiction Engine
-accessible through a Telnet connection.
+The Enchiridion Library is a Java-based Multi-User Dungeon and Interactive Fiction Engine accessible
+through a Telnet connection.
 
 #### Purpose
 
@@ -35,14 +35,25 @@ through telnet on port 1127.
 
 ## Getting Started
 
+#### Running Locally
+
+The application can be run locally using a single gradle command. The gradle wrapper is included
+with the repository, so gradle does not need to be installed in order to execute the command.
+
+```
+$ ./gradlew clean run
+```
+
+This will initiate the spring boot application on your local machine and will serve the library out
+of port 1127 over telnet.
+
 #### Running with Docker
 
 You must have docker installed and running in order to perform the following commands.
 
 ```
-$ mvn clean package
-$ docker build -t seanshookman/golem .
-$ docker run --name golem -d -p 1127:1127 seanshookman/golem
+$ ./scripts/build.sh
+$ ./scripts/run.sh
 ```
 
 Once this is done, the Golem docker container will be running and serving the Telnet Server for
@@ -59,7 +70,7 @@ IP address or hostname of the server on which the hub is running.
 $ telnet localhost 1127
 ```
 
-This will connect you to the Golem Hub where you can log in and start playing stories.
+This will connect you to the Enchiridion Library where you can log in and start playing stories.
 
 
 ## Contributing
