@@ -34,14 +34,14 @@ public class WelcomeViewTest {
 		renderer = Mockito.mock(Renderer.class);
 
 		Mockito.doNothing().when(renderer).write(Mockito.anyString());
-		Mockito.when(renderer.prompt()).thenReturn("INPUT");
+		Mockito.when(renderer.prompt()).thenReturn("1");
 	}
 
 	@Test
 	public void testRender() {
 		String input = welcomeView.render(renderer, options);
 		assertNotNull(input);
-		assertEquals("INPUT", input);
+		assertEquals("library", input);
 	}
 
 	@Test

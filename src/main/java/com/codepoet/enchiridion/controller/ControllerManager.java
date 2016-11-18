@@ -13,11 +13,16 @@ public class ControllerManager {
 	@Autowired
 	private WelcomeController welcomeController;
 
+	@Autowired
+	private LibraryController libraryController;
+
 	public Controller resolve(String ctrl) {
 		try {
 			switch (ctrl) {
 				case "welcome":
 					return welcomeController;
+				case "library":
+					return libraryController;
 				default:
 					return null;
 			}

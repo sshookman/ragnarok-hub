@@ -7,6 +7,7 @@ public class ViewManager {
 
 	private static final Logger LOGGER = Logger.getLogger(ViewManager.class.getName());
 	private final WelcomeView welcomeView = new WelcomeView();
+	private final LibraryView libraryView = new LibraryView();
 
 	public View resolve(String view) {
 
@@ -14,6 +15,8 @@ public class ViewManager {
 			switch (view) {
 				case "welcome":
 					return welcomeView;
+				case "library":
+					return libraryView;
 				default:
 					return null;
 			}

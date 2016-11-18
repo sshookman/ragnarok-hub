@@ -33,7 +33,15 @@ public class WelcomeView implements View {
 	public String render(final Renderer renderer, Map<String, Object> model) {
 		String welcome = buildWelcomeView(model);
 		renderer.write(welcome, Renderer.PURPLE);
-		return renderer.prompt();
+
+		String input = renderer.prompt();
+
+		switch (input) {
+			case "1":
+				return "library";
+			default:
+				return "";
+		}
 	}
 
 	public String buildWelcomeView(Map<String, Object> model) {
