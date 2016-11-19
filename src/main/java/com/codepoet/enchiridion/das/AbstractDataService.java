@@ -13,17 +13,17 @@ public abstract class AbstractDataService<D extends AbstractDO> {
 
 	private final Logger LOGGER = Logger.getLogger(AbstractDataService.class.getName());
 
+	private Connection connection;
 	private D dataObjectClass;
-	private Connection story;
 
-	public AbstractDataService(final D dataObject, final Connection story) {
+	public AbstractDataService(final D dataObject, final Connection connection) {
 		this.dataObjectClass = dataObject;
-		this.story = story;
+		this.connection = connection;
 	}
 
 	private boolean executeUpdate(final String query) {
 		try {
-			Statement statement = story.createStatement();
+			Statement statement = connection.createStatement();
 			statement.executeUpdate(query);
 			statement.close();
 			return true;
@@ -37,7 +37,7 @@ public abstract class AbstractDataService<D extends AbstractDO> {
 	private List<D> executeQuery(final String query) {
 		List<D> dataObjects = new ArrayList<D>();
 		try {
-			Statement statement = story.createStatement();
+			Statement statement = connection.createStatement();
 			ResultSet results = statement.executeQuery(query);
 			while (results.next()) {
 				@SuppressWarnings("unchecked")
