@@ -1,5 +1,8 @@
 package com.codepoet.enchiridion.controller;
 
+import com.codepoet.enchiridion.hub.controller.Controller;
+import com.codepoet.enchiridion.hub.controller.WelcomeController;
+import com.codepoet.enchiridion.hub.controller.ControllerManager;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;

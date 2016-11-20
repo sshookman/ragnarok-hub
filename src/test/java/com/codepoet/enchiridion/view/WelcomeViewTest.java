@@ -1,5 +1,7 @@
 package com.codepoet.enchiridion.view;
 
+import com.codepoet.enchiridion.hub.model.Request;
+import com.codepoet.enchiridion.hub.view.WelcomeView;
 import com.codepoet.enchiridion.render.Renderer;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,9 +41,9 @@ public class WelcomeViewTest {
 
 	@Test
 	public void testRender() {
-		String input = welcomeView.render(renderer, options);
-		assertNotNull(input);
-		assertEquals("library", input);
+		Request request = welcomeView.render(renderer, options);
+		assertNotNull(request);
+		assertEquals("library", request.getController());
 	}
 
 	@Test

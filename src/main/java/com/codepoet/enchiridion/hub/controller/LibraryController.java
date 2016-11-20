@@ -1,7 +1,8 @@
-package com.codepoet.enchiridion.controller;
+package com.codepoet.enchiridion.hub.controller;
 
 import com.codepoet.enchiridion.das.StoryDataService;
 import com.codepoet.enchiridion.das.model.StoryDO;
+import com.codepoet.enchiridion.hub.model.Request;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,7 @@ public class LibraryController implements Controller {
 	private StoryDataService service;
 
 	@Override
-	public Map<String, Object> run() {
+	public Map<String, Object> run(final Request request) {
 		List<StoryDO> stories = service.read(new HashMap<>());
 
 		Map<String, Object> model = new HashMap<>();

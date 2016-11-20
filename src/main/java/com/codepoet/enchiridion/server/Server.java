@@ -1,6 +1,6 @@
 package com.codepoet.enchiridion.server;
 
-import com.codepoet.enchiridion.controller.ControllerManager;
+import com.codepoet.enchiridion.hub.controller.ControllerManager;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;

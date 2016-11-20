@@ -1,5 +1,6 @@
-package com.codepoet.enchiridion.controller;
+package com.codepoet.enchiridion.hub.controller;
 
+import com.codepoet.enchiridion.hub.model.Request;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class WelcomeController implements Controller {
 
 	@Override
-	public Map<String, Object> run() {
+	public Map<String, Object> run(final Request request) {
 		List<String> options = new ArrayList<>();
 		options.add("Library");
 		options.add("Authors");

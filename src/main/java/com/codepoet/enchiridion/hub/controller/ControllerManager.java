@@ -1,4 +1,4 @@
-package com.codepoet.enchiridion.controller;
+package com.codepoet.enchiridion.hub.controller;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

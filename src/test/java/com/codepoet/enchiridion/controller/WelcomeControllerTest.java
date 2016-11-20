@@ -1,5 +1,6 @@
 package com.codepoet.enchiridion.controller;
 
+import com.codepoet.enchiridion.hub.controller.WelcomeController;
 import java.util.List;
 import java.util.Map;
 import static org.junit.Assert.assertEquals;
@@ -19,7 +20,7 @@ public class WelcomeControllerTest {
 
 	@Test
 	public void testRun() {
-		Map<String, Object> model = WelcomeController.run();
+		Map<String, Object> model = WelcomeController.run(null);
 		assertNotNull(model);
 		assertEquals("welcome", model.get("view").toString());
 

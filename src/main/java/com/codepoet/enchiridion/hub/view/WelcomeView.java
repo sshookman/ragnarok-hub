@@ -1,5 +1,6 @@
-package com.codepoet.enchiridion.view;
+package com.codepoet.enchiridion.hub.view;
 
+import com.codepoet.enchiridion.hub.model.Request;
 import com.codepoet.enchiridion.render.Renderer;
 import java.util.List;
 import java.util.Map;
@@ -30,18 +31,23 @@ public class WelcomeView implements View {
 			+ "\n";
 
 	@Override
-	public String render(final Renderer renderer, Map<String, Object> model) {
+	public Request render(final Renderer renderer, Map<String, Object> model) {
 		String welcome = buildWelcomeView(model);
 		renderer.write(welcome, Renderer.PURPLE);
 
 		String input = renderer.prompt();
 
+		String controller = null;
 		switch (input) {
 			case "1":
-				return "library";
+				controller = "library";
+				break;
 			default:
-				return "";
+				controller = "";
+				break;
 		}
+
+		return new Request.Builder().controller(controller).build();
 	}
 
 	public String buildWelcomeView(Map<String, Object> model) {

@@ -1,9 +1,10 @@
 package com.codepoet.enchiridion.server;
 
-import com.codepoet.enchiridion.controller.Controller;
-import com.codepoet.enchiridion.controller.ControllerManager;
-import com.codepoet.enchiridion.view.View;
-import com.codepoet.enchiridion.view.ViewManager;
+import com.codepoet.enchiridion.hub.controller.Controller;
+import com.codepoet.enchiridion.hub.controller.ControllerManager;
+import com.codepoet.enchiridion.hub.model.Request;
+import com.codepoet.enchiridion.hub.view.View;
+import com.codepoet.enchiridion.hub.view.ViewManager;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,12 +37,13 @@ public class Client implements Runnable {
 
 	private void mainLoop() {
 		Controller controller = controllerManager.resolve("welcome");
+		Request request = null;
 
 		while (controller != null) {
-			Map<String, Object> model = controller.run();
+			Map<String, Object> model = controller.run(request);
 			View view = viewManager.resolve(model.get("view").toString());
-			String ctrl = view.render(session.getRenderer(), model);
-			controller = controllerManager.resolve(ctrl);
+			request = view.render(session.getRenderer(), model);
+			controller = controllerManager.resolve(request.getController());
 		}
 	}
 }

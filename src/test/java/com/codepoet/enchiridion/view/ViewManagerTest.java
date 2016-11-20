@@ -1,5 +1,8 @@
 package com.codepoet.enchiridion.view;
 
+import com.codepoet.enchiridion.hub.view.ViewManager;
+import com.codepoet.enchiridion.hub.view.WelcomeView;
+import com.codepoet.enchiridion.hub.view.View;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
