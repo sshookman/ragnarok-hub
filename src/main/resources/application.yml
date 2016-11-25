@@ -1,0 +1,2 @@
+database:
+    hub: srv/hub.sqlite
