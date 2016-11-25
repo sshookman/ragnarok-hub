@@ -1,11 +1,8 @@
 package com.codepoet.enchiridion.server;
 
-import com.codepoet.enchiridion.hub.controller.ControllerManager;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +15,13 @@ public class Server {
 	private static final int PORT = 1127;
 
 	private final SessionManager sessionManager;
-	private final ControllerManager controllerManager;
-	private final ExecutorService executor = Executors.newFixedThreadPool(5);
+	private final ClientManager clientManager;
 	private final ServerSocket server;
 
 	@Autowired
-	public Server(final SessionManager sessionManager, final ControllerManager controllerManager) throws IOException {
+	public Server(final SessionManager sessionManager, final ClientManager clientManager) throws IOException {
 		this.sessionManager = sessionManager;
-		this.controllerManager = controllerManager;
+		this.clientManager = clientManager;
 		this.server = new ServerSocket(PORT);
 		start();
 	}
@@ -36,20 +32,17 @@ public class Server {
 			listen();
 		} catch (Exception exception) {
 			LOGGER.log(Level.WARNING, "Shutting Down Due To {0}", exception.getMessage());
-			executor.shutdown();
+			clientManager.shutdown();
 		}
 	}
 
 	private void listen() throws Exception {
 		while (true) {
 			Socket socket = server.accept();
-			Session session = Session.instance(socket);
-			Client client = new Client(session, controllerManager);
+			Session session = sessionManager.instance(socket);
 
-			sessionManager.addSession(session);
-			executor.execute(client);
 			LOGGER.log(Level.INFO, "Opening Session {0}", session.getId());
-
+			clientManager.launch(session);
 			sessionManager.removeClosedSessions();
 		}
 	}

@@ -1,5 +1,6 @@
 package com.codepoet.enchiridion.server;
 
+import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -10,10 +11,17 @@ import org.springframework.stereotype.Component;
 public class SessionManager {
 
 	private static final Logger LOGGER = Logger.getLogger(SessionManager.class.getName());
-	private Map<String, Session> sessions;
+	private Map<String, Session> sessions = new HashMap<>();
 
-	public SessionManager() {
-		sessions = new HashMap<>();
+	public Session instance(final Socket socket) {
+		try {
+			Session session = new Session(socket);
+			addSession(session);
+			return session;
+		} catch (Exception exception) {
+			LOGGER.log(Level.SEVERE, "Failed to Create Session: {0}", exception.getMessage());
+			return null;
+		}
 	}
 
 	public void addSession(Session session) {
@@ -38,6 +46,6 @@ public class SessionManager {
 
 		LOGGER.log(Level.INFO, "Removed {0} Session(s)", sessions.size() - openSessions.size());
 		LOGGER.log(Level.INFO, "Currently {0} Session(s) Remaining", openSessions.size());
-		sessions = openSessions;
+		setSessions(openSessions);
 	}
 }

@@ -22,15 +22,6 @@ public class Session {
 		this.renderer = new Renderer(socket);
 	}
 
-	public static Session instance(final Socket socket) {
-		try {
-			return new Session(socket);
-		} catch (Exception exception) {
-			LOGGER.log(Level.SEVERE, "Failed to Create Session: {0}", exception.getMessage());
-			return null;
-		}
-	}
-
 	public String getId() {
 		return id;
 	}

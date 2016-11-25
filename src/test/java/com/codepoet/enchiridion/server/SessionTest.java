@@ -14,6 +14,7 @@ import static org.mockito.Mockito.when;
 public class SessionTest {
 
 	private static Socket socketMock;
+	private final SessionManager sessionManager = new SessionManager();
 
 	@BeforeClass
 	public static void setup() throws Exception {
@@ -25,7 +26,7 @@ public class SessionTest {
 
 	@Test
 	public void testSession() {
-		Session session = Session.instance(socketMock);
+		Session session = sessionManager.instance(socketMock);
 
 		assertNotNull(session.getId());
 		assertNotNull(session.getRenderer());
@@ -36,6 +37,6 @@ public class SessionTest {
 
 	@Test
 	public void testSessionWithNullSocket() {
-		assertNull(Session.instance(null));
+		assertNull(sessionManager.instance(null));
 	}
 }
