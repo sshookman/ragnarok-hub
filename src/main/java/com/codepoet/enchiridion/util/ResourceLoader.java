@@ -1,20 +1,19 @@
 package com.codepoet.enchiridion.util;
 
 import java.io.File;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ResourceLoader {
+
 	private static final Logger LOGGER = Logger.getLogger(ResourceLoader.class.getName());
 
 	public File load(final String resource) {
-		File file = null;
 		try {
-			ClassLoader classLoader = getClass().getClassLoader();
-			file = new File(classLoader.getResource(resource).getFile());
+			return new File(getClass().getClassLoader().getResource(resource).getFile());
 		} catch (Exception exception) {
-			LOGGER.severe("Failed to load resouce: " + resource);
+			LOGGER.log(Level.WARNING, "Failed to load resource: {0} : {1}", new String[]{resource, exception.getMessage()});
+			return null;
 		}
-		
-		return file;
 	}
 }
