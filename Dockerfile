@@ -1,8 +1,5 @@
-FROM ubuntu:16.04
+FROM sshookman/base-java:latest
 MAINTAINER Sean Shookman <SMS112788@gmail.com>
-
-RUN apt-get -y update
-RUN apt-get -y install default-jdk
 
 EXPOSE 1127
 
