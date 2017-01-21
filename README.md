@@ -10,6 +10,7 @@
   - [Purpose](#purpose)
   - [Plans](#plans)
 - [Getting Started](#getting-started)
+  - [Running Locally](#running-locally)
   - [Running with Docker](#running-with-docker)
   - [Connecting to the Hub](#connecting-to-the-hub)
 - [Contributing](#contributing)
@@ -56,8 +57,8 @@ $ ./scripts/build.sh
 $ ./scripts/run.sh
 ```
 
-Once this is done, the Golem docker container will be running and serving the Telnet Server for
-the Golem MUD/IF Hub out of port 1127. Don't forget to kill (and optionally remove) the container
+Once this is done, the enchiridion docker container will be running and serving the Telnet Server for
+the hub out of port 1127. Don't forget to kill (and optionally remove) the container
 once you are finished.
 
 #### Connecting to the Hub
