@@ -9,14 +9,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-public abstract class AbstractDataService<D extends AbstractDO> {
+public class DataService<D extends AbstractDO> {
 
-	private final Logger LOGGER = Logger.getLogger(AbstractDataService.class.getName());
+	private final Logger LOGGER = Logger.getLogger(DataService.class.getName());
 
 	private Connection connection;
 	private D dataObjectClass;
 
-	public AbstractDataService(final D dataObject, final Connection connection) {
+	public DataService(final D dataObject, final Connection connection) {
 		this.dataObjectClass = dataObject;
 		this.connection = connection;
 	}
