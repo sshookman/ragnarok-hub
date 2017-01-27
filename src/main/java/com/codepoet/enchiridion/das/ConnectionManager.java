@@ -73,6 +73,7 @@ public class ConnectionManager {
 		return connection;
 	}
 
+	//TODO: This code doesn't belong here
 	private static String getFile(String fileName) throws FileNotFoundException {
 		StringBuilder result = new StringBuilder("");
 		File file = RESOURCE_LOADER.load(fileName);

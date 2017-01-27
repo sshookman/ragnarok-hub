@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DatabaseConfig {
 
-	@Value("database.hub")
+	@Value("${database.hub}")
 	private String hubDatabase;
 
 	@Bean

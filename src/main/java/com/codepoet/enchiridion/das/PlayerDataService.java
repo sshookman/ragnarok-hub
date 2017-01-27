@@ -4,7 +4,9 @@ import com.codepoet.enchiridion.das.model.PlayerDO;
 import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PlayerDataService extends AbstractDataService<PlayerDO> {
 
 	public PlayerDataService(final Connection story) {
