@@ -34,6 +34,13 @@ public class ConnectionManagerTest {
 		} catch (Exception exception) {
 			assertNotNull(exception);
 		}
+
+		try {
+			ConnectionManager.establishConnectionInMemory("not-a-library/NotAGame.sqlite");
+			fail("Exception Expected");
+		} catch (Exception exception) {
+			assertNotNull(exception);
+		}
 	}
 
 	@Test
