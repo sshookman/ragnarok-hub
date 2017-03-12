@@ -19,7 +19,7 @@ apply plugin: 'spring-boot'
 apply plugin: "info.solidsoft.pitest"
 
 pitest {
-    targetClasses = ['com.codepoet.enchiridion.*']
+    targetClasses = ['codepoet.ragnarok.*']
 	timestampedReports = false
 }
 
@@ -30,12 +30,12 @@ jacocoTestReport {
 }
 
 jar {
-	baseName = 'enchiridion'
+	baseName = 'ragnarok'
 	group = 'codepoet'
 	version = '0.0.1'
 }
 
-mainClassName = "com.codepoet.enchiridion.EnchiridionApplication"
+mainClassName = "codepoet.ragnarok.Application"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
