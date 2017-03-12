@@ -31,7 +31,8 @@ jacocoTestReport {
 
 jar {
 	baseName = 'enchiridion'
-	version = '0.0.1-SNAPSHOT'
+	group = 'codepoet'
+	version = '0.0.1'
 }
 
 mainClassName = "com.codepoet.enchiridion.EnchiridionApplication"
