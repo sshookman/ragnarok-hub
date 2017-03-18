@@ -20,3 +20,4 @@ library/*
 .gradle/
 *.jar
 *.log
+!vault-monkey-*.jar

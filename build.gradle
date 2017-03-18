@@ -3,11 +3,15 @@ buildscript {
 		springBootVersion = '1.4.1.RELEASE'
 	}
 	repositories {
+		flatDir {
+			dirs 'lib'
+		}
 		mavenCentral()
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 		classpath('info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.10')
+		classpath("codepoet:vault-monkey:1.0.0")
 	}
 }
 
@@ -41,12 +45,16 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
+	flatDir {
+		dirs 'lib'
+	}
 	mavenCentral()
 }
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter')
 	compile('org.xerial:sqlite-jdbc:3.8.11.2')
+	compile('codepoet:vault-monkey:1.0.0')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
