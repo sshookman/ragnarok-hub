@@ -1,14 +1,29 @@
 package codepoet.ragnarok.das.model;
 
+import codepoet.vaultmonkey.annotations.SqliteColumn;
+import codepoet.vaultmonkey.annotations.SqliteObject;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+@SqliteObject(table = "story")
 public class StoryDO extends AbstractDO {
 
+	@SqliteColumn
+	private Integer id;
+	@SqliteColumn
 	private String name;
+	@SqliteColumn
 	private String path;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return this.name;

@@ -1,1 +1,1 @@
-docker run --name enchiridion -d -p 1127:1127 seanshookman/enchiridion
+docker run --name ragnarok -d -p 1127:1127 seanshookman/enchiridion
