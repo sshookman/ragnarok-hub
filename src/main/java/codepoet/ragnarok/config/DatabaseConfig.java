@@ -1,6 +1,5 @@
 package codepoet.ragnarok.config;
 
-import codepoet.ragnarok.das.DataService;
 import codepoet.ragnarok.das.model.AuthorDO;
 import codepoet.ragnarok.das.model.ConfigDO;
 import codepoet.ragnarok.das.model.PlayerDO;
@@ -24,27 +23,22 @@ public class DatabaseConfig {
 	}
 
 	@Bean
-	public SqliteDataService<StoryDO> storyDataServiceNew() throws Exception {
+	public SqliteDataService<StoryDO> storyDataService() throws Exception {
 		return new SqliteDataService<StoryDO>(StoryDO.class, hubDatabaseConnection());
 	}
 
 	@Bean
-	public DataService<StoryDO> storyDataService() throws Exception {
-		return new DataService<StoryDO>(new StoryDO(), hubDatabaseConnection());
+	public SqliteDataService<PlayerDO> playerDataService() throws Exception {
+		return new SqliteDataService<PlayerDO>(PlayerDO.class, hubDatabaseConnection());
 	}
 
 	@Bean
-	public DataService<PlayerDO> playerDataService() throws Exception {
-		return new DataService<PlayerDO>(new PlayerDO(), hubDatabaseConnection());
+	public SqliteDataService<AuthorDO> authorDataService() throws Exception {
+		return new SqliteDataService<AuthorDO>(AuthorDO.class, hubDatabaseConnection());
 	}
 
 	@Bean
-	public DataService<AuthorDO> authorDataService() throws Exception {
-		return new DataService<AuthorDO>(new AuthorDO(), hubDatabaseConnection());
-	}
-
-	@Bean
-	public DataService<ConfigDO> configDataService() throws Exception {
-		return new DataService<ConfigDO>(new ConfigDO(), hubDatabaseConnection());
+	public SqliteDataService<ConfigDO> configDataService() throws Exception {
+		return new SqliteDataService<ConfigDO>(ConfigDO.class, hubDatabaseConnection());
 	}
 }

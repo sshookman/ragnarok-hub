@@ -1,7 +1,7 @@
 package codepoet.ragnarok.hub.controller;
 
-import codepoet.ragnarok.das.DataService;
 import codepoet.ragnarok.das.model.StoryDO;
+import codepoet.vaultmonkey.service.SqliteDataService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +18,7 @@ import org.mockito.MockitoAnnotations;
 public class LibraryControllerTest {
 
 	@Mock
-	private DataService storyDataService;
+	private SqliteDataService storyDataService;
 
 	@InjectMocks
 	private LibraryController libraryController;
@@ -46,14 +46,14 @@ public class LibraryControllerTest {
 		assertEquals(3, stories.size());
 
 		for (Integer x = 0; x < 3; x++) {
-			assertEquals(stories.get(x).getRowId().toString(), stories.get(x).getName());
-			assertEquals(stories.get(x).getRowId().toString(), stories.get(x).getPath());
+			assertEquals(stories.get(x).getId().toString(), stories.get(x).getName());
+			assertEquals(stories.get(x).getId().toString(), stories.get(x).getPath());
 		}
 	}
 
 	private StoryDO buildStory(Integer i) {
 		StoryDO story = new StoryDO();
-		story.setRowId(i);
+		story.setId(i);
 		story.setName(i.toString());
 		story.setPath(i.toString());
 		return story;

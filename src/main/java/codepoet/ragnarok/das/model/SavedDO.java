@@ -1,16 +1,29 @@
 package codepoet.ragnarok.das.model;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
+import codepoet.vaultmonkey.annotations.SqliteColumn;
+import codepoet.vaultmonkey.annotations.SqliteObject;
 
-public class SavedDO extends AbstractDO {
+@SqliteObject(table = "saved")
+public class SavedDO {
 
+	@SqliteColumn
+	private Integer id;
+	@SqliteColumn
 	private String name;
+	@SqliteColumn
 	private String path;
+	@SqliteColumn
 	private Integer playerId;
+	@SqliteColumn
 	private Integer golemId;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return this.name;
@@ -42,31 +55,5 @@ public class SavedDO extends AbstractDO {
 
 	public void setGolemId(Integer golemId) {
 		this.golemId = golemId;
-	}
-
-	@Override
-	public String getTable() {
-		return "saved";
-	}
-
-	@Override
-	public SavedDO instance(ResultSet result) throws SQLException {
-		SavedDO instance = new SavedDO();
-		instance.setRowId(result.getInt("id"));
-		instance.setName(result.getString("name"));
-		instance.setPath(result.getString("path"));
-		instance.setPlayerId(result.getInt("player_id"));
-		instance.setGolemId(result.getInt("golem_id"));
-		return instance;
-	}
-
-	@Override
-	public Map<String, String> toMap() {
-		Map<String, String> dataMap = new HashMap<String, String>();
-		addNotNull("name", getName(), dataMap);
-		addNotNull("path", getPath(), dataMap);
-		addNotNull("player_id", getPlayerId(), dataMap);
-		addNotNull("golem_id", getGolemId(), dataMap);
-		return dataMap;
 	}
 }

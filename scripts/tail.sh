@@ -1,1 +1,1 @@
-docker logs -f enchiridion
+docker logs -f ragnarok

@@ -1,15 +1,27 @@
 package codepoet.ragnarok.das.model;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
+import codepoet.vaultmonkey.annotations.SqliteColumn;
+import codepoet.vaultmonkey.annotations.SqliteObject;
 
-public class ConfigDO extends AbstractDO {
+@SqliteObject(table = "config")
+public class ConfigDO {
 
+	@SqliteColumn
+	private Integer id;
+	@SqliteColumn
 	private Integer playerId;
+	@SqliteColumn
 	private Integer textSpeed;
+	@SqliteColumn
 	private String textColor;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public Integer getPlayerId() {
 		return this.playerId;
@@ -33,29 +45,5 @@ public class ConfigDO extends AbstractDO {
 
 	public void setTextColor(final String textColor) {
 		this.textColor = textColor;
-	}
-
-	@Override
-	public String getTable() {
-		return "config";
-	}
-
-	@Override
-	public ConfigDO instance(ResultSet result) throws SQLException {
-		ConfigDO instance = new ConfigDO();
-		instance.setRowId(result.getInt("id"));
-		instance.setPlayerId(result.getInt("player_id"));
-		instance.setTextSpeed(result.getInt("text_speed"));
-		instance.setTextColor(result.getString("text_color"));
-		return instance;
-	}
-
-	@Override
-	public Map<String, String> toMap() {
-		Map<String, String> dataMap = new HashMap<String, String>();
-		addNotNull("player_id", getPlayerId(), dataMap);
-		addNotNull("text_speed", getTextSpeed(), dataMap);
-		addNotNull("text_color", getTextColor(), dataMap);
-		return dataMap;
 	}
 }

@@ -1,14 +1,25 @@
 package codepoet.ragnarok.das.model;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
+import codepoet.vaultmonkey.annotations.SqliteColumn;
+import codepoet.vaultmonkey.annotations.SqliteObject;
 
-public class PlayerDO extends AbstractDO {
+@SqliteObject(table = "player")
+public class PlayerDO {
 
+	@SqliteColumn
+	private Integer id;
+	@SqliteColumn
 	private String username;
+	@SqliteColumn
 	private String password;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getUsername() {
 		return this.username;
@@ -24,27 +35,5 @@ public class PlayerDO extends AbstractDO {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	@Override
-	public String getTable() {
-		return "player";
-	}
-
-	@Override
-	public PlayerDO instance(ResultSet result) throws SQLException {
-		PlayerDO instance = new PlayerDO();
-		instance.setRowId(result.getInt("id"));
-		instance.setUsername(result.getString("username"));
-		instance.setPassword(result.getString("password"));
-		return instance;
-	}
-
-	@Override
-	public Map<String, String> toMap() {
-		Map<String, String> dataMap = new HashMap<String, String>();
-		addNotNull("username", getUsername(), dataMap);
-		addNotNull("password", getPassword(), dataMap);
-		return dataMap;
 	}
 }
