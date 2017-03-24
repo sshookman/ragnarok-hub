@@ -1,9 +1,9 @@
 package codepoet.ragnarok.config;
 
-import codepoet.ragnarok.das.model.AuthorDO;
-import codepoet.ragnarok.das.model.ConfigDO;
-import codepoet.ragnarok.das.model.PlayerDO;
-import codepoet.ragnarok.das.model.StoryDO;
+import codepoet.ragnarok.model.AuthorDO;
+import codepoet.ragnarok.model.ConfigDO;
+import codepoet.ragnarok.model.PlayerDO;
+import codepoet.ragnarok.model.StoryDO;
 import codepoet.vaultmonkey.service.SqliteDataService;
 import codepoet.vaultmonkey.util.SqliteConnectionUtil;
 import java.sql.Connection;

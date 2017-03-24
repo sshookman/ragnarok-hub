@@ -1,6 +1,6 @@
 package codepoet.ragnarok.hub.controller;
 
-import codepoet.ragnarok.das.model.StoryDO;
+import codepoet.ragnarok.model.StoryDO;
 import codepoet.vaultmonkey.service.SqliteDataService;
 import java.util.ArrayList;
 import java.util.List;

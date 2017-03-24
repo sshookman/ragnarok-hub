@@ -1,10 +1,10 @@
-package codepoet.ragnarok.das.model;
+package codepoet.ragnarok.model;
 
 import codepoet.vaultmonkey.annotations.SqliteColumn;
 import codepoet.vaultmonkey.annotations.SqliteObject;
 
-@SqliteObject(table = "saved")
-public class SavedDO {
+@SqliteObject(table = "story")
+public class StoryDO {
 
 	@SqliteColumn
 	private Integer id;
@@ -12,10 +12,6 @@ public class SavedDO {
 	private String name;
 	@SqliteColumn
 	private String path;
-	@SqliteColumn
-	private Integer playerId;
-	@SqliteColumn
-	private Integer golemId;
 
 	public Integer getId() {
 		return id;
@@ -39,21 +35,5 @@ public class SavedDO {
 
 	public void setPath(String path) {
 		this.path = path;
-	}
-
-	public Integer getPlayerId() {
-		return this.playerId;
-	}
-
-	public void setPlayerId(Integer playerId) {
-		this.playerId = playerId;
-	}
-
-	public Integer getGolemId() {
-		return this.golemId;
-	}
-
-	public void setGolemId(Integer golemId) {
-		this.golemId = golemId;
 	}
 }

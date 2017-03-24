@@ -1,6 +1,6 @@
 package codepoet.ragnarok.hub.view;
 
-import codepoet.ragnarok.das.model.StoryDO;
+import codepoet.ragnarok.model.StoryDO;
 import codepoet.ragnarok.hub.model.Request;
 import codepoet.ragnarok.render.Renderer;
 import java.util.List;

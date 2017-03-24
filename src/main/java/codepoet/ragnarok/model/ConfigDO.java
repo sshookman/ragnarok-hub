@@ -1,4 +1,4 @@
-package codepoet.ragnarok.das.model;
+package codepoet.ragnarok.model;
 
 import codepoet.vaultmonkey.annotations.SqliteColumn;
 import codepoet.vaultmonkey.annotations.SqliteObject;
