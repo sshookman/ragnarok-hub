@@ -31,4 +31,18 @@ public class WelcomeController implements Controller {
 		option.put("value", value);
 		return option;
 	}
+
+    public String sendMessage(final String message) {
+        if (message.equals("1") || message.equalsIgnoreCase("library")) {
+           return "library"; 
+        } else if (message.equals("2") || message.equalsIgnoreCase("authors")) {
+           return "authors";
+        } else if (message.equals("3") || message.equalsIgnoreCase("stories")) {
+           return "stories"; 
+        } else if (message.equals("4") || message.equalsIgnoreCase("config")) {
+           return "config"; 
+        }
+
+        return "";
+    }
 }
