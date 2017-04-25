@@ -1,4 +1,4 @@
-package codepoet.ragnarok.controller;
+package codepoet.ragnarok.hub.controller;
 
 import codepoet.ragnarok.hub.controller.Controller;
 import codepoet.ragnarok.hub.controller.ControllerManager;

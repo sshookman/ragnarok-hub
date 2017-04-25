@@ -12,16 +12,23 @@ public class WelcomeController implements Controller {
 
 	@Override
 	public Map<String, Object> run(final Request request) {
-		List<String> options = new ArrayList<>();
-		options.add("Library");
-		options.add("Authors");
-		options.add("Stories");
-		options.add("Config");
+		List<Object> options = new ArrayList<>();
+		options.add(buildOption(1, "Library"));
+		options.add(buildOption(2, "Authors"));
+		options.add(buildOption(3, "Stories"));
+		options.add(buildOption(4, "Config"));
 
 		Map<String, Object> model = new HashMap<>();
 		model.put("options", options);
 		model.put("view", "welcome");
 
 		return model;
+	}
+
+	private Map<String, Object> buildOption(final Integer index, final String value) {
+		Map<String, Object> option = new HashMap<>();
+		option.put("index", index);
+		option.put("value", value);
+		return option;
 	}
 }
