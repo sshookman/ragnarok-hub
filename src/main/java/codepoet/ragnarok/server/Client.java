@@ -3,7 +3,6 @@ package codepoet.ragnarok.server;
 import codepoet.ragnarok.hub.controller.Controller;
 import codepoet.ragnarok.hub.controller.ControllerManager;
 import codepoet.ragnarok.hub.model.Request;
-import codepoet.ragnarok.hub.view.ViewManager;
 import codepoet.ragnarok.render.Renderer;
 import codepoet.venalartificer.TemplateBuilder;
 import java.util.Map;
@@ -17,12 +16,10 @@ public class Client implements Runnable {
 	private final TemplateBuilder templateBuilder = new TemplateBuilder("templates");
 	private final Session session;
 	private final ControllerManager controllerManager;
-	private final ViewManager viewManager;
 
 	public Client(final Session session, final ControllerManager controllerManager) throws Exception {
 		this.session = session;
 		this.controllerManager = controllerManager;
-		this.viewManager = new ViewManager();
 	}
 
 	@Override
@@ -38,17 +35,9 @@ public class Client implements Runnable {
 	}
 
 	private void mainLoop() {
-		Controller controller = controllerManager.resolve("welcome");
-		Request request = null;
-
-		while (controller != null) {
-			Map<String, Object> model = controller.run(request);
-			String welcome = templateBuilder.render(model.get("view").toString(), model);
-			session.getRenderer().write(welcome, Renderer.PURPLE);
-			controller = null;
-//			View view = viewManager.resolve(model.get("view").toString());
-//			request = view.render(session.getRenderer(), model);
-//			controller = controllerManager.resolve(request.getController());
-		}
+        Request request = null;
+        do {
+            request = requestHandler.process(request);
+        } while (request != null);
 	}
 }
