@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@Route("library")
 public class LibraryController implements Controller {
 
 	@Autowired

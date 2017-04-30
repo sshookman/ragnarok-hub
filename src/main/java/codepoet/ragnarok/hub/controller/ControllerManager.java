@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+//TODO: Replace with RequestHandler and Route annotations
 @Component
 public class ControllerManager {
 

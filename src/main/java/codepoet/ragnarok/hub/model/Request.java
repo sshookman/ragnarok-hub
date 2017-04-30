@@ -5,16 +5,16 @@ import java.util.Map;
 
 public class Request {
 
-	private String controller;
+	private String route;
 	private Map<String, Object> parameters;
 
-	public Request(final String controller, final Map<String, Object> parameters) {
-		this.controller = controller;
+	public Request(final String route, final Map<String, Object> parameters) {
+		this.route = route;
 		this.parameters = parameters;
 	}
 
-	public String getController() {
-		return controller;
+	public String getRoute() {
+		return route;
 	}
 
 	public Map<String, Object> getParameters() {
@@ -27,15 +27,15 @@ public class Request {
 
 	public static class Builder {
 
-		private String controller;
+		private String route;
 		private Map<String, Object> parameters;
 
 		public Builder() {
 			parameters = new HashMap<>();
 		}
 
-		public Builder controller(final String controller) {
-			this.controller = controller;
+		public Builder route(final String route) {
+			this.route = route;
 			return this;
 		}
 
@@ -45,7 +45,7 @@ public class Request {
 		}
 
 		public Request build() {
-			return new Request(controller, parameters);
+			return new Request(route, parameters);
 		}
 	}
 }

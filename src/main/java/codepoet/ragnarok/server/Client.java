@@ -36,6 +36,7 @@ public class Client implements Runnable {
 
 	private void mainLoop() {
         Request request = null;
+
         do {
             request = requestHandler.process(request);
         } while (request != null);
