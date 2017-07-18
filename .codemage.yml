@@ -1,0 +1,5 @@
+id: ragnarok
+test:
+  cmd: gradle
+  params: ["clean", "test"]
+  options: ["-q", "true"]
