@@ -27,7 +27,7 @@ public class Session {
 	}
 
 	public Renderer getRenderer() {
-		return this.renderer;
+		return renderer;
 	}
 
 	public boolean isOpen() {

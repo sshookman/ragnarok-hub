@@ -1,9 +1,9 @@
 package codepoet.ragnarok.server;
 
+import codepoet.ragnarok.hub.PageData;
 import codepoet.ragnarok.hub.PageRouter;
 import codepoet.ragnarok.hub.Route;
-import codepoet.ragnarok.hub.controller.ControllerManager;
-import codepoet.venalartificer.TemplateBuilder;
+import codepoet.ragnarok.render.Renderer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,22 +12,28 @@ public class Client implements Runnable {
 	private final static Logger LOGGER = Logger.getLogger(Client.class.getName());
 
 	private final Session session;
-    private final PageRouter pageRouter;
+	private final PageRouter pageRouter;
 
-	public Client(final Session session, final ControllerManager controllerManager) throws Exception {
+	public Client(Session session, PageRouter pageRouter) {
 		this.session = session;
-        this.pageRouter = new PageRouter(new TemplateBuilder("templates"), session.getRenderer());
+		this.pageRouter = pageRouter;
 	}
 
 	@Override
 	public void run() {
 		try {
-            
-            Route route = new Route.Builder("welcome").build();
-            do {
-                route = pageRouter.route(route);
-            } while (route != null);
-            
+			Renderer renderer = session.getRenderer();
+			Route route = new Route.Builder("welcome").build();
+
+			do {
+				PageData page = pageRouter.route(route);
+				renderer.write(page.getDisplay());
+				String input = renderer.prompt();
+				route = page.getRoutes().get(input);
+			} while (route != null);
+
+			LOGGER.log(Level.INFO, "Exiting Gracefully");
+
 		} catch (Exception exception) {
 			LOGGER.log(Level.SEVERE, exception.getMessage());
 		} finally {
