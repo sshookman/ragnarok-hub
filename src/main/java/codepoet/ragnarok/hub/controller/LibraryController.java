@@ -1,7 +1,7 @@
 package codepoet.ragnarok.hub.controller;
 
-import codepoet.ragnarok.model.StoryDO;
 import codepoet.ragnarok.hub.model.Request;
+import codepoet.ragnarok.model.StoryDO;
 import codepoet.vaultmonkey.service.SqliteDataService;
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@Route("library")
 public class LibraryController implements Controller {
 
 	@Autowired
