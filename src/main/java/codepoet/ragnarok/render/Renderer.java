@@ -31,6 +31,7 @@ public class Renderer {
 	}
 
 	public String prompt() {
+		endl(1);
 		write(" > ");
 		return read();
 	}
