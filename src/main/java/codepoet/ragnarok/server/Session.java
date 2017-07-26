@@ -36,9 +36,7 @@ public class Session {
 
 	public void close() {
 		try {
-			renderer.endl(1);
-			renderer.write("Thanks for Playing!");
-			renderer.endl(1);
+			renderer.writeln("Now departing the Archives...");
 			socket.close();
 		} catch (IOException exception) {
 			LOGGER.log(Level.SEVERE, "Failed to Close Session: {0}", exception.getMessage());

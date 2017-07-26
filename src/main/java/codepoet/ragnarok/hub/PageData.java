@@ -6,10 +6,12 @@ import java.util.Map;
 public class PageData {
 
 	private String display;
+	private String prompt;
 	private Map<String, Route> routes;
 
-	private PageData(String display, Map<String, Route> routes) {
+	private PageData(String display, String prompt, Map<String, Route> routes) {
 		this.display = display;
+		this.prompt = prompt;
 		this.routes = routes;
 	}
 
@@ -17,25 +19,23 @@ public class PageData {
 		return display;
 	}
 
-	public void setDisplay(String display) {
-		this.display = display;
-	}
-
 	public Map<String, Route> getRoutes() {
 		return routes;
 	}
 
-	public void setRoutes(Map<String, Route> routes) {
-		this.routes = routes;
+	public String getPrompt() {
+		return prompt;
 	}
 
 	public static class Builder {
 
 		private String display;
+		private String prompt;
 		private Map<String, Route> routes;
 
-		public Builder(String display) {
+		public Builder(String display, String prompt) {
 			this.display = display;
+			this.prompt = prompt;
 			this.routes = new HashMap<>();
 		}
 
@@ -45,7 +45,7 @@ public class PageData {
 		}
 
 		public PageData build() {
-			return new PageData(display, routes);
+			return new PageData(display, prompt, routes);
 		}
 	}
 }

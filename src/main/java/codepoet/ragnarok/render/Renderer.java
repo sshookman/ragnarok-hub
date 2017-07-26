@@ -31,9 +31,17 @@ public class Renderer {
 	}
 
 	public String prompt() {
-		endl(1);
+		endl();
 		write(" > ");
 		return read();
+	}
+
+	public String prompt(final String prompt) {
+		endl();
+		write(prompt + " > ");
+		String input = read();
+		endl();
+		return input;
 	}
 
 	public String read() {
@@ -63,6 +71,15 @@ public class Renderer {
 		writeByLetter(message, speed);
 		writer.write(RESET);
 		writer.flush();
+	}
+
+	public void writeln(final String message) {
+		write(message);
+		endl(1);
+	}
+
+	public void endl() {
+		endl(1);
 	}
 
 	public void endl(final Integer count) {

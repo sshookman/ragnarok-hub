@@ -21,20 +21,19 @@ public class Client implements Runnable {
 
 	@Override
 	public void run() {
+		Renderer renderer = session.getRenderer();
 		try {
-			Renderer renderer = session.getRenderer();
 			Route route = new Route.Builder("welcome").build();
 
 			do {
 				PageData page = pageRouter.route(route);
 				renderer.write(page.getDisplay());
-				String input = renderer.prompt();
-				route = page.getRoutes().get(input);
+				String input = renderer.prompt(page.getPrompt());
+				route = (page.getRoutes().containsKey("*")) ? page.getRoutes().get("*") : page.getRoutes().get(input);
 			} while (route != null);
 
-			LOGGER.log(Level.INFO, "Exiting Gracefully");
-
 		} catch (Exception exception) {
+			renderer.writeln("An error has occurred: " + exception.getMessage());
 			LOGGER.log(Level.SEVERE, exception.getMessage());
 		} finally {
 			LOGGER.log(Level.INFO, "Closing Session {0}", session.getId());
