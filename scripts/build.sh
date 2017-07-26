@@ -1,1 +1,1 @@
-docker build -t seanshookman/enchiridion .
+docker build -t seanshookman/ragnarok .

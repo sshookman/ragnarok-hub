@@ -1,11 +1,9 @@
 package codepoet.ragnarok.server;
 
-import codepoet.ragnarok.hub.controller.Controller;
-import codepoet.ragnarok.hub.controller.ControllerManager;
-import codepoet.ragnarok.hub.model.Request;
-import codepoet.ragnarok.hub.view.View;
-import codepoet.ragnarok.hub.view.ViewManager;
-import java.util.Map;
+import codepoet.ragnarok.hub.PageData;
+import codepoet.ragnarok.hub.PageRouter;
+import codepoet.ragnarok.hub.Route;
+import codepoet.ragnarok.render.Renderer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,36 +12,32 @@ public class Client implements Runnable {
 	private final static Logger LOGGER = Logger.getLogger(Client.class.getName());
 
 	private final Session session;
-	private final ControllerManager controllerManager;
-	private final ViewManager viewManager;
+	private final PageRouter pageRouter;
 
-	public Client(final Session session, final ControllerManager controllerManager) throws Exception {
+	public Client(Session session, PageRouter pageRouter) {
 		this.session = session;
-		this.controllerManager = controllerManager;
-		this.viewManager = new ViewManager();
+		this.pageRouter = pageRouter;
 	}
 
 	@Override
 	public void run() {
+		Renderer renderer = session.getRenderer();
 		try {
-			mainLoop();
+			Route route = new Route.Builder("welcome").build();
+
+			do {
+				PageData page = pageRouter.route(route);
+				renderer.write(page.getDisplay());
+				String input = renderer.prompt(page.getPrompt());
+				route = (page.getRoutes().containsKey("*")) ? page.getRoutes().get("*") : page.getRoutes().get(input);
+			} while (route != null);
+
 		} catch (Exception exception) {
+			renderer.writeln("An error has occurred: " + exception.getMessage());
 			LOGGER.log(Level.SEVERE, exception.getMessage());
 		} finally {
 			LOGGER.log(Level.INFO, "Closing Session {0}", session.getId());
 			session.close();
-		}
-	}
-
-	private void mainLoop() {
-		Controller controller = controllerManager.resolve("welcome");
-		Request request = null;
-
-		while (controller != null) {
-			Map<String, Object> model = controller.run(request);
-			View view = viewManager.resolve(model.get("view").toString());
-			request = view.render(session.getRenderer(), model);
-			controller = controllerManager.resolve(request.getController());
 		}
 	}
 }

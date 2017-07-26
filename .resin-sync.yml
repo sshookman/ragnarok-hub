@@ -1,0 +1,5 @@
+local_resinos:
+  app-name: ragnarok
+  build-triggers:
+    - Dockerfile: f36eb6489679eb0237f52e7f21fc4979391dba0166534d5230bfa9e10a332573
+  environment: []

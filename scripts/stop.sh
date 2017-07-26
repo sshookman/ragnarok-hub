@@ -1,4 +1,4 @@
 echo 'Killing Container'
-docker kill enchiridion
+docker kill ragnarok
 echo 'Removing Container'
-docker rm enchiridion
+docker rm ragnarok

@@ -54,12 +54,12 @@ public class RendererTest {
 		String response1 = renderer.prompt();
 		assertNotNull(response1);
 		assertEquals("1", response1);
-		assertEquals(" > ", oStream.toString());
+		assertEquals("\n > ", oStream.toString());
 
 		String response2 = renderer.prompt();
 		assertNotNull(response2);
 		assertEquals("2", response2);
-		assertEquals(" >  > ", oStream.toString());
+		assertEquals("\n > \n > ", oStream.toString());
 	}
 
 	@Test
