@@ -10,6 +10,5 @@ public class ServerConfig {
 	@Bean
 	public TemplateBuilder templateBuilder() throws Exception {
 		return new TemplateBuilder("templates");
-
 	}
 }

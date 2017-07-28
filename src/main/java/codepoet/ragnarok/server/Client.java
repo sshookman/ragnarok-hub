@@ -27,9 +27,12 @@ public class Client implements Runnable {
 
 			do {
 				PageData page = pageRouter.route(route);
+
 				renderer.write(page.getDisplay());
 				String input = renderer.prompt(page.getPrompt());
+
 				route = (page.getRoutes().containsKey("*")) ? page.getRoutes().get("*") : page.getRoutes().get(input);
+				route.setInput(input);
 			} while (route != null);
 
 		} catch (Exception exception) {
