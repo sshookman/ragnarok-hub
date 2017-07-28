@@ -1,0 +1,12 @@
+Archives
+
+{{#if hasPrevious}}<<[P]revious{{if#}}                                         {{#if hasNext}}[N]ext>>{{if#}}
++--------+------------------+-------------------------------+
+|   ID   |      TITLE       |          DESCRIPTION          |
++--------+------------------+-------------------------------+
+{{#for story in stories}}
+|{{story.id}}|{{story.title}}|{{story.description}}|
++--------+------------------+-------------------------------+
+{{for#}}
+
+Page {{pageIndex}} of {{pageCount}}

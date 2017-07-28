@@ -1,0 +1,12 @@
+Archives
+
+{{#if hasPrevious}}<<[P]revious{{if#}}                           {{#if hasNext}}[N]ext>>{{if#}}
++--------+------------------+-----------------+
+|   ID   |      TITLE       |      HERO       |
++--------+------------------+-----------------+
+{{#for mark in bookmarks}}
+{{mark.id}}|{{mark.title}}|{{mark.hero}}
++--------+------------------+-----------------+
+{{for#}}
+
+Page {{pageIndex}} of {{pageCount}}
