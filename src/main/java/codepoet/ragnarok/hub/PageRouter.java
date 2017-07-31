@@ -2,6 +2,7 @@ package codepoet.ragnarok.hub;
 
 import codepoet.ragnarok.annotation.Page;
 import codepoet.ragnarok.exception.HubException;
+import codepoet.ragnarok.hub.page.HomePage;
 import codepoet.ragnarok.hub.page.LoginPage;
 import codepoet.ragnarok.hub.page.WelcomePage;
 import java.util.HashMap;
@@ -15,10 +16,11 @@ public class PageRouter {
 	private final Map<String, Pageable> pages;
 
 	@Autowired
-	public PageRouter(WelcomePage welcomePage, LoginPage loginPage) {
+	public PageRouter(WelcomePage welcomePage, LoginPage loginPage, HomePage homePage) {
 		this.pages = new HashMap<>();
 		addPage(welcomePage);
 		addPage(loginPage);
+		addPage(homePage);
 	}
 
 	public PageData route(final Route route) throws HubException {

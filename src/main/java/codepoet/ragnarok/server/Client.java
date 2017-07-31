@@ -24,15 +24,16 @@ public class Client implements Runnable {
 		Renderer renderer = session.getRenderer();
 		try {
 			Route route = new Route.Builder("welcome").build();
+			String input = null;
 
 			do {
+				route.setInput(input);
 				PageData page = pageRouter.route(route);
 
 				renderer.write(page.getDisplay());
-				String input = renderer.prompt(page.getPrompt());
+				input = renderer.prompt(page.getPrompt());
 
-				route = (page.getRoutes().containsKey("*")) ? page.getRoutes().get("*") : page.getRoutes().get(input);
-				route.setInput(input);
+				route = (page.getRoutes().containsKey("*")) ? page.getRoutes().get("*") : page.getRoutes().get(input.toLowerCase());
 			} while (route != null);
 
 		} catch (Exception exception) {

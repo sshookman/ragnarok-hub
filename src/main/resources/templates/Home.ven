@@ -1,11 +1,11 @@
 The Archives of Ragnarok
 
 {{#if hasUpdates}}
-UPDATES: {{updates}}
+{{updates}}
 {{if#}}
 
-  1. Archives
-  2. Bookmarks
-  3. Settings
-  4. Help
-  5. Exit
+  [A]rchives
+  [B]ookmarks
+  [S]ettings
+  [H]elp
+  [E]xit

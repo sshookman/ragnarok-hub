@@ -7,4 +7,4 @@ WORKDIR /app
 ADD . /app
 
 RUN ["gradle", "clean", "test", "build"]
-CMD ["nohup", "java", "-jar", "build/libs/ragnarok-0.0.1.jar"]
+CMD ["nohup", "gradle", "bootRun"]
