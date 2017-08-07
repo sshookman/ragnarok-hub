@@ -4,8 +4,6 @@ import codepoet.ragnarok.annotation.Page;
 import codepoet.ragnarok.hub.PageData;
 import codepoet.ragnarok.hub.Pageable;
 import codepoet.ragnarok.hub.Route;
-import codepoet.ragnarok.model.PlayerDO;
-import codepoet.vaultmonkey.service.SqliteDataService;
 import codepoet.venalartificer.TemplateBuilder;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,15 +14,13 @@ import org.springframework.stereotype.Component;
 @Page(name = "home")
 public class HomePage implements Pageable {
 
-	private Map<String, Object> templateData;
-	private TemplateBuilder templateBuilder;
-	private Map<String, Route> routes;
-	private SqliteDataService<PlayerDO> playerDataService;
+	private final Map<String, Object> templateData;
+	private final TemplateBuilder templateBuilder;
+	private final Map<String, Route> routes;
 
 	@Autowired
-	public HomePage(TemplateBuilder templateBuilder, SqliteDataService playerDataService) {
+	public HomePage(TemplateBuilder templateBuilder) {
 		this.templateBuilder = templateBuilder;
-		this.playerDataService = playerDataService;
 		this.templateData = new HashMap<>();
 
 		this.routes = new HashMap<>();
@@ -36,31 +32,17 @@ public class HomePage implements Pageable {
 	}
 
 	@Override
-	public PageData render(Map<String, String> params, String password) {
-		String username = params.get("username");
-		boolean isRegistered = params.get("isRegistered").equalsIgnoreCase("true");
+	public PageData render(Map<String, String> params, String input) {
 		String updates = null;
-
-		if (!isRegistered) {
-			try {
-				PlayerDO player = new PlayerDO();
-				player.setUsername(username);
-				player.setPassword(password);
-				playerDataService.create(player);
-				updates = "Account Created!";
-			} catch (Exception ex) {
-				updates = "Failed to Create Account!";
-			}
-		}
 
 		templateData.put("hasUpdates", updates != null);
 		templateData.put("updates", updates);
 		String renderText = templateBuilder.render("Home", templateData);
-		PageData.Builder pageData = new PageData.Builder(renderText, username);
+		PageData.Builder pageData = new PageData.Builder(renderText, "");
 
-		for (Map.Entry<String, Route> route : routes.entrySet()) {
+		routes.entrySet().stream().forEach((route) -> {
 			pageData.route(route.getKey(), route.getValue());
-		}
+		});
 
 		return pageData.build();
 	}

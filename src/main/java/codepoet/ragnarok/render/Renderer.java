@@ -78,6 +78,11 @@ public class Renderer {
 		endl(1);
 	}
 
+	public void writeln(final String message, final String color) {
+		write(message, color);
+		endl(1);
+	}
+
 	public void endl() {
 		endl(1);
 	}
