@@ -36,10 +36,18 @@ public class Client implements Runnable {
 				PageData page = pageRouter.route(route);
 
 				renderer.write(page.getDisplay());
-				input = renderer.prompt(player.getUsername() + " | " + page.getPrompt());
+				input = renderer.prompt(player.getUsername());
 
-				route = (page.getRoutes().containsKey("*")) ? page.getRoutes().get("*") : page.getRoutes().get(input.toLowerCase());
-			} while (route != null);
+				Route newRoute = page.getRoutes().get(input.toLowerCase());
+				if (newRoute == null) {
+					renderer.writeln("Invalid Command", Renderer.RED, 50);
+					Thread.sleep(1000);
+					renderer.endl();
+				} else {
+					route = newRoute;
+				}
+
+			} while (!route.getName().equalsIgnoreCase("EXIT"));
 
 		} catch (Exception exception) {
 			renderer.writeln("An error has occurred: " + exception.getMessage(), Renderer.RED);
@@ -56,18 +64,24 @@ public class Client implements Runnable {
 		player.setPassword(renderer.prompt("Enter your password"));
 		int status = pageRouter.login(player.getUsername(), player.getPassword());
 
-		if (status == 0) {
-			String create = renderer.prompt("No account found for " + player.getUsername() + " would you like to create one? (y/n)");
-			if (create.equalsIgnoreCase("y")) {
-				register(player.getUsername(), player.getPassword(), renderer);
-			} else {
+		switch (status) {
+			case 0:
+				String create = renderer.prompt("No account found for " + player.getUsername() + " would you like to create one? (y/n)");
+				if (create.equalsIgnoreCase("y")) {
+					register(player.getUsername(), player.getPassword(), renderer);
+				} else {
+					return login(renderer);
+				}
+				break;
+			case -1:
+				renderer.writeln("Invalid Password!", Renderer.RED, 50);
+				Thread.sleep(1000);
 				return login(renderer);
-			}
-		} else if (status == -1) {
-			renderer.writeln("Invalid Password!", Renderer.RED);
-			return login(renderer);
-		} else {
-			renderer.writeln("Login Successful!", Renderer.GREEN);
+			default:
+				renderer.writeln("Login Successful!", Renderer.GREEN, 50);
+				Thread.sleep(1000);
+				renderer.endl();
+				break;
 		}
 
 		return player;
@@ -77,7 +91,9 @@ public class Client implements Runnable {
 		boolean isRegistered = pageRouter.register(username, password);
 
 		if (isRegistered) {
-			renderer.writeln("Account Created!", Renderer.GREEN);
+			renderer.writeln("Account Created!", Renderer.GREEN, 50);
+			Thread.sleep(1000);
+			renderer.endl();
 		} else {
 			throw new HubException("Failed to Create Account");
 		}

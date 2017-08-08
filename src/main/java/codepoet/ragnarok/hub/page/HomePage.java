@@ -24,11 +24,11 @@ public class HomePage implements Pageable {
 		this.templateData = new HashMap<>();
 
 		this.routes = new HashMap<>();
-		this.routes.put("a", new Route.Builder("archives").build());
-		this.routes.put("b", new Route.Builder("bookmarks").build());
-		this.routes.put("s", new Route.Builder("settings").build());
-		this.routes.put("h", new Route.Builder("help").build());
-		this.routes.put("e", null);
+		this.routes.put("archives", new Route.Builder("archives").build());
+		this.routes.put("bookmarks", new Route.Builder("bookmarks").build());
+		this.routes.put("settings", new Route.Builder("settings").build());
+		this.routes.put("help", new Route.Builder("help").build());
+		this.routes.put("exit", new Route.Builder("exit").build());
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class HomePage implements Pageable {
 		templateData.put("hasUpdates", updates != null);
 		templateData.put("updates", updates);
 		String renderText = templateBuilder.render("Home", templateData);
-		PageData.Builder pageData = new PageData.Builder(renderText, "");
+		PageData.Builder pageData = new PageData.Builder(renderText);
 
 		routes.entrySet().stream().forEach((route) -> {
 			pageData.route(route.getKey(), route.getValue());
