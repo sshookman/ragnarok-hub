@@ -24,19 +24,12 @@ public class HomePage implements Pageable {
 		this.templateData = new HashMap<>();
 
 		this.routes = new HashMap<>();
-		this.routes.put("archives", new Route.Builder("archives").build());
-		this.routes.put("bookmarks", new Route.Builder("bookmarks").build());
-		this.routes.put("settings", new Route.Builder("settings").build());
-		this.routes.put("help", new Route.Builder("help").build());
+		this.routes.put("play", new Route.Builder("play").build());
 		this.routes.put("exit", new Route.Builder("exit").build());
 	}
 
 	@Override
 	public PageData render(Map<String, String> params, String input) {
-		String updates = null;
-
-		templateData.put("hasUpdates", updates != null);
-		templateData.put("updates", updates);
 		String renderText = templateBuilder.render("Home", templateData);
 		PageData.Builder pageData = new PageData.Builder(renderText);
 
