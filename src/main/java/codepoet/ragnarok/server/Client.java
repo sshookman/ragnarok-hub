@@ -1,6 +1,7 @@
 package codepoet.ragnarok.server;
 
 import codepoet.ragnarok.exception.HubException;
+import codepoet.ragnarok.game.ArchiveReader;
 import codepoet.ragnarok.hub.PageData;
 import codepoet.ragnarok.hub.PageRouter;
 import codepoet.ragnarok.hub.Route;
@@ -27,6 +28,7 @@ public class Client implements Runnable {
 
 		try {
 			PlayerDO player = login(renderer);
+			session.setPlayer(player);
 
 			Route route = new Route.Builder("home").build();
 			String input = null;
@@ -43,6 +45,9 @@ public class Client implements Runnable {
 					renderer.writeln("Invalid Command", Renderer.RED, 50);
 					Thread.sleep(1000);
 					renderer.endl();
+				} else if (newRoute.getName().equalsIgnoreCase("PLAY")) {
+					ArchiveReader reader = new ArchiveReader(session);
+					reader.start();
 				} else {
 					route = newRoute;
 				}
