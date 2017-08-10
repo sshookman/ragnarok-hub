@@ -63,7 +63,6 @@ public class Renderer {
 
 	public void write(final String message, final int speed) {
 		writeByLetter(message, speed);
-		writer.flush();
 	}
 
 	public void write(final String message, final String color, final int speed) {
@@ -75,6 +74,16 @@ public class Renderer {
 
 	public void writeln(final String message) {
 		write(message);
+		endl(1);
+	}
+
+	public void writeln(final String message, final String color) {
+		write(message, color);
+		endl(1);
+	}
+
+	public void writeln(final String message, final String color, final int speed) {
+		write(message, color, speed);
 		endl(1);
 	}
 
@@ -93,6 +102,7 @@ public class Renderer {
 			sleep(speed);
 			char character = message.charAt(index);
 			writer.write(character);
+			writer.flush();
 		}
 	}
 

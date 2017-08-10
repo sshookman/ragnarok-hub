@@ -1,5 +1,6 @@
 package codepoet.ragnarok.server;
 
+import codepoet.ragnarok.model.PlayerDO;
 import codepoet.ragnarok.render.Renderer;
 import java.io.IOException;
 import java.math.BigInteger;
@@ -15,6 +16,7 @@ public class Session {
 	private String id;
 	private final Socket socket;
 	private final Renderer renderer;
+	private PlayerDO player;
 
 	protected Session(final Socket socket) throws Exception {
 		this.id = new BigInteger(130, new SecureRandom()).toString(32);
@@ -28,6 +30,14 @@ public class Session {
 
 	public Renderer getRenderer() {
 		return renderer;
+	}
+
+	public PlayerDO getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(PlayerDO player) {
+		this.player = player;
 	}
 
 	public boolean isOpen() {

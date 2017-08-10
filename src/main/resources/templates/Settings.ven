@@ -1,0 +1,5 @@
+Settings
+
+{{#for setting in settings}}
+[{{setting.id}}] {{setting.name}}: {{setting.state}}
+{{for#}}
