@@ -1,4 +1,5 @@
-# Enchiridion Library
+# The Archives of Ragnarok
+A Library of Adventures
 
 [![License](https://img.shields.io/badge/license-GPL%20v3-brightgreen.svg)](https://www.gnu.org/licenses/gpl-3.0.txt) [![Build](https://travis-ci.org/sshookman/ProjectRead.svg?branch=master)](https://travis-ci.org/sshookman/ProjectRead) [![Coverage](https://codecov.io/gh/sshookman/ProjectRead/branch/master/graph/badge.svg)](https://codecov.io/gh/sshookman/ProjectRead)
 
@@ -19,13 +20,12 @@
 
 ## About
 
-The Enchiridion Library is a Java-based Multi-User Dungeon and Interactive Fiction Engine accessible
-through a Telnet connection.
+The Archives of Ragnarok is a Java-based text-based-adventure hub accessible through Telnet.
 
 #### Purpose
 
 The purpose is to create a single online library filled with various interactive stories and games
-that can be accessed from any device capable of establishing a telnet connection. The HUB will serve
+that can be accessed from any device capable of establishing a telnet connection. The hub will serve
 as the gateway to the stories as well as a portal for authentication and cloud storage of saved game
 states. In order to act as a library the hub will also allow for the uploading of stories.
 
@@ -34,19 +34,30 @@ states. In order to act as a library the hub will also allow for the uploading o
 Once in a usable and stable state the hub will be launched on a public server and will be accessible
 through telnet on port 1127.
 
+Another plan is create a simple script that would turn a raspberry pi into command-line-only computer for the
+sole pupose of accessing the hub. Then you could just shove it into a lunchbox and play in style wherever you go! 
+A RagnaBox if you will. Eesh, maybe don't.
+
+A nice-to-have would be a graphical (probably web-based) tool to aid in the construction of games
+so people don't have to mess around with sqlite just to make a game. A bit more work than the RagnaBox.
+
+---
+
 ## Getting Started
 
 #### Running Locally
 
 The application can be run locally using a single gradle command. The gradle wrapper is included
-with the repository, so gradle does not need to be installed in order to execute the command.
+with the repository, so gradle does not need to be installed in order to execute the command. Wasn't
+that nice of me!
 
 ```
 $ ./gradlew clean run
 ```
 
 This will initiate the spring boot application on your local machine and will serve the library out
-of port 1127 over telnet.
+of port 1127 over telnet. Assuming your birthday is not also the 27th of November and you are not already
+using that port.
 
 #### Running with Docker
 
@@ -57,9 +68,9 @@ $ ./scripts/build.sh
 $ ./scripts/run.sh
 ```
 
-Once this is done, the enchiridion docker container will be running and serving the Telnet Server for
+Once this is done, the ragnarok docker container will be running and serving the Telnet Server for
 the hub out of port 1127. Don't forget to kill (and optionally remove) the container
-once you are finished.
+once you are finished. Or don't, you're free to make whatever terrible decisions you want in life.
 
 #### Connecting to the Hub
 
@@ -71,8 +82,9 @@ IP address or hostname of the server on which the hub is running.
 $ telnet localhost 1127
 ```
 
-This will connect you to the Enchiridion Library where you can log in and start playing stories.
+This will connect you to The Archives of Ragnarok where you can log in and start playing stories.
 
+---
 
 ## Contributing
 
