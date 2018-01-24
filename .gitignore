@@ -21,3 +21,6 @@ library/*
 *.jar
 *.log
 !lib/*.jar
+.classpath
+.project
+bin/
