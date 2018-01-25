@@ -1,5 +1,12 @@
-id: ragnarok
-test:
-  cmd: gradle
-  params: ["clean", "test"]
-  options: ["-q", "true"]
+spells:
+- name: test
+  cmd: gradle clean test
+- name: stop
+  cmd: echo 'Killing ragnarok container'; docker kill ragnarok; echo 'Removing ragnarok
+    container'; docker rm ragnarok
+- name: build
+  cmd: docker build -t seanshookman/ragnarok .
+- name: run
+  cmd: docker run --name ragnarok -d -p 1127:1127 seanshookman/ragnarok
+- name: tail
+  cmd: docker logs -f ragnarok
