@@ -1,7 +1,7 @@
 # The Archives of Ragnarok
 A Library of Adventures
 
-[![License](https://img.shields.io/badge/license-GPL%20v3-brightgreen.svg)](https://www.gnu.org/licenses/gpl-3.0.txt) [![Build](https://travis-ci.org/sshookman/ProjectRead.svg?branch=master)](https://travis-ci.org/sshookman/ragnarok-hub) [![Coverage](https://codecov.io/gh/sshookman/ProjectRead/branch/master/graph/badge.svg)](https://codecov.io/gh/sshookman/ProjectRead)
+[![License](https://img.shields.io/badge/license-GPL%20v3-brightgreen.svg)](https://www.gnu.org/licenses/gpl-3.0.txt) [![Build](https://travis-ci.org/sshookman/ragnarok-hub.svg?branch=master)](https://travis-ci.org/sshookman/ragnarok-hub) [![Coverage](https://codecov.io/gh/sshookman/ProjectRead/branch/master/graph/badge.svg)](https://codecov.io/gh/sshookman/ProjectRead)
 
 ---
 
