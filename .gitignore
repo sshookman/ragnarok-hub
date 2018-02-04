@@ -24,3 +24,4 @@ library/*
 .classpath
 .project
 bin/
+.settings/
