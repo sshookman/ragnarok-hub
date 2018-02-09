@@ -65,6 +65,7 @@ public class Client implements Runnable {
 
 	private PlayerDO login(Renderer renderer) throws Exception {
 		PlayerDO player = new PlayerDO();
+        renderer.writeln("Welcome to the Archives of Ragnarok: A Library of Adventures");
 		player.setUsername(renderer.prompt("Enter your username"));
 		player.setPassword(renderer.prompt("Enter your password"));
 		int status = pageRouter.login(player.getUsername(), player.getPassword());

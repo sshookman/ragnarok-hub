@@ -14,6 +14,7 @@ public class ArchiveReader {
 	}
 
 	public void start() {
+        //TODO: Connect to ragnarok-reader.jar with username
 		renderer.writeln("THE DRAGONF|Y EXPERIMENTS", Renderer.PURPLE, 50);
 		renderer.writeln("           |", Renderer.PURPLE, 50);
 		renderer.writeln("           |", Renderer.PURPLE, 50);

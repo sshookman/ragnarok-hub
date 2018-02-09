@@ -31,16 +31,13 @@ public class Renderer {
 	}
 
 	public String prompt() {
-		endl();
 		write(" > ");
 		return read();
 	}
 
 	public String prompt(final String prompt) {
-		endl();
 		write(prompt + " > ");
 		String input = read();
-		endl();
 		return input;
 	}
 
