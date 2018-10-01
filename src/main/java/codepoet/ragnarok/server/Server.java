@@ -46,7 +46,7 @@ public class Server {
      * a session instance inside the SessionManager. A client is then launched
      * from this session where the user interaction will take place.
      */
-	private void listen() throws Exception {
+	private void listen() {
 		try {
 			LOGGER.log(Level.INFO, "Server Listening on Port : {0}", PORT);
             while (true) {
