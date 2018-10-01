@@ -7,16 +7,30 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.stereotype.Component;
 
+/**
+ * The Session Manager - Telnet Based Session creation and removal.
+ *
+ * The Session Manager offers functionality to instantiate new sessions
+ * on a given socket and maintain the list of active sessions. It also
+ * exposes a method for removing sessions after the sockt was closed.
+ */
 @Component
 public class SessionManager {
 
 	private static final Logger LOGGER = Logger.getLogger(SessionManager.class.getName());
 	private Map<String, Session> sessions = new HashMap<>();
 
+    /**
+     * Generate a new session from a socket.
+     *
+     * Attempts to generate a new session instance from a socket and
+     * returns null if it fails to do so.
+     */
 	public Session instance(final Socket socket) {
 		try {
 			Session session = new Session(socket);
 			addSession(session);
+			LOGGER.log(Level.INFO, "Opening Session {0}", session.getId());
 			return session;
 		} catch (Exception exception) {
 			LOGGER.log(Level.SEVERE, "Failed to Create Session: {0}", exception.getMessage());
